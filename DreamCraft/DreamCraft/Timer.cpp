@@ -20,6 +20,8 @@ GLvoid TimerFunction(int value)
 		//newWorld.KeyIn('j');
 	}
 
+	World.Update();
+
 	glutPostRedisplay();
 
 	glutTimerFunc(TimerValue, TimerFunction, 1);

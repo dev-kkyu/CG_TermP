@@ -25,8 +25,9 @@ extern GLint winWidth, winHeight;
 extern GLuint BlockVAO, edgeVAO;
 extern GLuint shaderID; //--- 세이더 프로그램 이름
 
-extern float C_RotYAngle;
 extern pair<float, float> MouseAngle;
 
 extern bool isW, isA, isS, isD;
 extern int isJump;
+
+extern int personView;

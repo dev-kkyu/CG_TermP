@@ -1,9 +1,14 @@
 #include "Header.h"
+
 #include "Draw.h"
 #include "Keyboard.h"
 #include "KeyboardUP.h"
 #include "Mouse.h"
 #include "Timer.h"
+
+#include "CWorld.h"
+
+CWorld World;
 
 GLuint make_vertexShaders();
 GLuint make_fragmentShaders();

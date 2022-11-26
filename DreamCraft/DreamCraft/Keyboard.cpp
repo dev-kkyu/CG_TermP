@@ -4,8 +4,16 @@ bool isW, isA, isS, isD;
 
 int isJump;
 
+int personView{ 1 };
+
 GLvoid Keyboard(unsigned char key, int x, int y) {
 	switch (key) {
+	case '1':
+		personView = 1;
+		break;
+	case '3':
+		personView = 3;
+		break;
 	case 'w':
 	case 'W':
 		isW = true;
@@ -33,10 +41,8 @@ GLvoid Keyboard(unsigned char key, int x, int y) {
 		glutLeaveMainLoop();
 		break;
 	default:
-		return;
+		break;
 	}
-
-	//glutPostRedisplay();
 }
 
 GLvoid SpecialKeyboard(int key, int x, int y)
@@ -58,7 +64,5 @@ GLvoid SpecialKeyboard(int key, int x, int y)
 		isS = true;
 		break;
 	}
-
-	//glutPostRedisplay();
 }
 

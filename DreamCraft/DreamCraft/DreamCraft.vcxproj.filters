@@ -19,6 +19,21 @@
     <Filter Include="헤더 파일\CallBack">
       <UniqueIdentifier>{ab14f117-1178-464b-b4c7-f2a66500d28e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="World">
+      <UniqueIdentifier>{c926d563-51fe-4a14-94ae-b3640fde5a3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{210014e2-a7b5-4468-8a6f-469f94b0a807}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Block">
+      <UniqueIdentifier>{fe5fc2d6-9889-48de-92b6-180031278680}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Player">
+      <UniqueIdentifier>{34a6a604-4f6c-47de-a545-69b38497411d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Block\Base">
+      <UniqueIdentifier>{47f1c92b-aede-4867-a83b-b8af7c9d9c4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Keyboard.cpp">
@@ -39,6 +54,21 @@
     <ClCompile Include="DreamCraft.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="CWorld.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="CBase.cpp">
+      <Filter>GameObject\Block\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>GameObject\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CBlock.cpp">
+      <Filter>GameObject\Block</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h">
@@ -58,6 +88,21 @@
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>헤더 파일\CallBack</Filter>
+    </ClInclude>
+    <ClInclude Include="CWorld.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="CBase.h">
+      <Filter>GameObject\Block\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="CBlock.h">
+      <Filter>GameObject\Block</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>GameObject\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameObject.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
