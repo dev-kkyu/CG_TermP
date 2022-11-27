@@ -47,6 +47,8 @@ void CWorld::Keyboard(unsigned char key, int state)
 			break;
 		}
 		break;
+
+
 	case GLUT_UP:
 		switch (key) {
 		case 'w':
@@ -92,6 +94,8 @@ void CWorld::SpecialKeyboard(int key, int state)
 			break;
 		}
 		break;
+
+
 	case GLUT_UP:
 		switch (key) {
 		case GLUT_KEY_LEFT:
@@ -113,12 +117,30 @@ void CWorld::SpecialKeyboard(int key, int state)
 
 void CWorld::Mouse(int button, int state)
 {
-	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-	getObject();
-	}
-
-	if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
-
+	switch (state) {
+	case GLUT_DOWN:
+		switch (button) {
+		case GLUT_LEFT_BUTTON: {
+			auto temp = getObject();
+			if (temp != Blocks.end()) {
+				Blocks.erase(temp);
+				delete (*temp);
+			}
+		}
+			break;
+		case GLUT_RIGHT_BUTTON:
+			newBlock();
+			break;
+		}
+		break;
+	case GLUT_UP:
+		switch (button) {
+		case GLUT_LEFT_BUTTON:
+			break;
+		case GLUT_RIGHT_BUTTON:
+			break;
+		}
+		break;
 	}
 }
 
@@ -167,13 +189,32 @@ void CWorld::Camera(int personView)
 	}
 }
 
-CGameObject* CWorld::getObject()
+set<CBlock*, CBlockCmp>::iterator CWorld::getObject()
 {
 	glm::vec3 normalDirection = cameraDirection - cameraPos;
 	normalDirection = glm::normalize(normalDirection);
 
-	//set<CBlock*, CBlockCmp>::iterator itr;
-	for (int i = 1; i < 55; ++i) {
+	for (int i = 1; i < 65; ++i) {
+		glm::vec3 temp(cameraPos + (normalDirection * (i / 10.f)));
+		temp.x = round(temp.x);
+		temp.y = ceil(temp.y);
+		temp.z = round(temp.z);
+		CBase test(temp);
+		auto itr = Blocks.find(&test);
+		if (itr != Blocks.end()) {
+			(*itr)->show();
+			return itr;
+		}
+	}
+	return Blocks.end();
+}
+
+void CWorld::newBlock()
+{
+	glm::vec3 normalDirection = cameraDirection - cameraPos;
+	normalDirection = glm::normalize(normalDirection);
+
+	for (int i = 1; i < 65; ++i) {
 		glm::vec3 temp(cameraPos + (normalDirection * (i / 10.f)));
 		temp.x = round(temp.x);
 		temp.y = ceil(temp.y);
@@ -187,31 +228,25 @@ CGameObject* CWorld::getObject()
 			temps.y = ceil(temps.y);
 			temps.z = round(temps.z);
 			Blocks.insert(new CBase(temps));
-
-
-			return *itr;
+			break;
 		}
 	}
-	return nullptr;
 }
 
 
 
 void CWorld::Initialize()
 {
-	for (int i = -30; i <= 30; ++i) {
-		for (int j = -30; j <= 30; ++j) {
+	for (int i = -25; i <= 24; ++i) {
+		for (int j = -25; j <= 24; ++j) {
 			Blocks.insert(new CBase{ glm::vec3{i, 0, j} });
 		}
 	}
-	for (int i = -30; i <= 30; ++i) {
-		for (int j = -30; j <= 30; ++j) {
-			Blocks.insert(new CBase{ glm::vec3{i, 0, j} });
-		}
-	}
-	Blocks.insert(new CBase{ glm::vec3(-30,1,-30) });
-	Blocks.insert(new CBase{ glm::vec3(-30,2,-30) });
-	Blocks.insert(new CBase{ glm::vec3(-30,1,-29) });
+	//for (int i = -25; i <= 24; ++i) {						// 중복 생성되는지 테스트
+	//	for (int j = -25; j <= 24; ++j) {
+	//		Blocks.insert(new CBase{ glm::vec3{i, 0, j} });
+	//	}
+	//}
 }
 
 void CWorld::Update()
@@ -246,10 +281,14 @@ void CWorld::FixedUpdate()
 void CWorld::Render()
 {
 	Camera(personView);
-
+	//static bool a = true;
+	//static int b = 0;
 	for (auto Block : Blocks) {
+		//if(a)
+		//cout << ++b << endl;
 		Block->Render();
 	}
+	//a = false;
 
 	Player.Render();
 }

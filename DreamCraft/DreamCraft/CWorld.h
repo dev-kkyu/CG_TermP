@@ -28,7 +28,8 @@ public:
 
 	void Camera(int personView);
 
-	CGameObject* getObject();		//길이 4 안으로 받아온다.
+	set<CBlock*, CBlockCmp>::iterator getObject();		//set에서 내가 클릭한 오브젝트의 iterator를 받아온다.
+	void newBlock();									//내가 클릭한 오브젝트의 앞쪽에 블럭을 생성한다.
 
 	void Initialize();		//생성될 때 할 일
 	void Update();			//타이머에서 할 일
