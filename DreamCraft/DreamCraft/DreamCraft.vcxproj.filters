@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="소스 파일\CallBack">
-      <UniqueIdentifier>{40374b58-47ae-4fb5-bc98-851c91932ec1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="헤더 파일\CallBack">
-      <UniqueIdentifier>{ab14f117-1178-464b-b4c7-f2a66500d28e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="World">
       <UniqueIdentifier>{c926d563-51fe-4a14-94ae-b3640fde5a3d}</UniqueIdentifier>
     </Filter>
@@ -36,21 +30,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Keyboard.cpp">
-      <Filter>소스 파일\CallBack</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyboardUP.cpp">
-      <Filter>소스 파일\CallBack</Filter>
-    </ClCompile>
-    <ClCompile Include="Mouse.cpp">
-      <Filter>소스 파일\CallBack</Filter>
-    </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>소스 파일\CallBack</Filter>
-    </ClCompile>
-    <ClCompile Include="Draw.cpp">
-      <Filter>소스 파일\CallBack</Filter>
-    </ClCompile>
     <ClCompile Include="DreamCraft.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -73,21 +52,6 @@
   <ItemGroup>
     <ClInclude Include="Header.h">
       <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Draw.h">
-      <Filter>헤더 파일\CallBack</Filter>
-    </ClInclude>
-    <ClInclude Include="Keyboard.h">
-      <Filter>헤더 파일\CallBack</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyboardUP.h">
-      <Filter>헤더 파일\CallBack</Filter>
-    </ClInclude>
-    <ClInclude Include="Mouse.h">
-      <Filter>헤더 파일\CallBack</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>헤더 파일\CallBack</Filter>
     </ClInclude>
     <ClInclude Include="CWorld.h">
       <Filter>World</Filter>

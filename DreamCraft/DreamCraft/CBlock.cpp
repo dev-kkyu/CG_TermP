@@ -9,14 +9,14 @@ CBlock::~CBlock()
 {
 }
 
-bool CBlock::operator<(const CBlock& other) const
-{
-	if (Position.x != other.Position.x)
-		return Position.x < other.Position.x;
-	if (Position.y != other.Position.y)
-		return Position.y < other.Position.y;
-	return Position.z < other.Position.z;
-}
+//bool CBlock::operator<(const CBlock& other) const
+//{
+//	if (Position.x != other.Position.x)
+//		return Position.x < other.Position.x;
+//	if (Position.y != other.Position.y)
+//		return Position.y < other.Position.y;
+//	return Position.z < other.Position.z;
+//}
 
 void CBlock::Initialize()
 {
@@ -69,4 +69,13 @@ float CBlock::getBottom()
 float CBlock::getTop()
 {
 	return Position.y;
+}
+
+bool CBlockCmp::operator()(const CBlock* lhs, const CBlock* rhs) const
+{
+	if (lhs->Position.x != rhs->Position.x)
+		return lhs->Position.x < rhs->Position.x;
+	if (lhs->Position.y != rhs->Position.y)
+		return lhs->Position.y < rhs->Position.y;
+	return lhs->Position.z < rhs->Position.z;
 }

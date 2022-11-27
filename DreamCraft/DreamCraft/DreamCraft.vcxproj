@@ -132,12 +132,7 @@
     <ClCompile Include="CGameObject.cpp" />
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CWorld.cpp" />
-    <ClCompile Include="Draw.cpp" />
     <ClCompile Include="DreamCraft.cpp" />
-    <ClCompile Include="Keyboard.cpp" />
-    <ClCompile Include="KeyboardUP.cpp" />
-    <ClCompile Include="Mouse.cpp" />
-    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CBase.h" />
@@ -145,12 +140,7 @@
     <ClInclude Include="CGameObject.h" />
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CWorld.h" />
-    <ClInclude Include="Draw.h" />
     <ClInclude Include="Header.h" />
-    <ClInclude Include="Keyboard.h" />
-    <ClInclude Include="KeyboardUP.h" />
-    <ClInclude Include="Mouse.h" />
-    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.glsl" />

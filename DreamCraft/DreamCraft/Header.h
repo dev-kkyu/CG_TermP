@@ -3,10 +3,11 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <cmath>
 #include <cstdlib>
 #include <vector>
 #include <random>
-#include <utility>
+#include <utility>		// pair땜에
 #include <gl/glew.h>											//--- 필요한 헤더파일 include
 #include <gl/freeglut.h>
 //#include <gl/freeglut_ext.h>
@@ -14,20 +15,10 @@
 #include <gl/glm/ext.hpp>
 //#include <gl/glm/gtc/matrix_transform.hpp>
 
-#pragma comment(lib, "glew32.lib")
-#pragma comment(lib, "freeglut.lib")
-
 using namespace std;
 
-
-extern int TimerValue;
 extern GLint winWidth, winHeight;
 extern GLuint BlockVAO, edgeVAO;
 extern GLuint shaderID; //--- 세이더 프로그램 이름
 
 extern pair<float, float> MouseAngle;
-
-extern bool isW, isA, isS, isD;
-extern int isJump;
-
-extern int personView;

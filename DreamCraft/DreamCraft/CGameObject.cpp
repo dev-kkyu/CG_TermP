@@ -7,3 +7,8 @@ CGameObject::CGameObject(glm::vec3 Position) : Unit{ glm::mat4(1.f) }, Position{
 CGameObject::~CGameObject()
 {
 }
+
+void CGameObject::show()
+{
+	cout << Position.x << " " << Position.y << ' ' << Position.z << endl;
+}

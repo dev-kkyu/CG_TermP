@@ -13,6 +13,8 @@ public:
 	CGameObject(glm::vec3 Position);
 	virtual ~CGameObject() = 0;			//소멸자도 버츄얼 해주는게 좋음
 
+	void show();
+
 	virtual void Initialize() = 0;		//생성될 때 할 일
 	virtual void Update() = 0;			//타이머에서 할 일
 	virtual void FixedUpdate() = 0;		//충돌처리 등
