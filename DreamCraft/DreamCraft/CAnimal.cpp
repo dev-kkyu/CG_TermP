@@ -2,21 +2,11 @@
 
 random_device rd;
 default_random_engine dre(rd());
-uniform_real_distribution<float> color_urd{ 0.f, 1.f };
 uniform_int_distribution<int> dict_urd{ 1, 8 };				
 uniform_real_distribution<float> travel_urd{ 5.f, 15.f };
 
 CAnimal::CAnimal(glm::vec3 Position) : CGameObject{ Position }
 {
-	Color = glm::vec3(color_urd(dre), color_urd(dre), color_urd(dre));
-
-	animalView = dict_urd(dre) * 45.f;			// 이동 방향 1-8까지 n*45도 만큼 회전
-	travel = travel_urd(dre);
-
-	origin_Position = Position;
-	before_location_x = Position.x;
-	before_location_z = Position.z;
-
 	Initialize();
 }
 
@@ -26,6 +16,12 @@ CAnimal::~CAnimal()
 
 void CAnimal::Initialize()
 {
+	animal_Direction = dict_urd(dre) * 45.f;			// 이동 방향 1-8까지 n*45도 만큼 회전
+	Travel = travel_urd(dre);
+
+	origin_Position = Position;
+	before_Position = Position;
+
 	random_device rd;
 	default_random_engine dre{ rd() };
 	uniform_real_distribution<float> urd{ 0.f, 1.f };
@@ -37,24 +33,22 @@ void CAnimal::Initialize()
 
 void CAnimal::Update()
 {
-	float temp_x = 0, temp_z = 0;
+	static float temp_x = 0, temp_z = 0;
 
-	if (pow(before_location_x - Position.x, 2)
-		+ pow(before_location_z - Position.z, 2) >= pow(travel, 2)  // 한 방향으로 travel만큼 이동했으면
+	if (pow(before_Position.x - Position.x, 2)
+		+ pow(before_Position.z - Position.z, 2) >= pow(Travel, 2)  // 한 방향으로 travel만큼 이동했으면
 		||
 		(pow(temp_x- origin_Position.x, 2) + pow(temp_z- origin_Position.z, 2) >= 100)   //다음 이동이 경계에 걸리면
 		) {
 
-		animalView = dict_urd(dre) * 45.f;
-		travel = travel_urd(dre);
-		before_location_x = Position.x;
-		before_location_z = Position.z;
-
+		animal_Direction = dict_urd(dre) * 45.f;
+		Travel = travel_urd(dre);
+		before_Position = Position;
 	}
 
 	float speed = 0.05;
 	
-	switch ((int)(animalView / 45))
+	switch ((int)(animal_Direction / 45))
 	{
 	case 1:
 		Position.x += speed;
@@ -106,7 +100,7 @@ void CAnimal::Update()
 
 	Trans = glm::translate(Unit, glm::vec3(0.f, -0.5f, 0.f));
 	Scale = glm::scale(Unit, glm::vec3(1.f, 1.f, 2.f));
-	rotation = glm::rotate(glm::mat4(1.0f), glm::radians(animalView), glm::vec3(0.f, 1.f, 0.f));
+	rotation = glm::rotate(glm::mat4(1.0f), glm::radians(animal_Direction), glm::vec3(0.f, 1.f, 0.f));
 	
 	
 	Change = glm::translate(Unit, Position) * Trans * rotation * Scale;

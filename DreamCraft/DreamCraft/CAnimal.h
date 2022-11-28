@@ -7,10 +7,10 @@ protected:
 	glm::vec3 Color;
 
 	glm::vec3 origin_Position;		// 첫 스폰 위치
+	glm::vec3 before_Position;		// 방향 전환 직전 위치
 
-	float animalView, travel;		// 동물의 시선(방향), 한 방향으로 갈 수 있는 최대 거리(방향이 바뀌면 달라짐)
-	float before_location_x, before_location_z;		// 방향 전환 직전 위치
-
+	float animal_Direction, Travel;		// 동물의 방향, 한 방향으로 갈 수 있는 최대 거리(방향이 바뀌면 달라짐)
+	
 public:
 	CAnimal(glm::vec3 Position);
 	virtual ~CAnimal() = 0;			// 소멸자도 버츄얼 해주는게 좋음
