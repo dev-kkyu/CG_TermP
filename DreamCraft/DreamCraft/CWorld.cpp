@@ -123,8 +123,8 @@ void CWorld::Mouse(int button, int state)
 		case GLUT_LEFT_BUTTON: {
 			auto temp = getObject();
 			if (temp != Blocks.end()) {
-				Blocks.erase(temp);
 				delete (*temp);
+				Blocks.erase(temp);
 			}
 		}
 			break;
