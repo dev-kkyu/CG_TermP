@@ -8,10 +8,6 @@ CCow::~CCow()
 {
 }
 
-void CCow::FixedUpdate()
-{
-}
-
 void CCow::Release()
 {
 }
