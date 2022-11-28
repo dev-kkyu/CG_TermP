@@ -13,6 +13,8 @@ public:
 	CGameObject(glm::vec3 Position);
 	virtual ~CGameObject() = 0;			//소멸자도 버츄얼 해주는게 좋음
 
+	friend struct CGameObjectCmp;							//set을 포인터로 쓸 때 사용하는 것
+
 	void show();
 
 	virtual void Initialize() = 0;		//생성될 때 할 일
@@ -30,3 +32,6 @@ public:
 	virtual float getTop() = 0;
 };
 
+struct CGameObjectCmp {
+	bool operator () (const CGameObject* lhs, const CGameObject* rhs) const;
+};

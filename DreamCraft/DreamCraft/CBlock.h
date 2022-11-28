@@ -10,9 +10,6 @@ public:
 	CBlock(glm::vec3 Position);
 	virtual ~CBlock() = 0;			//소멸자도 버츄얼 해주는게 좋음
 
-	//bool operator<(const CBlock& other) const;		//그냥 set 쓸 때 사용하는 것
-	friend struct CBlockCmp;							//set을 포인터로 쓸 때 사용하는 것
-
 	virtual void Initialize() override;		//생성될 때 할 일
 	virtual void Update() = 0;			//타이머에서 할 일
 	virtual void FixedUpdate() = 0;		//충돌처리 등
@@ -27,8 +24,4 @@ public:
 	virtual float getBottom() override;
 	virtual float getTop() override;
 
-};
-
-struct CBlockCmp {
-	bool operator () (const CBlock* lhs, const CBlock* rhs) const;
 };

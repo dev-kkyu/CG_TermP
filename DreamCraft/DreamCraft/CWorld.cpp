@@ -1,6 +1,6 @@
 #include "CWorld.h"
 
-CWorld::CWorld() : Player{ CPlayer{glm::vec3(0.f)} }, PlayerPos{ glm::vec3(0.f) },
+CWorld::CWorld() : Player{ CPlayer{glm::vec3(0.f, 2.f, 0.f)} }, PlayerPos{ glm::vec3(0.f, 2.f, 0.f) },
 	isUp{ false }, isDown{ false }, isLeft{ false }, isRight{ false }, isJump{ false }, personView{ 1 }
 {
 	Initialize();
@@ -122,9 +122,9 @@ void CWorld::Mouse(int button, int state)
 		switch (button) {
 		case GLUT_LEFT_BUTTON: {
 			auto temp = getObject();
-			if (temp != Blocks.end()) {
+			if (temp != Objects.end()) {
 				delete (*temp);
-				Blocks.erase(temp);
+				Objects.erase(temp);
 			}
 		}
 			break;
@@ -154,7 +154,7 @@ void CWorld::Camera(int personView)
 		cameraDirRot = glm::rotate(cameraDirRot, glm::radians(-MouseAngle.second), glm::vec3(1.f, 0.f, 0.f));
 		DirectionPos = cameraDirRot * glm::vec4(DirectionPos, 1.f);
 
-		cameraPos = glm::vec3(PlayerPos.x, PlayerPos.y + 1.5f, PlayerPos.z); //--- 카메라 위치 (어디서 볼건지)
+		cameraPos = glm::vec3(PlayerPos.x, PlayerPos.y - 0.5f, PlayerPos.z); //--- 카메라 위치 (어디서 볼건지)
 		cameraDirection = glm::vec3(PlayerPos.x + DirectionPos.x, PlayerPos.y + DirectionPos.y, PlayerPos.z + DirectionPos.z); //--- 카메라 바라보는 방향 (어디볼건지 하면될듯)
 		glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f); //--- 카메라 위쪽 방향->벡터임(방향만) (음수하면 화면 상하거꾸로보임)
 
@@ -174,7 +174,7 @@ void CWorld::Camera(int personView)
 		cameraDirRot = glm::rotate(cameraDirRot, glm::radians(-MouseAngle.second), glm::vec3(1.f, 0.f, 0.f));
 		DirectionPos = cameraDirRot * glm::vec4(DirectionPos, 1.f);
 
-		cameraPos = glm::vec3(PlayerPos.x, PlayerPos.y + 1.8f, PlayerPos.z); //--- 카메라 위치 (어디서 볼건지)
+		cameraPos = glm::vec3(PlayerPos.x, PlayerPos.y - 0.2f, PlayerPos.z); //--- 카메라 위치 (어디서 볼건지)
 		cameraDirection = glm::vec3(PlayerPos.x + DirectionPos.x, PlayerPos.y + DirectionPos.y, PlayerPos.z + DirectionPos.z); //--- 카메라 바라보는 방향 (어디볼건지 하면될듯)
 		glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f); //--- 카메라 위쪽 방향->벡터임(방향만) (음수하면 화면 상하거꾸로보임)
 
@@ -189,24 +189,24 @@ void CWorld::Camera(int personView)
 	}
 }
 
-set<CBlock*, CBlockCmp>::iterator CWorld::getObject()
+set<CGameObject*, CGameObjectCmp>::iterator CWorld::getObject()
 {
 	glm::vec3 normalDirection = cameraDirection - cameraPos;
 	normalDirection = glm::normalize(normalDirection);
 
 	for (int i = 1; i < 65; ++i) {
-		glm::vec3 temp(cameraPos + (normalDirection * (i / 10.f)));
-		temp.x = round(temp.x);
-		temp.y = ceil(temp.y);
-		temp.z = round(temp.z);
-		CBase test(temp);
-		auto itr = Blocks.find(&test);
-		if (itr != Blocks.end()) {
+		glm::vec3 tempPos(cameraPos + (normalDirection * (i / 10.f)));
+		tempPos.x = round(tempPos.x);
+		tempPos.y = ceil(tempPos.y);
+		tempPos.z = round(tempPos.z);
+		CBase tempBlock(tempPos);
+		auto itr = Objects.find(&tempBlock);
+		if (itr != Objects.end()) {
 			(*itr)->show();
 			return itr;
 		}
 	}
-	return Blocks.end();
+	return Objects.end();
 }
 
 void CWorld::newBlock()
@@ -215,19 +215,19 @@ void CWorld::newBlock()
 	normalDirection = glm::normalize(normalDirection);
 
 	for (int i = 1; i < 65; ++i) {
-		glm::vec3 temp(cameraPos + (normalDirection * (i / 10.f)));
-		temp.x = round(temp.x);
-		temp.y = ceil(temp.y);
-		temp.z = round(temp.z);
-		CBase test(temp);
-		auto itr = Blocks.find(&test);
-		if (itr != Blocks.end()) {
+		glm::vec3 tempPos(cameraPos + (normalDirection * (i / 10.f)));
+		tempPos.x = round(tempPos.x);
+		tempPos.y = ceil(tempPos.y);
+		tempPos.z = round(tempPos.z);
+		CBase tempBlock(tempPos);
+		auto itr = Objects.find(&tempBlock);
+		if (itr != Objects.end()) {
 			(*itr)->show();
-			glm::vec3 temps(cameraPos + (normalDirection * ((i - 1) / 10.f)));
-			temps.x = round(temps.x);
-			temps.y = ceil(temps.y);
-			temps.z = round(temps.z);
-			Blocks.insert(new CBase(temps));
+			tempPos = glm::vec3(cameraPos + (normalDirection * ((i - 1) / 10.f)));
+			tempPos.x = round(tempPos.x);
+			tempPos.y = ceil(tempPos.y);
+			tempPos.z = round(tempPos.z);
+			Objects.insert(new CBase(tempPos));
 			break;
 		}
 	}
@@ -239,18 +239,21 @@ void CWorld::Initialize()
 {
 	for (int i = -25; i <= 24; ++i) {
 		for (int j = -25; j <= 24; ++j) {
-			Blocks.insert(new CBase{ glm::vec3{i, 0, j} });
+			Objects.insert(new CBase{ glm::vec3{i, 0, j} });
 		}
 	}
-	//for (int i = -25; i <= 24; ++i) {						// 중복 생성되는지 테스트
-	//	for (int j = -25; j <= 24; ++j) {
-	//		Blocks.insert(new CBase{ glm::vec3{i, 0, j} });
-	//	}
-	//}
+
+	Objects.insert(new CCow{ glm::vec3(3,1,3) });
+	Objects.insert(new CCow{ glm::vec3(-3,1,3) });
+	Objects.insert(new CCow{ glm::vec3(3,1,-3) });
 }
 
 void CWorld::Update()
 {
+	for (auto Object : Objects) {
+		Object->Update();
+	}
+
 	if (isUp) {
 		PlayerPos.x += glm::sin(glm::radians(MouseAngle.first)) * 0.075f;
 		PlayerPos.z -= glm::cos(glm::radians(MouseAngle.first)) * 0.075f;
@@ -281,14 +284,10 @@ void CWorld::FixedUpdate()
 void CWorld::Render()
 {
 	Camera(personView);
-	//static bool a = true;
-	//static int b = 0;
-	for (auto Block : Blocks) {
-		//if(a)
-		//cout << ++b << endl;
-		Block->Render();
+
+	for (auto Object : Objects) {
+		Object->Render();
 	}
-	//a = false;
 
 	Player.Render();
 }

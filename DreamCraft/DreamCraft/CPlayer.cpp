@@ -25,7 +25,7 @@ void CPlayer::Update()
 	glm::mat4 Scale;
 	glm::mat4 Rotate;
 
-	Trans = glm::translate(Unit, glm::vec3(0.f, 0.5f, 0.f));
+	Trans = glm::translate(Unit, glm::vec3(0.f, -0.5f, 0.f));
 	Scale = glm::scale(Unit, glm::vec3(1.f, 2.f, 1.f));
 
 	Change = Scale * Trans;
@@ -81,10 +81,10 @@ float CPlayer::getFront()
 
 float CPlayer::getBottom()
 {
-	return Position.y;
+	return Position.y - 2.f;
 }
 
 float CPlayer::getTop()
 {
-	return Position.y + 2.f;
+	return Position.y;
 }

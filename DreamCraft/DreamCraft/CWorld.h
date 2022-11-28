@@ -2,11 +2,12 @@
 #include "Header.h"
 #include "CBase.h"
 #include "CPlayer.h"
+#include "CCow.h"
 #include <set>
 
 class CWorld
 {
-	set<CBlock*, CBlockCmp> Blocks;
+	set<CGameObject*, CGameObjectCmp> Objects;
 
 	CPlayer Player;
 	glm::vec3 PlayerPos;
@@ -28,7 +29,7 @@ public:
 
 	void Camera(int personView);
 
-	set<CBlock*, CBlockCmp>::iterator getObject();		//set에서 내가 클릭한 오브젝트의 iterator를 받아온다.
+	set<CGameObject*, CGameObjectCmp>::iterator getObject();		//set에서 내가 클릭한 오브젝트의 iterator를 받아온다.
 	void newBlock();									//내가 클릭한 오브젝트의 앞쪽에 블럭을 생성한다.
 
 	void Initialize();		//생성될 때 할 일
