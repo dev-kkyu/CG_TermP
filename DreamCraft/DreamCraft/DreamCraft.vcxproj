@@ -127,6 +127,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Arm.cpp" />
+    <ClCompile Include="Body.cpp" />
     <ClCompile Include="CAnimal.cpp" />
     <ClCompile Include="CBase.cpp" />
     <ClCompile Include="CBlock.cpp" />
@@ -135,8 +137,14 @@
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CWorld.cpp" />
     <ClCompile Include="DreamCraft.cpp" />
+    <ClCompile Include="Head.cpp" />
+    <ClCompile Include="Leg.cpp" />
+    <ClCompile Include="Nose.cpp" />
+    <ClCompile Include="RobotParts.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Arm.h" />
+    <ClInclude Include="Body.h" />
     <ClInclude Include="CAnimal.h" />
     <ClInclude Include="CBase.h" />
     <ClInclude Include="CBlock.h" />
@@ -144,7 +152,11 @@
     <ClInclude Include="CGameObject.h" />
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CWorld.h" />
+    <ClInclude Include="Head.h" />
     <ClInclude Include="Header.h" />
+    <ClInclude Include="Leg.h" />
+    <ClInclude Include="Nose.h" />
+    <ClInclude Include="RobotParts.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.glsl" />

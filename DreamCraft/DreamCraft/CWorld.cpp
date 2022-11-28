@@ -149,13 +149,16 @@ void CWorld::Camera()
 {
 	if (1 == personView) {
 		// 카메라 변환
-		glm::vec3 DirectionPos{ 0, 1.5f, -5.f };				//카메라 방향 원본
+		glm::vec3 DirectionPos{ 0, 0, -5.f };				//카메라 방향 원본
 		glm::mat4 cameraDirRot = glm::rotate(glm::mat4(1.f), glm::radians(-MouseAngle.first), glm::vec3(0.f, 1.f, 0.f));
 		cameraDirRot = glm::rotate(cameraDirRot, glm::radians(-MouseAngle.second), glm::vec3(1.f, 0.f, 0.f));
 		DirectionPos = cameraDirRot * glm::vec4(DirectionPos, 1.f);
 
-		cameraPos = glm::vec3(PlayerPos.x, PlayerPos.y - 0.5f, PlayerPos.z); //--- 카메라 위치 (어디서 볼건지)
-		cameraDirection = glm::vec3(PlayerPos.x + DirectionPos.x, PlayerPos.y + DirectionPos.y, PlayerPos.z + DirectionPos.z); //--- 카메라 바라보는 방향 (어디볼건지 하면될듯)
+		glm::vec3 cPos = glm::vec3(0, 0, -0.25);
+		cPos = glm::rotate(glm::mat4(1.f), glm::radians(-MouseAngle.first), glm::vec3(0.f, 1.f, 0.f)) * glm::vec4(cPos, 1.f);
+
+		cameraPos = glm::vec3(PlayerPos.x + cPos.x, PlayerPos.y - 0.4f, PlayerPos.z + cPos.z); //--- 카메라 위치 (어디서 볼건지)
+		cameraDirection = PlayerPos + DirectionPos; //--- 카메라 바라보는 방향 (어디볼건지 하면될듯)
 		glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f); //--- 카메라 위쪽 방향->벡터임(방향만) (음수하면 화면 상하거꾸로보임)
 
 		glm::mat4 view = glm::lookAt(cameraPos, cameraDirection, cameraUp);// *cameraRevolution;
@@ -273,7 +276,8 @@ void CWorld::Update()
 	if (isJump) {
 		;
 	}
-	Player.Update(PlayerPos);
+	if (isUp || isDown || isLeft || isRight)
+		Player.Update(PlayerPos);
 	Player.Update();
 }
 

@@ -1,6 +1,15 @@
 #include "CPlayer.h"
 
-CPlayer::CPlayer(glm::vec3 Position) : CGameObject{ Position }
+CPlayer::CPlayer(glm::vec3 Position) : CGameObject{ Position },
+	head(Head(glm::vec3(191. / 255, 160. / 255, 237. / 255))),
+	nose(Nose(glm::vec3(1.f, 108. / 255, 108. / 255))),
+	body(Body(glm::vec3(243. / 255, 1, 72. / 255))),
+	armL(Arm(glm::vec3(178. / 255, 204. / 255, 1.f), -1)),
+	armR(Arm(glm::vec3(1.f, 193. / 255, 158. / 255), 1)),
+	legL(Leg(glm::vec3(1.f, 193. / 255, 158. / 255), -1)),
+	legR(Leg(glm::vec3(178. / 255, 204. / 255, 1.f), 1)),
+	
+	Direction(0.f)
 {
 	Initialize();
 }
@@ -12,6 +21,14 @@ CPlayer::~CPlayer()
 void CPlayer::Update(glm::vec3 Position)
 {
 	this->Position = Position;
+
+	nose.setPos(Position);
+	head.setPos(Position);
+	armL.setPos(Position);
+	armR.setPos(Position);
+	body.setPos(Position);
+	legL.setPos(Position);
+	legR.setPos(Position);
 }
 
 void CPlayer::Initialize()
@@ -21,21 +38,15 @@ void CPlayer::Initialize()
 
 void CPlayer::Update()
 {
-	glm::mat4 Trans;
-	glm::mat4 Scale;
-	glm::mat4 Rotate;
+	Direction = -MouseAngle.first;
 
-	Trans = glm::translate(Unit, glm::vec3(0.f, -0.5f, 0.f));
-	Scale = glm::scale(Unit, glm::vec3(1.f, 2.f, 1.f));
-
-	Change = Scale * Trans;
-
-	Rotate = glm::rotate(Unit, glm::radians(-MouseAngle.first + 180.f), glm::vec3(0, 1, 0));
-	Change = Rotate * Change;
-
-	Trans = glm::translate(Unit, Position);
-
-	Change = Trans * Change;
+	nose.setDirection(Direction);
+	head.setDirection(Direction);
+	armL.setDirection(Direction);
+	armR.setDirection(Direction);
+	body.setDirection(Direction);
+	legL.setDirection(Direction);
+	legR.setDirection(Direction);
 }
 
 void CPlayer::FixedUpdate()
@@ -44,15 +55,13 @@ void CPlayer::FixedUpdate()
 
 void CPlayer::Render()
 {
-	glBindVertexArray(BlockVAO);
-
-	GLuint Color = glGetUniformLocation(shaderID, "objectColor");
-	glUniform3f(Color, 1, 1, 1);
-
-	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
-
-	glDrawArrays(GL_TRIANGLES, 0, 36);
+	nose.Render();
+	head.Render();
+	armL.Render();
+	armR.Render();
+	body.Render();
+	legL.Render();
+	legR.Render();
 }
 
 void CPlayer::Release()

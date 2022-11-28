@@ -34,6 +34,24 @@
     <Filter Include="GameObject\Animal\Cow">
       <UniqueIdentifier>{ba0fb90b-53a1-4d08-8520-dff1bb444887}</UniqueIdentifier>
     </Filter>
+    <Filter Include="RobotParts">
+      <UniqueIdentifier>{1a54fd21-be3b-49b6-996b-4646440ba926}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RobotParts\Arm">
+      <UniqueIdentifier>{96a50e07-8763-4832-9c46-9a883a914f9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RobotParts\Body">
+      <UniqueIdentifier>{3fce438a-853d-4041-a0b7-4e059e754662}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RobotParts\Head">
+      <UniqueIdentifier>{17929603-9012-4500-8462-356f99035aa9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RobotParts\Leg">
+      <UniqueIdentifier>{133feefd-66c5-4fab-81d0-884f2a3b6e42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RobotParts\Nose">
+      <UniqueIdentifier>{03aad9ff-bc62-4066-aadf-328ce211d5cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DreamCraft.cpp">
@@ -60,6 +78,24 @@
     <ClCompile Include="CCow.cpp">
       <Filter>GameObject\Animal\Cow</Filter>
     </ClCompile>
+    <ClCompile Include="Arm.cpp">
+      <Filter>RobotParts\Arm</Filter>
+    </ClCompile>
+    <ClCompile Include="Body.cpp">
+      <Filter>RobotParts\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="Head.cpp">
+      <Filter>RobotParts\Head</Filter>
+    </ClCompile>
+    <ClCompile Include="Leg.cpp">
+      <Filter>RobotParts\Leg</Filter>
+    </ClCompile>
+    <ClCompile Include="Nose.cpp">
+      <Filter>RobotParts\Nose</Filter>
+    </ClCompile>
+    <ClCompile Include="RobotParts.cpp">
+      <Filter>RobotParts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h">
@@ -85,6 +121,24 @@
     </ClInclude>
     <ClInclude Include="CCow.h">
       <Filter>GameObject\Animal\Cow</Filter>
+    </ClInclude>
+    <ClInclude Include="Arm.h">
+      <Filter>RobotParts\Arm</Filter>
+    </ClInclude>
+    <ClInclude Include="Body.h">
+      <Filter>RobotParts\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="Head.h">
+      <Filter>RobotParts\Head</Filter>
+    </ClInclude>
+    <ClInclude Include="Leg.h">
+      <Filter>RobotParts\Leg</Filter>
+    </ClInclude>
+    <ClInclude Include="Nose.h">
+      <Filter>RobotParts\Nose</Filter>
+    </ClInclude>
+    <ClInclude Include="RobotParts.h">
+      <Filter>RobotParts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

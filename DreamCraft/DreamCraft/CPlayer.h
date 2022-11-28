@@ -1,9 +1,24 @@
 #pragma once
 #include "CGameObject.h"
 
+#include "Head.h"
+#include "Nose.h"
+#include "Body.h"
+#include "Arm.h"
+#include "Leg.h"
+
 class CPlayer : public CGameObject
 {
 private:
+	Head head;
+	Nose nose;
+	Body body;
+	Arm armL;
+	Arm armR;
+	Leg legL;
+	Leg legR;
+
+	float Direction;
 
 public:
 	CPlayer(glm::vec3 Position);
