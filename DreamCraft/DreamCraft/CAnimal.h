@@ -6,6 +6,11 @@ class CAnimal : public CGameObject
 protected:
 	glm::vec3 Color;
 
+	glm::vec3 origin_Position;
+
+	float cowView, cow_move_x, cow_move_z, travel;
+	float before_location_x, before_location_z;
+
 public:
 	CAnimal(glm::vec3 Position);
 	virtual ~CAnimal() = 0;			//소멸자도 버츄얼 해주는게 좋음
