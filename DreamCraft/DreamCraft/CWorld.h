@@ -27,7 +27,7 @@ public:
 	void SpecialKeyboard(int key, int state);
 	void Mouse(int button, int state);
 
-	void Camera(int personView);
+	void Camera();
 
 	set<CGameObject*, CGameObjectCmp>::iterator getObject();		//set에서 내가 클릭한 오브젝트의 iterator를 받아온다.
 	void newBlock();									//내가 클릭한 오브젝트의 앞쪽에 블럭을 생성한다.

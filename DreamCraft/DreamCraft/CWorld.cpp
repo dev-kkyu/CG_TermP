@@ -145,7 +145,7 @@ void CWorld::Mouse(int button, int state)
 }
 
 
-void CWorld::Camera(int personView)
+void CWorld::Camera()
 {
 	if (1 == personView) {
 		// 카메라 변환
@@ -283,7 +283,7 @@ void CWorld::FixedUpdate()
 
 void CWorld::Render()
 {
-	Camera(personView);
+	Camera();
 
 	for (auto Object : Objects) {
 		Object->Render();
