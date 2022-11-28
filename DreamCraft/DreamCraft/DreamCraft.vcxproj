@@ -127,16 +127,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CAnimal.cpp" />
     <ClCompile Include="CBase.cpp" />
     <ClCompile Include="CBlock.cpp" />
+    <ClCompile Include="CCow.cpp" />
     <ClCompile Include="CGameObject.cpp" />
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CWorld.cpp" />
     <ClCompile Include="DreamCraft.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CAnimal.h" />
     <ClInclude Include="CBase.h" />
     <ClInclude Include="CBlock.h" />
+    <ClInclude Include="CCow.h" />
     <ClInclude Include="CGameObject.h" />
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CWorld.h" />

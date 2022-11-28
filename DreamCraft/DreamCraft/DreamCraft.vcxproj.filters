@@ -31,6 +31,9 @@
     <Filter Include="GameObject\Animal">
       <UniqueIdentifier>{da44e1eb-63ca-48fe-9182-8f044f33237c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Animal\Cow">
+      <UniqueIdentifier>{ba0fb90b-53a1-4d08-8520-dff1bb444887}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DreamCraft.cpp">
@@ -51,6 +54,12 @@
     <ClCompile Include="CBlock.cpp">
       <Filter>GameObject\Block</Filter>
     </ClCompile>
+    <ClCompile Include="CAnimal.cpp">
+      <Filter>GameObject\Animal</Filter>
+    </ClCompile>
+    <ClCompile Include="CCow.cpp">
+      <Filter>GameObject\Animal\Cow</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h">
@@ -70,6 +79,12 @@
     </ClInclude>
     <ClInclude Include="CGameObject.h">
       <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CAnimal.h">
+      <Filter>GameObject\Animal</Filter>
+    </ClInclude>
+    <ClInclude Include="CCow.h">
+      <Filter>GameObject\Animal\Cow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
