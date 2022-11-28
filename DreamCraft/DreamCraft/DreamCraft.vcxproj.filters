@@ -28,6 +28,9 @@
     <Filter Include="GameObject\Block\Base">
       <UniqueIdentifier>{47f1c92b-aede-4867-a83b-b8af7c9d9c4d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Animal">
+      <UniqueIdentifier>{da44e1eb-63ca-48fe-9182-8f044f33237c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DreamCraft.cpp">
