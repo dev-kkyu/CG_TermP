@@ -2,20 +2,18 @@
 
 random_device rd;
 default_random_engine dre(rd());
-uniform_real_distribution<float> urd{ 0.f, 1.f };
-uniform_real_distribution<float> pos_urd{ -15.f, 15.f };
-uniform_int_distribution<int> dict_urd{ 1, 8 };
-uniform_real_distribution<float> move_urd{ 5.f, 15.f };
+uniform_real_distribution<float> color_urd{ 0.f, 1.f };
+uniform_int_distribution<int> dict_urd{ 1, 8 };				
+uniform_real_distribution<float> travel_urd{ 5.f, 15.f };
 
 CAnimal::CAnimal(glm::vec3 Position) : CGameObject{ Position }
 {
+	Color = glm::vec3(color_urd(dre), color_urd(dre), color_urd(dre));
 
-	cowView = dict_urd(dre) * 45.f;
-	cow_move_x = cow_move_z = 0;
-	Color = glm::vec3(urd(dre), urd(dre), urd(dre));
-	//Position = glm::vec3(pos_urd(dre), 1, pos_urd(dre));;
+	animalView = dict_urd(dre) * 45.f;			// 이동 방향 1-8까지 n*45도 만큼 회전
+	travel = travel_urd(dre);
+
 	origin_Position = Position;
-	travel = move_urd(dre);
 	before_location_x = Position.x;
 	before_location_z = Position.z;
 
@@ -39,26 +37,24 @@ void CAnimal::Initialize()
 
 void CAnimal::Update()
 {
-	
-
 	float temp_x = 0, temp_z = 0;
 
 	if (pow(before_location_x - Position.x, 2)
-		+ pow(before_location_z - Position.z, 2) >= pow(travel, 2)  //--한 방향으로 travel만큼 이동했으면
+		+ pow(before_location_z - Position.z, 2) >= pow(travel, 2)  // 한 방향으로 travel만큼 이동했으면
 		||
-		(pow(temp_x- origin_Position.x, 2) + pow(temp_z- origin_Position.z, 2) >= 100)   //--다음 이동이 경계에 걸리면
+		(pow(temp_x- origin_Position.x, 2) + pow(temp_z- origin_Position.z, 2) >= 100)   //다음 이동이 경계에 걸리면
 		) {
 
-		cowView = dict_urd(dre) * 45.f;
-		travel = move_urd(dre);
+		animalView = dict_urd(dre) * 45.f;
+		travel = travel_urd(dre);
 		before_location_x = Position.x;
 		before_location_z = Position.z;
 
-		//cout << "0" << endl;
 	}
+
 	float speed = 0.05;
 	
-	switch ((int)(cowView / 45))
+	switch ((int)(animalView / 45))
 	{
 	case 1:
 		Position.x += speed;
@@ -68,7 +64,6 @@ void CAnimal::Update()
 		break;
 	case 2:
 		Position.x += speed;
-		//cow_move_z -= 0.1;
 		temp_x = Position.x + speed * 2;
 
 		break;
@@ -79,7 +74,6 @@ void CAnimal::Update()
 		temp_z = Position.z - speed * 2;
 		break;
 	case 4:
-		//cow_move_x += 0.1;
 		Position.z -= speed;
 		temp_z = Position.z - speed * 2;
 		break;
@@ -92,7 +86,6 @@ void CAnimal::Update()
 	case 6:
 		Position.x -= speed;
 		temp_x = Position.x - speed * 2;
-		//cow_move_z -= 0.1;
 		break;
 	case 7:
 		Position.x -= speed;
@@ -101,7 +94,6 @@ void CAnimal::Update()
 		temp_z = Position.z + speed * 2;
 		break;
 	case 8:
-		//cow_move_x += 0.1;
 		Position.z += speed;
 		temp_z = Position.z + speed * 2;
 		break;
@@ -114,15 +106,10 @@ void CAnimal::Update()
 
 	Trans = glm::translate(Unit, glm::vec3(0.f, -0.5f, 0.f));
 	Scale = glm::scale(Unit, glm::vec3(1.f, 1.f, 2.f));
-
-	rotation = glm::rotate(glm::mat4(1.0f), glm::radians(cowView), glm::vec3(0.f, 1.f, 0.f));
+	rotation = glm::rotate(glm::mat4(1.0f), glm::radians(animalView), glm::vec3(0.f, 1.f, 0.f));
 	
 	
-	Change = glm::translate(Unit, Position)/*posMat*/ * Trans * rotation * Scale;
-
-	//Trans = glm::translate(Unit, Position);  //posMat
-
-	//Change = Trans * Change;
+	Change = glm::translate(Unit, Position) * Trans * rotation * Scale;
 }
 
 void CAnimal::Render()
