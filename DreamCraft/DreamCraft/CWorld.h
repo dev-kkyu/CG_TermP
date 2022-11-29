@@ -7,8 +7,7 @@
 
 class CWorld
 {
-	set<CGameObject*, CGameObjectCmp> Objects;
-
+private:
 	CPlayer Player;
 	glm::vec3 PlayerPos;
 
@@ -19,6 +18,8 @@ class CWorld
 	int isJump;
 	int personView;
 
+public:
+	set<CGameObject*, CGameObjectCmp> Objects;
 
 public:
 	CWorld();

@@ -9,6 +9,9 @@ protected:
 	glm::vec3 origin_Position;		// 첫 스폰 위치
 	glm::vec3 before_Position;		// 방향 전환 직전 위치
 
+	glm::vec3 float_Position;		// 이동하고 있는 현재 위치
+			// Position은 round, ceil 된 x.0 값
+
 	float animal_Direction, Travel;		// 동물의 방향, 한 방향으로 갈 수 있는 최대 거리(방향이 바뀌면 달라짐)
 	
 public:

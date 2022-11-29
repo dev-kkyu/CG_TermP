@@ -1,5 +1,8 @@
 #include "CAnimal.h"
 
+#include "CWorld.h"
+extern CWorld World;
+
 random_device rd;
 default_random_engine dre(rd());
 uniform_int_distribution<int> dict_urd{ 1, 8 };
@@ -22,6 +25,8 @@ void CAnimal::Initialize()
 	origin_Position = Position;
 	before_Position = Position;
 
+	float_Position = Position;
+
 	uniform_real_distribution<float> urd{ 0.f, 1.f };
 
 	Color = glm::vec3{ urd(dre),urd(dre), urd(dre) };
@@ -43,7 +48,7 @@ void CAnimal::Update()
 	Rotate = glm::rotate(glm::mat4(1.0f), glm::radians(animal_Direction), glm::vec3(0.f, 1.f, 0.f));
 	
 	
-	Change = glm::translate(Unit, Position) * Trans * Rotate * Scale;
+	Change = glm::translate(Unit, float_Position) * Rotate * Scale * Trans;
 }
 
 void CAnimal::FixedUpdate()
@@ -72,35 +77,46 @@ void CAnimal::FixedUpdate()
 	switch ((int)(animal_Direction / 45))
 	{
 	case 1:
-		Position.x += speed;
-		Position.z += speed;
+		float_Position.x += speed;
+		float_Position.z += speed;
 		break;
 	case 2:
-		Position.x += speed;
+		float_Position.x += speed;
 
 		break;
 	case 3:
-		Position.x += speed;
-		Position.z -= speed;
+		float_Position.x += speed;
+		float_Position.z -= speed;
 		break;
 	case 4:
-		Position.z -= speed;
+		float_Position.z -= speed;
 		break;
 	case 5:
-		Position.x -= speed;
-		Position.z -= speed;
+		float_Position.x -= speed;
+		float_Position.z -= speed;
 		break;
 	case 6:
-		Position.x -= speed;
+		float_Position.x -= speed;
 		break;
 	case 7:
-		Position.x -= speed;
-		Position.z += speed;
+		float_Position.x -= speed;
+		float_Position.z += speed;
 		break;
 	case 8:
-		Position.z += speed;
+		float_Position.z += speed;
 		break;
 	}
+
+	auto itrTemp = World.Objects.find(this);
+	if (itrTemp != World.Objects.end()) {
+		World.Objects.erase(itrTemp);
+	}
+
+	Position.x = round(float_Position.x);
+	Position.y = ceil(float_Position.y);
+	Position.z = round(float_Position.z);
+
+	World.Objects.insert(this);
 }
 
 void CAnimal::Render()
