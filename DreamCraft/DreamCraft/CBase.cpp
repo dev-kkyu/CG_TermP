@@ -11,6 +11,8 @@ CBase::~CBase()
 
 void CBase::Initialize()
 {
+	Hp = 10;
+
 	random_device rd;
 	default_random_engine dre{ rd() };
 	uniform_real_distribution<float> urd{ 0.f, 1.f };

@@ -4,11 +4,13 @@
 class CBlock : public CGameObject
 {
 protected:
-
+	glm::vec3 Color;
 
 public:
 	CBlock(glm::vec3 Position);
 	virtual ~CBlock() = 0;			//소멸자도 버츄얼 해주는게 좋음
+
+	virtual void be_Attacked(int Weapon);
 
 	virtual void Initialize() override;		//생성될 때 할 일
 	virtual void Update() = 0;			//타이머에서 할 일

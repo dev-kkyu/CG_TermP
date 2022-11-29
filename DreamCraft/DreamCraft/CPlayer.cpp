@@ -9,7 +9,9 @@ CPlayer::CPlayer(glm::vec3 Position) : CGameObject{ Position },
 	legL(Leg(glm::vec3(1.f, 193. / 255, 158. / 255), -1)),
 	legR(Leg(glm::vec3(178. / 255, 204. / 255, 1.f), 1)),
 	
-	Direction(0.f)
+	Direction(0.f),
+
+	Weapon(맨손)
 {
 	Initialize();
 }
@@ -31,8 +33,24 @@ void CPlayer::Update(glm::vec3 Position)
 	legR.setPos(Position);
 }
 
+void CPlayer::setWeapon(int Weapon)
+{
+	this->Weapon = Weapon;
+}
+
+int CPlayer::getWeapon()
+{
+	return Weapon;
+}
+
+void CPlayer::be_Attacked(int Weapon)
+{
+	//나중에 해주자.
+}
+
 void CPlayer::Initialize()
 {
+	Hp = 10;
 	Update();
 }
 

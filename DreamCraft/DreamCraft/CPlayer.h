@@ -20,11 +20,18 @@ private:
 
 	float Direction;
 
+	int Weapon;
+
 public:
 	CPlayer(glm::vec3 Position);
 	virtual ~CPlayer();			//소멸자도 버츄얼 해주는게 좋음
 	
 	void Update(glm::vec3 Position);
+
+	void setWeapon(int Weapon);
+	int getWeapon();
+
+	virtual void be_Attacked(int Weapon);
 
 	virtual void Initialize() override;		//생성될 때 할 일
 	virtual void Update() override;			//타이머에서 할 일

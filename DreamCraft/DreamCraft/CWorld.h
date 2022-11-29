@@ -14,9 +14,13 @@ private:
 	glm::vec3 cameraPos;
 	glm::vec3 cameraDirection;
 
+	bool mouseL_On;
+
 	bool isUp, isDown, isLeft, isRight;
 	int isJump;
 	int personView;
+
+	int planToCreateObj;
 
 public:
 	set<CGameObject*, CGameObjectCmp> Objects;
@@ -31,7 +35,7 @@ public:
 	void Camera();
 
 	set<CGameObject*, CGameObjectCmp>::iterator getObject();		//set에서 내가 클릭한 오브젝트의 iterator를 받아온다.
-	void newBlock();									//내가 클릭한 오브젝트의 앞쪽에 블럭을 생성한다.
+	void addNewObject(int ObjectType);									//내가 클릭한 오브젝트의 앞쪽에 오브젝트를 생성한다.
 
 	void Initialize();		//생성될 때 할 일
 	void Update();			//타이머에서 할 일

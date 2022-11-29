@@ -1,7 +1,8 @@
 #include "CWorld.h"
 
 CWorld::CWorld() : Player{ CPlayer{glm::vec3(0.f, 2.f, 0.f)} }, PlayerPos{ glm::vec3(0.f, 2.f, 0.f) },
-	isUp{ false }, isDown{ false }, isLeft{ false }, isRight{ false }, isJump{ false }, personView{ 1 }
+isUp{ false }, isDown{ false }, isLeft{ false }, isRight{ false }, isJump{ false }, personView{ 1 },
+planToCreateObj(기본블럭)
 {
 	Initialize();
 }
@@ -10,11 +11,29 @@ void CWorld::Keyboard(unsigned char key, int state)
 {
 	switch (state) {
 	case GLUT_DOWN:
-		switch (key) {
+		switch (key) {					//뭐 생성할지도 정해줌
 		case '1':
-			personView = 1;
+			Player.setWeapon(맨손);
+			break;
+		case '2':
+			Player.setWeapon(칼);
 			break;
 		case '3':
+			Player.setWeapon(곡괭이);
+			break;
+		case '9':
+			Player.setWeapon(최강무기);
+			break;
+		case 'b':
+			planToCreateObj = 기본블럭;
+			break;
+		case 'n':
+			planToCreateObj = 소;
+			break;
+		case 'f':
+			personView = 1;
+			break;
+		case 't':
 			personView = 3;
 			break;
 		case 'w':
@@ -120,22 +139,18 @@ void CWorld::Mouse(int button, int state)
 	switch (state) {
 	case GLUT_DOWN:
 		switch (button) {
-		case GLUT_LEFT_BUTTON: {
-			auto temp = getObject();
-			if (temp != Objects.end()) {
-				delete (*temp);
-				Objects.erase(temp);
-			}
-		}
+		case GLUT_LEFT_BUTTON:
+			mouseL_On = true;
 			break;
 		case GLUT_RIGHT_BUTTON:
-			newBlock();
+			addNewObject(planToCreateObj);
 			break;
 		}
 		break;
 	case GLUT_UP:
 		switch (button) {
 		case GLUT_LEFT_BUTTON:
+			mouseL_On = false;
 			break;
 		case GLUT_RIGHT_BUTTON:
 			break;
@@ -215,7 +230,7 @@ set<CGameObject*, CGameObjectCmp>::iterator CWorld::getObject()
 	return Objects.end();
 }
 
-void CWorld::newBlock()
+void CWorld::addNewObject(int ObjectType)
 {
 	glm::vec3 normalDirection = cameraDirection - cameraPos;
 	normalDirection = glm::normalize(normalDirection);
@@ -233,7 +248,14 @@ void CWorld::newBlock()
 			tempPos.x = round(tempPos.x);
 			tempPos.y = ceil(tempPos.y);
 			tempPos.z = round(tempPos.z);
-			Objects.insert(new CBase(tempPos));
+			switch (ObjectType) {
+			case 기본블럭:
+				Objects.insert(new CBase(tempPos));
+				break;
+			case 소:
+				Objects.insert(new CCow(tempPos));
+				break;
+			}
 			break;
 		}
 	}
@@ -259,6 +281,26 @@ void CWorld::Update()
 {
 	for (auto Object : Objects) {
 		Object->Update();
+	}
+
+	static int time = 0;
+	if (mouseL_On) {
+		if (0 == time) {
+			auto temp = getObject();
+			if (temp != Objects.end()) {
+				(*temp)->be_Attacked(Player.getWeapon());
+				if ((*temp)->isDead()) {
+					delete (*temp);
+					Objects.erase(temp);
+				}
+			}
+			time = 1;
+		}
+		else
+			time = (time + 1) % 20;
+	}
+	else {
+		time = 0;
 	}
 
 	if (isUp) {

@@ -17,8 +17,31 @@ CAnimal::~CAnimal()
 {
 }
 
+void CAnimal::be_Attacked(int Weapon)
+{
+	switch (Weapon) {
+	case ¸Ç¼Õ:
+		cout << "¸Ç¼Õ" << endl;
+		--Hp;
+		break;
+	case Ä®:
+		Hp -= 2;
+		cout << "Ä®" << endl;
+		break;
+	case °î±ªÀÌ:
+		cout << "°î±ªÀÌ" << endl;
+		break;
+	case ÃÖ°­¹«±â:
+		cout << "ÃÖ°­¹«±â" << endl;
+		Hp -= 100;
+		break;
+	}
+}
+
 void CAnimal::Initialize()
 {
+	Hp = 10;
+
 	animal_Direction = dict_urd(dre) * 45.f;			// ÀÌµ¿ ¹æÇâ 1-8±îÁö n*45µµ ¸¸Å­ È¸Àü
 	Travel = travel_urd(dre);
 

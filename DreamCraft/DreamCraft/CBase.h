@@ -4,7 +4,6 @@
 class CBase : public CBlock
 {
 private:
-	glm::vec3 Color;
 
 public:
 	CBase(glm::vec3 Position);

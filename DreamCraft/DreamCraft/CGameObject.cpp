@@ -13,6 +13,11 @@ void CGameObject::show()
 	cout << Position.x << " " << Position.y << ' ' << Position.z << endl;
 }
 
+bool CGameObject::isDead()
+{
+	return Hp <= 0;
+}
+
 bool CGameObjectCmp::operator()(const CGameObject* lhs, const CGameObject* rhs) const
 {
 	if (lhs->Position.x != rhs->Position.x)

@@ -2,24 +2,46 @@
 
 CBlock::CBlock(glm::vec3 Position) : CGameObject{Position}
 {
-	Initialize();
+	//Initialize();
 }
 
 CBlock::~CBlock()
 {
 }
 
+void CBlock::be_Attacked(int Weapon)
+{
+	switch (Weapon) {
+	case ¸Ç¼Õ:
+		cout << "¸Ç¼Õ" << endl;
+		--Hp;
+		break;
+	case Ä®:
+		cout << "Ä®" << endl;
+		break;
+	case °î±ªÀÌ:
+		cout << "°î±ªÀÌ" << endl;
+		Hp -= 2;
+		break;
+	case ÃÖ°­¹«±â:
+		cout << "ÃÖ°­¹«±â" << endl;
+		Hp -= 100;
+		break;
+	}
+	Color = Color * (Hp / 10.f);
+}
+
 void CBlock::Initialize()
 {
-	glm::mat4 Trans;
-	
-	Trans = glm::translate(Unit, glm::vec3(0.f, -0.5f, 0.f));
+	//glm::mat4 Trans;
+	//
+	//Trans = glm::translate(Unit, glm::vec3(0.f, -0.5f, 0.f));
 
-	Change = Trans;
+	//Change = Trans;
 
-	Trans = glm::translate(Unit, Position);
+	//Trans = glm::translate(Unit, Position);
 
-	Change = Trans * Change;
+	//Change = Trans * Change;
 }
 
 void CBlock::Render()
