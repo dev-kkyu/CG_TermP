@@ -239,7 +239,7 @@ GLvoid PassiveMotion(int x, int y)
 
 	if ((y - winHeight / 2) < 0 && MouseAngle.second > -80.f)		// ÇÏ´Ã
 		MouseAngle.second += ((y - winHeight / 2) / 12.5f);
-	else if ((y - winHeight / 2) >= 0 && MouseAngle.second < 45.f)	//¶¥
+	else if ((y - winHeight / 2) >= 0 && MouseAngle.second < 60.f)	//¶¥
 		MouseAngle.second += ((y - winHeight / 2) / 12.5f);
 
 	glutWarpPointer(winWidth / 2, winHeight / 2);
