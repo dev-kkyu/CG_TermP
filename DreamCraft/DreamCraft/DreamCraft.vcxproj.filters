@@ -55,6 +55,15 @@
     <Filter Include="RobotParts\Weapon">
       <UniqueIdentifier>{7046fe4b-d11e-44ae-aad6-3ec8d5eef3de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Animal\Pig">
+      <UniqueIdentifier>{f32524e0-332b-44cf-9e5a-ab6f8025f0cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Animal\Sheep">
+      <UniqueIdentifier>{49d19146-0fdb-471e-abc7-d4359a81a4b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Animal\Chicken">
+      <UniqueIdentifier>{a4c456ff-a1b7-404d-8a82-a87ad0f97219}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DreamCraft.cpp">
@@ -102,6 +111,15 @@
     <ClCompile Include="Weapon.cpp">
       <Filter>RobotParts\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="CChicken.cpp">
+      <Filter>GameObject\Animal\Chicken</Filter>
+    </ClCompile>
+    <ClCompile Include="CPig.cpp">
+      <Filter>GameObject\Animal\Pig</Filter>
+    </ClCompile>
+    <ClCompile Include="CSheep.cpp">
+      <Filter>GameObject\Animal\Sheep</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CWorld.h">
@@ -148,6 +166,15 @@
     </ClInclude>
     <ClInclude Include="Header.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CChicken.h">
+      <Filter>GameObject\Animal\Chicken</Filter>
+    </ClInclude>
+    <ClInclude Include="CPig.h">
+      <Filter>GameObject\Animal\Pig</Filter>
+    </ClInclude>
+    <ClInclude Include="CSheep.h">
+      <Filter>GameObject\Animal\Sheep</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
