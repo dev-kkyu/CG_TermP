@@ -8,10 +8,11 @@ CPlayer::CPlayer(glm::vec3 Position) : CGameObject{ Position },
 	armR(Arm(glm::vec3(1.f, 193. / 255, 158. / 255), 1)),
 	legL(Leg(glm::vec3(1.f, 193. / 255, 158. / 255), -1)),
 	legR(Leg(glm::vec3(178. / 255, 204. / 255, 1.f), 1)),
+	weapon(Weapon(1)),
 	
 	Direction(0.f),
 
-	Weapon(맨손)
+	Weapon_Name(맨손)
 {
 	Initialize();
 }
@@ -31,16 +32,18 @@ void CPlayer::Update(glm::vec3 Position)
 	body.setPos(Position);
 	legL.setPos(Position);
 	legR.setPos(Position);
+	weapon.setPos(Position);
+
 }
 
 void CPlayer::setWeapon(int Weapon)
 {
-	this->Weapon = Weapon;
+	this->Weapon_Name = Weapon;
 }
 
 int CPlayer::getWeapon()
 {
-	return Weapon;
+	return Weapon_Name;
 }
 
 void CPlayer::be_Attacked(int Weapon)
@@ -65,6 +68,24 @@ void CPlayer::Update()
 	body.setDirection(Direction);
 	legL.setDirection(Direction);
 	legR.setDirection(Direction);
+
+	weapon.setDirection(Direction);
+
+	if (getWeapon() == 맨손)
+		weapon.change(glm::vec3(0, 0, 0));
+
+	else if(getWeapon() == 칼)
+		weapon.change(glm::vec3(1, 0, 1));
+
+	else if(getWeapon() == 가위)
+		weapon.change(glm::vec3(1, 1, 0));
+
+	else if(getWeapon() == 곡괭이)
+		weapon.change(glm::vec3(0, 126./255, 0));
+
+	else if(getWeapon() == 최강무기)
+		weapon.change(glm::vec3(0, 1, 1));
+
 }
 
 void CPlayer::FixedUpdate()
@@ -80,6 +101,8 @@ void CPlayer::Render()
 	body.Render();
 	legL.Render();
 	legR.Render();
+	if (getWeapon() != 맨손)
+		weapon.Render();
 }
 
 void CPlayer::Release()

@@ -6,6 +6,7 @@
 #include "Body.h"
 #include "Arm.h"
 #include "Leg.h"
+#include "Weapon.h"
 
 class CPlayer : public CGameObject
 {
@@ -17,10 +18,11 @@ private:
 	Arm armR;
 	Leg legL;
 	Leg legR;
+	Weapon weapon;
 
 	float Direction;
 
-	int Weapon;
+	int Weapon_Name;
 
 public:
 	CPlayer(glm::vec3 Position);

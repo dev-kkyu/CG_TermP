@@ -52,6 +52,9 @@
     <Filter Include="RobotParts\Nose">
       <UniqueIdentifier>{03aad9ff-bc62-4066-aadf-328ce211d5cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="RobotParts\Weapon">
+      <UniqueIdentifier>{7046fe4b-d11e-44ae-aad6-3ec8d5eef3de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DreamCraft.cpp">
@@ -96,11 +99,11 @@
     <ClCompile Include="RobotParts.cpp">
       <Filter>RobotParts</Filter>
     </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>RobotParts\Weapon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="CWorld.h">
       <Filter>World</Filter>
     </ClInclude>
@@ -139,6 +142,12 @@
     </ClInclude>
     <ClInclude Include="RobotParts.h">
       <Filter>RobotParts</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>RobotParts\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="Header.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

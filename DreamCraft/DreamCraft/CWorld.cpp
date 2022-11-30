@@ -19,6 +19,9 @@ void CWorld::Keyboard(unsigned char key, int state)
 			Player.setWeapon(Ä®);
 			break;
 		case '3':
+			Player.setWeapon(°¡À§);
+			break;
+		case '4':
 			Player.setWeapon(°î±ªÀÌ);
 			break;
 		case '9':
