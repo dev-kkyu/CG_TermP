@@ -21,21 +21,30 @@ void CAnimal::be_Attacked(int Weapon)
 {
 	switch (Weapon) {
 	case ¸Ç¼Õ:
-		cout << "¸Ç¼Õ" << endl;
 		--Hp;
+		Attacked = true;
+		cout << "¸Ç¼Õ" << endl;
 		break;
 	case Ä®:
 		Hp -= 2;
+		Attacked = true;
 		cout << "Ä®" << endl;
 		break;
+	case °¡À§:
+		Attacked = true;
+		cout << "°¡À§" << endl;
+		break;
 	case °î±ªÀÌ:
+		Attacked = true;
 		cout << "°î±ªÀÌ" << endl;
 		break;
 	case ÃÖ°­¹«±â:
+		Attacked = true;
 		cout << "ÃÖ°­¹«±â" << endl;
 		Hp -= 100;
 		break;
 	}
+
 }
 
 void CAnimal::Initialize()
@@ -53,6 +62,7 @@ void CAnimal::Initialize()
 	uniform_real_distribution<float> urd{ 0.f, 1.f };
 
 	Color = glm::vec3{ urd(dre),urd(dre), urd(dre) };
+	origin_Color = Color;
 
 	Update();
 }
@@ -72,6 +82,19 @@ void CAnimal::Update()
 	
 	
 	Change = glm::translate(Unit, float_Position) * Rotate * Scale * Trans;
+
+	static int time = 0;
+	if (Attacked) {
+		Color *= glm::vec3(1, 0, 0);
+		if (time > 20) {
+			time = 0;
+			Attacked = false;
+		}
+		else
+			++time;
+	}
+	else
+		Color = origin_Color;
 }
 
 void CAnimal::FixedUpdate()

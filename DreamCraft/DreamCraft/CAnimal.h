@@ -14,6 +14,9 @@ protected:
 
 	float animal_Direction, Travel;		// 동물의 방향, 한 방향으로 갈 수 있는 최대 거리(방향이 바뀌면 달라짐)
 	
+	glm::vec3 origin_Color;
+	bool Attacked;
+
 public:
 	CAnimal(glm::vec3 Position);
 	virtual ~CAnimal() = 0;			// 소멸자도 버츄얼 해주는게 좋음
