@@ -15,7 +15,8 @@ protected:
 	float animal_Direction, Travel;		// 동물의 방향, 한 방향으로 갈 수 있는 최대 거리(방향이 바뀌면 달라짐)
 	
 	glm::vec3 origin_Color;
-	bool Attacked;
+	bool Attacked, Attacked_Motion;
+	
 
 public:
 	CAnimal(glm::vec3 Position);
@@ -29,12 +30,12 @@ public:
 	virtual void Render() override;			// 드로우
 	virtual void Release() = 0;			// 소멸될 때 할 일
 
-
 	virtual float getLeft() override;		// 오브젝트들은 충돌체크를 할 필요가 있을 때 있다.
 	virtual float getRight() override;		// 블럭의 Position은 윗면 중앙이다.
 	virtual float getBehind() override;
 	virtual float getFront() override;
 	virtual float getBottom() override;
 	virtual float getTop() override;
+
 };
 

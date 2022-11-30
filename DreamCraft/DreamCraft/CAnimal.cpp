@@ -22,24 +22,24 @@ void CAnimal::be_Attacked(int Weapon)
 	switch (Weapon) {
 	case ¸Ç¼Õ:
 		--Hp;
-		Attacked = true;
+		Attacked = Attacked_Motion = true;
 		cout << "¸Ç¼Õ" << endl;
 		break;
 	case Ä®:
 		Hp -= 2;
-		Attacked = true;
+		Attacked = Attacked_Motion = true;
 		cout << "Ä®" << endl;
 		break;
 	case °¡À§:
-		Attacked = true;
+		Attacked = Attacked_Motion = true;
 		cout << "°¡À§" << endl;
 		break;
 	case °î±ªÀÌ:
-		Attacked = true;
+		Attacked = Attacked_Motion = true;
 		cout << "°î±ªÀÌ" << endl;
 		break;
 	case ÃÖ°­¹«±â:
-		Attacked = true;
+		Attacked = Attacked_Motion = true;
 		cout << "ÃÖ°­¹«±â" << endl;
 		Hp -= 100;
 		break;
@@ -119,39 +119,47 @@ void CAnimal::FixedUpdate()
 		before_Position = Position;
 	}
 
+	if(!Attacked_Motion)
+		switch ((int)(animal_Direction / 45))
+		{
+		case 1:
+			float_Position.x += speed;
+			float_Position.z += speed;
+			break;
+		case 2:
+			float_Position.x += speed;
 
-	switch ((int)(animal_Direction / 45))
-	{
-	case 1:
-		float_Position.x += speed;
-		float_Position.z += speed;
-		break;
-	case 2:
-		float_Position.x += speed;
+			break;
+		case 3:
+			float_Position.x += speed;
+			float_Position.z -= speed;
+			break;
+		case 4:
+			float_Position.z -= speed;
+			break;
+		case 5:
+			float_Position.x -= speed;
+			float_Position.z -= speed;
+			break;
+		case 6:
+			float_Position.x -= speed;
+			break;
+		case 7:
+			float_Position.x -= speed;
+			float_Position.z += speed;
+			break;
+		case 8:
+			float_Position.z += speed;
+			break;
+		}
+	else {
 
-		break;
-	case 3:
-		float_Position.x += speed;
-		float_Position.z -= speed;
-		break;
-	case 4:
-		float_Position.z -= speed;
-		break;
-	case 5:
-		float_Position.x -= speed;
-		float_Position.z -= speed;
-		break;
-	case 6:
-		float_Position.x -= speed;
-		break;
-	case 7:
-		float_Position.x -= speed;
-		float_Position.z += speed;
-		break;
-	case 8:
-		float_Position.z += speed;
-		break;
+		float_Position.x += glm::sin(glm::radians(MouseAngle.first)) * 0.75f;
+		float_Position.z -= glm::cos(glm::radians(MouseAngle.first)) * 0.75f;
+		Attacked_Motion = false;
 	}
+
+
 
 	auto itrTemp = World.Objects.find(this);
 	if (itrTemp != World.Objects.end()) {
