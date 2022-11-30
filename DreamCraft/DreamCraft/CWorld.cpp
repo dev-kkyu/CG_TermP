@@ -31,7 +31,7 @@ void CWorld::Keyboard(unsigned char key, int state)
 			planToCreateObj = 기본블럭;
 			break;
 		case 'n':
-			planToCreateObj = 소;
+			planToCreateObj = 양;
 			break;
 		case 'f':
 			personView = 1;
@@ -258,6 +258,9 @@ void CWorld::addNewObject(int ObjectType)
 			case 소:
 				Objects.insert(new CCow(tempPos));
 				break;
+			case 양:
+				Objects.insert(new CSheep(tempPos));
+				break;
 			}
 			break;
 		}
@@ -275,9 +278,9 @@ void CWorld::Initialize()
 
 
 
-	Objects.insert(new CCow{ glm::vec3(3,1,3) });
-	Objects.insert(new CCow{ glm::vec3(-3,1,3) });
-	Objects.insert(new CCow{ glm::vec3(3,1,-3) });
+	Objects.insert(new CSheep{ glm::vec3(3,1,3) });
+	Objects.insert(new CSheep{ glm::vec3(-3,1,3) });
+	Objects.insert(new CSheep{ glm::vec3(3,1,-3) });
 }
 
 void CWorld::Update()

@@ -3,6 +3,9 @@
 #include "CBase.h"
 #include "CPlayer.h"
 #include "CCow.h"
+#include "CChicken.h"
+#include "CPig.h"
+#include "CSheep.h"
 #include <set>
 
 class CWorld

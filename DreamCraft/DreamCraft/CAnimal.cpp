@@ -23,23 +23,27 @@ void CAnimal::be_Attacked(int Weapon)
 	case ¸Ç¼Õ:
 		--Hp;
 		Attacked = Attacked_Motion = true;
+		hold_Scissors = false;
 		cout << "¸Ç¼Õ" << endl;
 		break;
 	case Ä®:
 		Hp -= 2;
 		Attacked = Attacked_Motion = true;
+		hold_Scissors = false;
 		cout << "Ä®" << endl;
 		break;
 	case °¡À§:
-		Attacked = Attacked_Motion = true;
+		Attacked = Attacked_Motion = hold_Scissors = true;
 		cout << "°¡À§" << endl;
 		break;
 	case °î±ªÀÌ:
 		Attacked = Attacked_Motion = true;
+		hold_Scissors = false;
 		cout << "°î±ªÀÌ" << endl;
 		break;
 	case ÃÖ°­¹«±â:
 		Attacked = Attacked_Motion = true;
+		hold_Scissors = false;
 		cout << "ÃÖ°­¹«±â" << endl;
 		Hp -= 100;
 		break;

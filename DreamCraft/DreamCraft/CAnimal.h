@@ -15,7 +15,7 @@ protected:
 	float animal_Direction, Travel;		// 동물의 방향, 한 방향으로 갈 수 있는 최대 거리(방향이 바뀌면 달라짐)
 	
 	glm::vec3 origin_Color;
-	bool Attacked, Attacked_Motion;
+	bool Attacked, Attacked_Motion, hold_Scissors;
 	
 
 public:
