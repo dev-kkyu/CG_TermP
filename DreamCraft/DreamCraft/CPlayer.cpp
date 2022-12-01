@@ -1,4 +1,7 @@
 #include "CPlayer.h"
+#include "CWorld.h"
+
+extern CWorld World;
 
 CPlayer::CPlayer(glm::vec3 Position) : CGameObject{ Position },
 	head(Head(glm::vec3(191. / 255, 160. / 255, 237. / 255))),
@@ -94,15 +97,22 @@ void CPlayer::FixedUpdate()
 
 void CPlayer::Render()
 {
-	nose.Render();
-	head.Render();
-	armL.Render();
-	armR.Render();
-	body.Render();
-	legL.Render();
-	legR.Render();
-	if (getWeapon() != 맨손)
+	if (World.getpersonView() == 3) {
+
+		nose.Render();
+		head.Render();
+		armL.Render();
+		armR.Render();
+		body.Render();
+		legL.Render();
+		legR.Render();
+
+	}
+
+	if (getWeapon() != 맨손) {
+
 		weapon.Render();
+	}
 }
 
 void CPlayer::Release()

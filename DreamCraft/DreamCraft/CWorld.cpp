@@ -187,6 +187,10 @@ void CWorld::Camera()
 		// fragment 쉐이더로 넘어가는 카메라 좌표(조명계산용)
 		GLuint viewPosLocation = glGetUniformLocation(shaderID, "viewPos");		//--- viewPos 값 전달: 카메라 위치
 		glUniform3f(viewPosLocation, cameraPos.x, cameraPos.y, cameraPos.z);
+
+
+
+
 	}
 	else if (3 == personView) {
 		// 카메라 변환
@@ -350,5 +354,10 @@ void CWorld::Render()
 
 void CWorld::Release()
 {
+}
+
+int CWorld::getpersonView()
+{
+	return personView;
 }
 

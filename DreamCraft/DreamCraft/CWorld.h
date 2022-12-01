@@ -45,6 +45,6 @@ public:
 	void FixedUpdate();		//충돌처리 등
 	void Render();			//드로우
 	void Release();			//소멸될 때 할 일
-	
+	int getpersonView();
 };
 
