@@ -28,7 +28,8 @@ public:
 	virtual void Render() = 0;			// 드로우
 	virtual void Release() = 0;			// 소멸될 때 할 일
 
-
+	glm::vec3 getPosition();			// 객체의 위치를 받아온다
+	
 	virtual float getLeft() = 0;		// 오브젝트들은 충돌체크를 할 필요가 있을 때 있다.
 	virtual float getRight() = 0;
 	virtual float getBehind() = 0;

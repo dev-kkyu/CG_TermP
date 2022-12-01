@@ -31,8 +31,11 @@ extern pair<float, float> MouseAngle;
 
 #define ±âº»ºí·°	200
 #define Èë			201
+#define º­			202
+#define ¾çÅĞ		203
 
 #define µÅÁö		211
 #define ¼Ò			212
 #define ´ß			213
 #define ¾ç			214
+#define ¹«³Ê¾ç		215

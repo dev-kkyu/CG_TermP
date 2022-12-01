@@ -1,40 +1,32 @@
-#include "CSheep.h"
+#include "CSheep_NoTER.h"
 
 #include "CWorld.h"
 extern CWorld World;
 
-CSheep::CSheep(glm::vec3 Position) : CAnimal{ Position }
+CSheep_NoTER::CSheep_NoTER(glm::vec3 Position) : CAnimal{ Position }
 {
 }
 
-CSheep::~CSheep()
+CSheep_NoTER::~CSheep_NoTER()
 {
 }
 
-void CSheep::Release()
+void CSheep_NoTER::Release()
 {
 }
 
-void CSheep::Render()
+void CSheep_NoTER::Render()
 {
-	
-
 	if (hold_Scissors || hairless) {
 		glBindVertexArray(BlockVAO);
 
 		GLuint Color = glGetUniformLocation(shaderID, "objectColor");
-		//glUniform3f(Color, this->Color.r, this->Color.g, this->Color.b);
-		glUniform3f(Color, 1, 1, 1);
+		glUniform3f(Color, this->Color.r, this->Color.g, this->Color.b);
 
 		GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
 
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-
-		if (!hairless) {
-			hairless = true;
-			this->Hp++;
-		}
 
 		////auto getObject();
 		//auto itrTemp = World.Objects.find(this);
@@ -56,7 +48,7 @@ void CSheep::Render()
 
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
-		
+
 
 	}
 }

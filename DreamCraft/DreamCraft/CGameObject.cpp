@@ -26,3 +26,8 @@ bool CGameObjectCmp::operator()(const CGameObject* lhs, const CGameObject* rhs) 
 		return lhs->Position.y < rhs->Position.y;
 	return lhs->Position.z < rhs->Position.z;
 }
+
+glm::vec3 CGameObject::getPosition()
+{
+	return Position;
+}
