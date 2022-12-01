@@ -33,7 +33,6 @@ void CSheep::Render()
 
 		if (!hairless) {
 			hairless = true;
-			this->Hp++;
 		}
 
 		////auto getObject();

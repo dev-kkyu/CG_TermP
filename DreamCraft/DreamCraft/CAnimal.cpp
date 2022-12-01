@@ -37,23 +37,26 @@ void CAnimal::be_Attacked(int Weapon)
 		cout << "가위" << endl;
 		break;
 	case 곡괭이:
+		--Hp;
 		Attacked = Attacked_Motion = true;
 		hold_Scissors = false;
 		cout << "곡괭이" << endl;
 		break;
 	case 최강무기:
+		Hp -= 100;
 		Attacked = Attacked_Motion = true;
 		hold_Scissors = false;
-		cout << "최강무기" << endl;
-		Hp -= 100;
+		cout << "최강무기" << endl;  // 최강무기는 최강이라서 고기가 드랍안된다!
 		break;
 	}
 
+	if (0 < Hp && Hp <= 5)
+		Hp = 5;
 }
 
 void CAnimal::Initialize()
 {
-	Hp = 10;
+	Hp = 15;
 
 	animal_Direction = dict_urd(dre) * 45.f;			// 이동 방향 1-8까지 n*45도 만큼 회전
 	Travel = travel_urd(dre);
@@ -81,7 +84,12 @@ void CAnimal::Update()
 	glm::mat4 Scale;
 
 	Trans = glm::translate(Unit, glm::vec3(0.f, -0.5f, 0.f));
-	Scale = glm::scale(Unit, glm::vec3(1.f, 1.f, 2.f));
+
+	if (Hp > 5)
+		Scale = glm::scale(Unit, glm::vec3(1.f, 1.f, 2.f));
+	else
+		Scale = glm::scale(Unit, glm::vec3(0.5,0.5,0.5));
+
 	Rotate = glm::rotate(glm::mat4(1.0f), glm::radians(animal_Direction), glm::vec3(0.f, 1.f, 0.f));
 	
 	
@@ -123,6 +131,7 @@ void CAnimal::FixedUpdate()
 		before_Position = Position;
 	}
 
+	if (Hp > 5)
 	if(!Attacked_Motion)
 		switch ((int)(animal_Direction / 45))
 		{
@@ -163,8 +172,6 @@ void CAnimal::FixedUpdate()
 		Attacked_Motion = false;
 	}
 
-
-
 	auto itrTemp = World.Objects.find(this);
 	if (itrTemp != World.Objects.end()) {
 		World.Objects.erase(itrTemp);
@@ -179,15 +186,33 @@ void CAnimal::FixedUpdate()
 
 void CAnimal::Render()
 {
-	glBindVertexArray(BlockVAO);
+	if (Hp > 5) {
 
-	GLuint Color = glGetUniformLocation(shaderID, "objectColor");
-	glUniform3f(Color, this->Color.r, this->Color.g, this->Color.b);
+		glBindVertexArray(BlockVAO);
 
-	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
+		GLuint Color = glGetUniformLocation(shaderID, "objectColor");
+		glUniform3f(Color, this->Color.r, this->Color.g, this->Color.b);
 
-	glDrawArrays(GL_TRIANGLES, 0, 36);
+		GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
+		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
+
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+	}
+	else {
+
+		glBindVertexArray(BlockVAO);
+
+		GLuint Color = glGetUniformLocation(shaderID, "objectColor");
+		//glUniform3f(Color, this->Color.r, this->Color.g, this->Color.b);
+		glUniform3f(Color, 0,0,0);
+
+		GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
+		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
+
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+	}
+
+	
 }
 
 float CAnimal::getLeft()
