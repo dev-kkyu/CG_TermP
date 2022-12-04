@@ -207,30 +207,47 @@ void InitTexture()
 		int ImageWidth, ImageHeight, numberOfChannel;
 		stbi_set_flip_vertically_on_load(true); //--- ¿ÃπÃ¡ˆ∞° ∞≈≤Ÿ∑Œ ¿–»˘¥Ÿ∏È √ﬂ∞°
 		string filename;
+		GLubyte* data;
 		switch (i) {
 		case 0:
-			filename = "≈ÿΩ∫√≥/≥Î«Æ.png";		//»Î
+			filename = "≈ÿΩ∫√≥/≥Î«Æ.png";		// »Î
+			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
 			break;
 		case 1:
-			filename = "≈ÿΩ∫√≥/ø∑«Æ.png";		//¿‹µ
+			filename = "≈ÿΩ∫√≥/ø∑«Æ.png";		// ¿‹µ
+			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
 			break;
 		case 2:
-			filename = "≈ÿΩ∫√≥/¿≠«Æ.png";		//¿‹µ ¿≠∏È
+			filename = "≈ÿΩ∫√≥/¿≠«Æ2.png";		// ¿‹µ ¿≠∏È
+			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
 			break;
-		/*case 3:
-			filename = "æ∆∫∏3.png";
+		case 3:
+			filename = "≈ÿΩ∫√≥/æÁ≈–.png";		// æÁ≈–
+			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
 			break;
-		case 4:
+		/*case 4:
 			filename = "æ∆∫∏2.png";
 			break;
 		case 5:
 			filename = "æ∆∫∏.png";
 			break;*/
 		}
-		GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
-		//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-		glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-		stbi_image_free(data);
+		//GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+		////glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		//stbi_image_free(data);
 	}
 
 

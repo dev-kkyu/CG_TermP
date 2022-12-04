@@ -17,9 +17,7 @@ void CSheep::Release()
 
 void CSheep::Render()
 {
-	
-
-	if (hold_Scissors || hairless) {
+	if (hold_Scissors && !hairless) {
 		glBindVertexArray(BlockVAO);
 
 		GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용
@@ -34,18 +32,29 @@ void CSheep::Render()
 
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
-		if (!hairless) {
-			hairless = true;
-		}
+		hairless = true;				// 털 깎인 양으로 빠꾸는 변수 on
+		Wool = true;					// 양털 생성하는 변수 on
+		Wool_Position = Position;		// 양털이 깎인 위치 저장
 
-		////auto getObject();
-		//auto itrTemp = World.Objects.find(this);
-		//if (itrTemp != World.Objects.end()) {
-		//	//World.Objects.erase(itrTemp);
-		//	getPosition();
-		//	delete (*itrTemp);
-		//	**itrTemp = new 
-		//}
+
+
+	}else if (hairless) {
+		glBindVertexArray(BlockVAO);
+
+		GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용
+		glUniform1i(selectColorLocation, 0);
+
+		GLuint Color = glGetUniformLocation(shaderID, "objectColor");
+		glUniform3f(Color, 1, 1, 1);
+
+		GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
+		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
+
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		
+	
+
 	}
 	else if (!hairless) {
 		glBindVertexArray(BlockVAO);
@@ -60,8 +69,32 @@ void CSheep::Render()
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
 
 		glDrawArrays(GL_TRIANGLES, 0, 36);
+			
 
-		
+	}
+
+	if (Wool) {		// 양털 드랍
+
+		glBindVertexArray(BlockVAO);
+
+		GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용
+		glUniform1i(selectColorLocation, 1);
+
+		glm::mat4 Trans;
+		glm::mat4 Scale;
+
+		Trans = glm::translate(Unit, Wool_Position);
+		Scale = glm::scale(Unit, glm::vec3(0.5, 0.5, 0.5));
+
+		glm::mat4 Change_Wool = Trans * Scale;
+
+		GLuint model = glGetUniformLocation(shaderID, "modelTransform");
+		glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(Change_Wool));
+
+		for (int i = 0; i < 6; ++i) {
+			glBindTexture(GL_TEXTURE_2D, Texture[3]);
+			glDrawArrays(GL_TRIANGLES, i * 6, 6);
+		}
 
 	}
 }

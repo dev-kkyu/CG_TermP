@@ -68,7 +68,13 @@ void CAnimal::Initialize()
 
 	uniform_real_distribution<float> urd{ 0.f, 1.f };
 
-	Color = glm::vec3{ urd(dre),urd(dre), urd(dre) };
+	while (true) {
+		Color = glm::vec3{ urd(dre),urd(dre), urd(dre) };
+		
+		if (Color != glm::vec3(1, 1, 1))
+			break;
+	}
+	
 	origin_Color = Color;
 
 	Update();

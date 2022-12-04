@@ -285,8 +285,6 @@ void CWorld::Initialize()
 			for (int j = -25; j <= 24; ++j)
 				Objects.insert(new CBase{ glm::vec3{i, k, j} });
 
-
-
 	Objects.insert(new CSheep{ glm::vec3(3,1,3) });
 	Objects.insert(new CSheep{ glm::vec3(-3,1,3) });
 	Objects.insert(new CSheep{ glm::vec3(3,1,-3) });

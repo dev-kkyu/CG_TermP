@@ -16,8 +16,10 @@ void RobotParts::Render()
 {
 	glBindVertexArray(BlockVAO);
 
-	GLuint Color = glGetUniformLocation(shaderID, "objectColor");
+	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용
+	glUniform1i(selectColorLocation, 0);
 
+	GLuint Color = glGetUniformLocation(shaderID, "objectColor");
 	glUniform3f(Color, this->Color.r, this->Color.g, this->Color.b);
 
 	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
