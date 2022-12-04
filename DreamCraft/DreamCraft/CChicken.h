@@ -10,5 +10,8 @@ public:
 	virtual ~CChicken();			//소멸자도 버츄얼 해주는게 좋음
 
 	virtual void Release() override;			//소멸될 때 할 일
+
+	virtual void Render() override;
+	//virtual void Updata() override;
 };
 

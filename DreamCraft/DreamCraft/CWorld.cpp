@@ -286,8 +286,9 @@ void CWorld::Initialize()
 				Objects.insert(new CBase{ glm::vec3{i, k, j} });
 
 	Objects.insert(new CSheep{ glm::vec3(3,1,3) });
-	Objects.insert(new CSheep{ glm::vec3(-3,1,3) });
-	Objects.insert(new CSheep{ glm::vec3(3,1,-3) });
+	Objects.insert(new CPig{ glm::vec3(-3,1,3) });
+	Objects.insert(new CCow{ glm::vec3(5,1,-3) });
+	Objects.insert(new CChicken{ glm::vec3(3,1,-6) });
 }
 
 void CWorld::Update()
@@ -315,6 +316,8 @@ void CWorld::Update()
 	else {
 		time = 0;
 	}
+
+	
 
 	if (isUp) {
 		PlayerPos.x += glm::sin(glm::radians(MouseAngle.first)) * 0.075f;

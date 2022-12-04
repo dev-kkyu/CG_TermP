@@ -1,6 +1,6 @@
 #include "CAnimal.h"
-
 #include "CWorld.h"
+
 extern CWorld World;
 
 random_device rd;
@@ -33,7 +33,7 @@ void CAnimal::be_Attacked(int Weapon)
 		cout << "Ä®" << endl;
 		break;
 	case °¡À§:
-		Attacked = Attacked_Motion = hold_Scissors = true;
+		Attacked_Motion = hold_Scissors = true;
 		cout << "°¡À§" << endl;
 		break;
 	case °î±ªÀÌ:
@@ -53,6 +53,11 @@ void CAnimal::be_Attacked(int Weapon)
 	if (0 < Hp && Hp <= 5)
 		Hp = 5;
 }
+
+//int CAnimal::getWeapon(int Weapon)		
+//{
+//	return Weapon;
+//}
 
 void CAnimal::Initialize()
 {
@@ -97,13 +102,12 @@ void CAnimal::Update()
 		Scale = glm::scale(Unit, glm::vec3(0.5,0.5,0.5));
 
 	Rotate = glm::rotate(glm::mat4(1.0f), glm::radians(animal_Direction), glm::vec3(0.f, 1.f, 0.f));
-	
-	
+		
 	Change = glm::translate(Unit, float_Position) * Rotate * Scale * Trans;
 
 	static int time = 0;
-	if (Attacked) {
-		Color *= glm::vec3(1, 0, 0);
+	if (Attacked /* && playerWeapon != °¡À§*/) {
+		Color = glm::vec3(1, 0, 0);
 		if (time > 20) {
 			time = 0;
 			Attacked = false;
@@ -207,7 +211,7 @@ void CAnimal::Render()
 
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 	}
-	else {
+	else {		// µ¿¹° Á×À½
 
 		glBindVertexArray(BlockVAO);
 
