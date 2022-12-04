@@ -2,7 +2,7 @@
 
 CWorld::CWorld() : Player{ CPlayer{glm::vec3(0.f, 2.f, 0.f)} }, PlayerPos{ glm::vec3(0.f, 2.f, 0.f) },
 isUp{ false }, isDown{ false }, isLeft{ false }, isRight{ false }, isJump{ false }, personView{ 1 },
-planToCreateObj(기본블럭)
+planToCreateObj(기본흙)
 {
 	Initialize();
 }
@@ -28,7 +28,7 @@ void CWorld::Keyboard(unsigned char key, int state)
 			Player.setWeapon(최강무기);
 			break;
 		case 'b':
-			planToCreateObj = 기본블럭;
+			planToCreateObj = 기본흙;
 			break;
 		case 'n':
 			planToCreateObj = 양;
@@ -256,7 +256,7 @@ void CWorld::addNewObject(int ObjectType)
 			tempPos.y = ceil(tempPos.y);
 			tempPos.z = round(tempPos.z);
 			switch (ObjectType) {
-			case 기본블럭:
+			case 기본흙:
 				Objects.insert(new CBase(tempPos));
 				break;
 			case 소:
@@ -275,7 +275,12 @@ void CWorld::addNewObject(int ObjectType)
 
 void CWorld::Initialize()
 {
-	for (int k = 0; k > -5; --k)
+	// 바닥
+	for (int i = -25; i <= 24; ++i)
+		for (int j = -25; j <= 24; ++j)
+			Objects.insert(new CGrass{ glm::vec3{i, 0, j} });
+	// 바닥 아래
+	for (int k = -1; k > -5; --k)
 		for (int i = -25; i <= 24; ++i)
 			for (int j = -25; j <= 24; ++j)
 				Objects.insert(new CBase{ glm::vec3{i, k, j} });

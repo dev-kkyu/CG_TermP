@@ -22,6 +22,8 @@ extern GLuint BlockVAO, edgeVAO;
 extern GLuint shaderID; //--- ¼¼ÀÌ´õ ÇÁ·Î±×·¥ ÀÌ¸§
 
 extern pair<float, float> MouseAngle;
+extern GLuint Texture[6];
+
 
 #define ¸Ç¼Õ		100
 #define Ä®			101
@@ -29,10 +31,11 @@ extern pair<float, float> MouseAngle;
 #define °î±ªÀÌ		103
 #define ÃÖ°­¹«±â	109
 
-#define ±âº»ºí·°	200
-#define Èë			201
-#define º­			202
-#define ¾çÅĞ		203
+//#define ±âº»ºí·°	200
+#define ±âº»Èë		201
+#define ÀÜµğÈë		202
+#define º­			203
+#define ¾çÅĞ		204
 
 #define µÅÁö		211
 #define ¼Ò			212

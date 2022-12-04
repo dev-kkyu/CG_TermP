@@ -135,6 +135,7 @@
     <ClCompile Include="CChicken.cpp" />
     <ClCompile Include="CCow.cpp" />
     <ClCompile Include="CGameObject.cpp" />
+    <ClCompile Include="CGrass.cpp" />
     <ClCompile Include="CPig.cpp" />
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CSheep.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="CChicken.h" />
     <ClInclude Include="CCow.h" />
     <ClInclude Include="CGameObject.h" />
+    <ClInclude Include="CGrass.h" />
     <ClInclude Include="CPig.h" />
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CSheep.h" />
@@ -164,6 +166,7 @@
     <ClInclude Include="Leg.h" />
     <ClInclude Include="Nose.h" />
     <ClInclude Include="RobotParts.h" />
+    <ClInclude Include="stb_image.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>

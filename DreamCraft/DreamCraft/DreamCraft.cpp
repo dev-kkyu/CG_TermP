@@ -5,6 +5,9 @@
 #pragma comment(lib, "glew32.lib")
 #pragma comment(lib, "freeglut.lib")
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
 CWorld World;
 
 GLuint make_vertexShaders();
@@ -12,6 +15,7 @@ GLuint make_fragmentShaders();
 GLuint make_shaderProgram();
 
 void InitBuffer();
+void InitTexture();
 
 GLvoid drawScene();
 GLvoid Reshape(int w, int h);
@@ -35,6 +39,22 @@ GLuint BlockVAO, BlockVBO;
 GLuint shaderID; //--- 세이더 프로그램 이름
 pair<float, float> MouseAngle;
 
+GLuint Texture[6];
+
+float textureVertex[36][2]{
+	{1,0},	{0,1},	{0,0},	{1,0},	{1,1},	{0,1},
+
+	{0,0},	{1,1},	{0,1},	{0,0},	{1,0},	{1,1},
+
+	{0,1},	{1,0},	{1,1},	{0,1},	{0,0},	{1,0},
+
+	{1,0},	{1,1},	{0,1},	{1,0},	{0,1},	{0,0},
+
+	{0,0},	{1,0},	{1,1},	{0,0},	{1,1},	{0,1},
+
+	{0,0},	{1,0},	{1,1},	{0,0},	{1,1},	{0,1}
+};
+
 void main(int argc, char** argv) //--- 윈도우 출력하고 콜백함수 설정
 {
 	//--- 윈도우 생성하기
@@ -55,7 +75,8 @@ void main(int argc, char** argv) //--- 윈도우 출력하고 콜백함수 설정
 	//도형 쉐이더 생성 및 버퍼 생성
 	shaderID = make_shaderProgram(); //--- 세이더 프로그램 만들기
 	glUseProgram(shaderID);
-	InitBuffer();									// VAO, VBO 생성
+	InitBuffer();	// VAO, VBO 생성
+	InitTexture();
 
 	glutDisplayFunc(drawScene); //--- 출력 콜백 함수
 	glutReshapeFunc(Reshape);
@@ -162,6 +183,57 @@ void InitBuffer()					// 도형 버퍼 생성
 	glEnableVertexAttribArray(0);		// 버텍스 속성 배열을 사용하도록 한다.(0번 배열 활성화)
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
 	glEnableVertexAttribArray(1);		// 버텍스 속성 배열을 사용하도록 한다.(1번 배열 활성화)
+
+		//--텍스처
+	GLuint textureVBO;
+	glGenBuffers(1, &textureVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, textureVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(textureVertex), textureVertex, GL_STATIC_DRAW);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0); //--- 텍스처 좌표 속성
+	glEnableVertexAttribArray(2);
+}
+
+void InitTexture()
+{
+	glGenTextures(6, Texture);
+
+	for (int i = 0; i < 6; ++i) {
+		glBindTexture(GL_TEXTURE_2D, Texture[i]);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+		int ImageWidth, ImageHeight, numberOfChannel;
+		stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
+		string filename;
+		switch (i) {
+		case 0:
+			filename = "텍스처/노풀.png";		//흙
+			break;
+		case 1:
+			filename = "텍스처/옆풀.png";		//잔디
+			break;
+		case 2:
+			filename = "텍스처/윗풀.png";		//잔디 윗면
+			break;
+		/*case 3:
+			filename = "아보3.png";
+			break;
+		case 4:
+			filename = "아보2.png";
+			break;
+		case 5:
+			filename = "아보.png";
+			break;*/
+		}
+		GLubyte* data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+		//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		stbi_image_free(data);
+	}
+
+
 }
 
 GLvoid drawScene() //--- 콜백 함수: 그리기 콜백 함수

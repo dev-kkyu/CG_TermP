@@ -30,7 +30,6 @@ void Weapon::Update()
 		if (rotate < -30.f)
 			isrotDirec = true;
 	}
-	
 
 	glm::mat4 Scale;
 	glm::mat4 Trans;

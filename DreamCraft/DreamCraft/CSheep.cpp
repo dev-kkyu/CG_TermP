@@ -22,6 +22,9 @@ void CSheep::Render()
 	if (hold_Scissors || hairless) {
 		glBindVertexArray(BlockVAO);
 
+		GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용
+		glUniform1i(selectColorLocation, 0);
+
 		GLuint Color = glGetUniformLocation(shaderID, "objectColor");
 		//glUniform3f(Color, this->Color.r, this->Color.g, this->Color.b);
 		glUniform3f(Color, 1, 1, 1);
@@ -46,6 +49,9 @@ void CSheep::Render()
 	}
 	else if (!hairless) {
 		glBindVertexArray(BlockVAO);
+
+		GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용
+		glUniform1i(selectColorLocation, 0);
 
 		GLuint Color = glGetUniformLocation(shaderID, "objectColor");
 		glUniform3f(Color, this->Color.r, this->Color.g, this->Color.b);

@@ -43,13 +43,23 @@ void CBase::Render()
 {
 	glBindVertexArray(BlockVAO);
 
-	GLuint Color = glGetUniformLocation(shaderID, "objectColor");
-	glUniform3f(Color, this->Color.r, this->Color.g, this->Color.b);
+	//GLuint Color = glGetUniformLocation(shaderID, "objectColor");
+	//glUniform3f(Color, this->Color.r, this->Color.g, this->Color.b);
 
-	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
+	//GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
+	//glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
 
+	//glDrawArrays(GL_TRIANGLES, 0, 36);
+
+	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용
+	glUniform1i(selectColorLocation, 1);
+
+	GLuint model = glGetUniformLocation(shaderID, "modelTransform");
+	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(Change));
+
+	glBindTexture(GL_TEXTURE_2D, Texture[0]);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
+
 }
 
 void CBase::Release()

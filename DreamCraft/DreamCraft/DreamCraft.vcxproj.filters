@@ -64,6 +64,9 @@
     <Filter Include="GameObject\Animal\Chicken">
       <UniqueIdentifier>{a4c456ff-a1b7-404d-8a82-a87ad0f97219}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Block\Grass">
+      <UniqueIdentifier>{7256a908-6eab-448c-9d3c-ae35febf9d2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DreamCraft.cpp">
@@ -120,6 +123,9 @@
     <ClCompile Include="CSheep.cpp">
       <Filter>GameObject\Animal\Sheep</Filter>
     </ClCompile>
+    <ClCompile Include="CGrass.cpp">
+      <Filter>GameObject\Block\Grass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CWorld.h">
@@ -175,6 +181,12 @@
     </ClInclude>
     <ClInclude Include="CSheep.h">
       <Filter>GameObject\Animal\Sheep</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CGrass.h">
+      <Filter>GameObject\Block\Grass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

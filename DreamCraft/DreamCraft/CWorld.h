@@ -1,6 +1,7 @@
 #pragma once
 #include "Header.h"
 #include "CBase.h"
+#include "CGrass.h"
 #include "CPlayer.h"
 #include "CCow.h"
 #include "CChicken.h"
