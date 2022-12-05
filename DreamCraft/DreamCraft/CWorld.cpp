@@ -1,9 +1,11 @@
 #include "CWorld.h"
 
 CWorld::CWorld() : Player{ CPlayer{glm::vec3(0.f, 2.f, 0.f)} }, PlayerPos{ glm::vec3(0.f, 2.f, 0.f) },
-isUp{ false }, isDown{ false }, isLeft{ false }, isRight{ false }, isJump{ false }, personView{ 1 },
-planToCreateObj(±âº»Èë)
+isUp{ false }, isDown{ false }, isLeft{ false }, isRight{ false }, isJump{ 0 }, personView{ 1 },
+planToCreateObj{ ï¿½âº»ï¿½ï¿½ï¿½ï¿½ },
+first_VEL{ 25 }, MASS{ 10 }
 {
+	VELOCITY = first_VEL;
 	Initialize();
 }
 
@@ -11,36 +13,36 @@ void CWorld::Keyboard(unsigned char key, int state)
 {
 	switch (state) {
 	case GLUT_DOWN:
-		switch (key) {					//¹¹ »ý¼ºÇÒÁöµµ Á¤ÇØÁÜ
-			// ¹«±â
+		switch (key) {					//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			// ï¿½ï¿½ï¿½ï¿½
 		case '1':
-			Player.setWeapon(¸Ç¼Õ);
+			Player.setWeapon(ï¿½Ç¼ï¿½);
 			break;
 		case '2':
 			Player.setWeapon(Ä®);
 			break;
 		case '3':
-			Player.setWeapon(°¡À§);
+			Player.setWeapon(ï¿½ï¿½ï¿½ï¿½);
 			break;
 		case '4':
-			Player.setWeapon(°î±ªÀÌ);
+			Player.setWeapon(ï¿½î±ªï¿½ï¿½);
 			break;
 		case '9':
-			Player.setWeapon(ÃÖ°­¹«±â);
+			Player.setWeapon(ï¿½Ö°ï¿½ï¿½ï¿½ï¿½ï¿½);
 			break;
 
-			// ºí·Ï
+			// ï¿½ï¿½ï¿½ï¿½
 		case 'u':
-			planToCreateObj = ±âº»Èë;
+			planToCreateObj = ï¿½âº»ï¿½ï¿½;
 			break;
 		case 'i':
-			planToCreateObj = ÀÜµðÈë;
+			planToCreateObj = ï¿½Üµï¿½ï¿½ï¿½;
 			break;
 		case 'o':
-			planToCreateObj = º­;
+			planToCreateObj = ï¿½ï¿½;
 			break;
 		case 'j':
-			planToCreateObj = ¾çÅÐ;
+			planToCreateObj = ï¿½ï¿½ï¿½ï¿½;
 			break;
 		/*case 'k':
 			planToCreateObj = ;
@@ -49,34 +51,34 @@ void CWorld::Keyboard(unsigned char key, int state)
 			planToCreateObj = ;
 			break;*/
 		case 'm':
-			planToCreateObj = ³ª¹«;
+			planToCreateObj = ï¿½ï¿½ï¿½ï¿½;
 			break;
 		case ',':
-			planToCreateObj = ³ª¹«ÁÙ±â;
+			planToCreateObj = ï¿½ï¿½ï¿½ï¿½ï¿½Ù±ï¿½;
 			break;
 		case '.':
-			planToCreateObj = ³ª¹µÀÙ;
+			planToCreateObj = ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½;
 			break;
 
 
-			// µ¿¹°
+			// ï¿½ï¿½ï¿½ï¿½
 		case 'z':
-			planToCreateObj = µÅÁö;
+			planToCreateObj = ï¿½ï¿½ï¿½ï¿½;
 			break;
 		case 'x':
-			planToCreateObj = ¼Ò;
+			planToCreateObj = ï¿½ï¿½;
 			break;
 		case 'c':
-			planToCreateObj = ´ß;
+			planToCreateObj = ï¿½ï¿½;
 			break;
 		case 'v':
-			planToCreateObj = ¾ç;
+			planToCreateObj = ï¿½ï¿½;
 			break;
 		case 'b':
-			planToCreateObj = ¹«³Ê¾ç;
+			planToCreateObj = ï¿½ï¿½ï¿½Ê¾ï¿½;
 			break;
 
-			//½ÃÁ¡
+			//ï¿½ï¿½ï¿½ï¿½
 		case 'f':
 			personView = 1;
 			break;
@@ -84,7 +86,7 @@ void CWorld::Keyboard(unsigned char key, int state)
 			personView = 3;
 			break;
 
-			// ÀÌµ¿
+			// ï¿½Ìµï¿½
 		case 'w':
 		case 'W':
 			isUp = true;
@@ -108,7 +110,7 @@ void CWorld::Keyboard(unsigned char key, int state)
 				++isJump;
 			}
 			break;
-		case 27:		//Esc¹öÆ°
+		case 27:		//Escï¿½ï¿½Æ°
 			glutLeaveMainLoop();
 			break;
 		default:
@@ -212,8 +214,8 @@ void CWorld::Mouse(int button, int state)
 void CWorld::Camera()
 {
 	if (1 == personView) {
-		// Ä«¸Þ¶ó º¯È¯
-		glm::vec3 DirectionPos{ 0, 0, -5.f };				//Ä«¸Þ¶ó ¹æÇâ ¿øº»
+		// Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½È¯
+		glm::vec3 DirectionPos{ 0, 0, -5.f };				//Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		glm::mat4 cameraDirRot = glm::rotate(glm::mat4(1.f), glm::radians(-MouseAngle.first), glm::vec3(0.f, 1.f, 0.f));
 		cameraDirRot = glm::rotate(cameraDirRot, glm::radians(-MouseAngle.second), glm::vec3(1.f, 0.f, 0.f));
 		DirectionPos = cameraDirRot * glm::vec4(DirectionPos, 1.f);
@@ -221,17 +223,17 @@ void CWorld::Camera()
 		glm::vec3 cPos = glm::vec3(0, 0, -0.25);
 		cPos = glm::rotate(glm::mat4(1.f), glm::radians(-MouseAngle.first), glm::vec3(0.f, 1.f, 0.f)) * glm::vec4(cPos, 1.f);
 
-		cameraPos = glm::vec3(PlayerPos.x + cPos.x, PlayerPos.y - 0.4f, PlayerPos.z + cPos.z); //--- Ä«¸Þ¶ó À§Ä¡ (¾îµð¼­ º¼°ÇÁö)
-		cameraDirection = PlayerPos + DirectionPos; //--- Ä«¸Þ¶ó ¹Ù¶óº¸´Â ¹æÇâ (¾îµðº¼°ÇÁö ÇÏ¸éµÉµí)
-		glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f); //--- Ä«¸Þ¶ó À§ÂÊ ¹æÇâ->º¤ÅÍÀÓ(¹æÇâ¸¸) (À½¼öÇÏ¸é È­¸é »óÇÏ°Å²Ù·Îº¸ÀÓ)
+		cameraPos = glm::vec3(PlayerPos.x + cPos.x, PlayerPos.y - 0.4f, PlayerPos.z + cPos.z); //--- Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½Ä¡ (ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+		cameraDirection = PlayerPos + DirectionPos; //--- Ä«ï¿½Þ¶ï¿½ ï¿½Ù¶óº¸´ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ðº¼°ï¿½ï¿½ï¿½ ï¿½Ï¸ï¿½Éµï¿½)
+		glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f); //--- Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½->ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½â¸¸) (ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ È­ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°Å²Ù·Îºï¿½ï¿½ï¿½)
 
 		glm::mat4 view = glm::lookAt(cameraPos, cameraDirection, cameraUp);// *cameraRevolution;
 
-		GLuint viewLocation = glGetUniformLocation(shaderID, "viewTransform"); //--- ºäÀ× º¯È¯ ¼³Á¤
+		GLuint viewLocation = glGetUniformLocation(shaderID, "viewTransform"); //--- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ ï¿½ï¿½ï¿½ï¿½
 		glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(view));
 
-		// fragment ½¦ÀÌ´õ·Î ³Ñ¾î°¡´Â Ä«¸Þ¶ó ÁÂÇ¥(Á¶¸í°è»ê¿ë)
-		GLuint viewPosLocation = glGetUniformLocation(shaderID, "viewPos");		//--- viewPos °ª Àü´Þ: Ä«¸Þ¶ó À§Ä¡
+		// fragment ï¿½ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½Ñ¾î°¡ï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½Ç¥(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+		GLuint viewPosLocation = glGetUniformLocation(shaderID, "viewPos");		//--- viewPos ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½Ä¡
 		glUniform3f(viewPosLocation, cameraPos.x, cameraPos.y, cameraPos.z);
 
 
@@ -239,8 +241,8 @@ void CWorld::Camera()
 
 	}
 	else if (3 == personView) {
-		// Ä«¸Þ¶ó º¯È¯
-		glm::vec3 DirectionPos{ 0, 0, -5.f };				//Ä«¸Þ¶ó ¹æÇâ ¿øº»
+		// Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½È¯
+		glm::vec3 DirectionPos{ 0, 0, -5.f };				//Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		glm::mat4 cameraDirRot = glm::rotate(glm::mat4(1.f), glm::radians(-MouseAngle.first), glm::vec3(0.f, 1.f, 0.f));
 		cameraDirRot = glm::rotate(cameraDirRot, glm::radians(-MouseAngle.second), glm::vec3(1.f, 0.f, 0.f));
 		DirectionPos = cameraDirRot * glm::vec4(DirectionPos, 1.f);
@@ -248,19 +250,46 @@ void CWorld::Camera()
 		glm::vec3 cPos = glm::vec3(0, 0, -0.25);
 		cPos = glm::rotate(glm::mat4(1.f), glm::radians(-MouseAngle.first), glm::vec3(0.f, 1.f, 0.f)) * glm::vec4(cPos, 1.f);
 
-		cameraPos = glm::vec3(PlayerPos.x + cPos.x, PlayerPos.y - 0.4f, PlayerPos.z + cPos.z); //--- Ä«¸Þ¶ó À§Ä¡ (¾îµð¼­ º¼°ÇÁö)
-		cameraDirection = PlayerPos + DirectionPos; //--- Ä«¸Þ¶ó ¹Ù¶óº¸´Â ¹æÇâ (¾îµðº¼°ÇÁö ÇÏ¸éµÉµí)
-		glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f); //--- Ä«¸Þ¶ó À§ÂÊ ¹æÇâ->º¤ÅÍÀÓ(¹æÇâ¸¸) (À½¼öÇÏ¸é È­¸é »óÇÏ°Å²Ù·Îº¸ÀÓ)
+		cameraPos = glm::vec3(PlayerPos.x + cPos.x, PlayerPos.y - 0.4f, PlayerPos.z + cPos.z); //--- Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½Ä¡ (ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+		cameraDirection = PlayerPos + DirectionPos; //--- Ä«ï¿½Þ¶ï¿½ ï¿½Ù¶óº¸´ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ðº¼°ï¿½ï¿½ï¿½ ï¿½Ï¸ï¿½Éµï¿½)
+		glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f); //--- Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½->ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½â¸¸) (ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ È­ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°Å²Ù·Îºï¿½ï¿½ï¿½)
 
 		glm::mat4 view = glm::translate(glm::mat4(1.f), glm::vec3(0, -1, -5)) * glm::lookAt(cameraPos, cameraDirection, cameraUp);// *cameraRevolution;
 
-		GLuint viewLocation = glGetUniformLocation(shaderID, "viewTransform"); //--- ºäÀ× º¯È¯ ¼³Á¤
+		GLuint viewLocation = glGetUniformLocation(shaderID, "viewTransform"); //--- ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ ï¿½ï¿½ï¿½ï¿½
 		glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(view));
 
-		// fragment ½¦ÀÌ´õ·Î ³Ñ¾î°¡´Â Ä«¸Þ¶ó ÁÂÇ¥(Á¶¸í°è»ê¿ë)
-		GLuint viewPosLocation = glGetUniformLocation(shaderID, "viewPos");		//--- viewPos °ª Àü´Þ: Ä«¸Þ¶ó À§Ä¡
+		// fragment ï¿½ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½Ñ¾î°¡ï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½Ç¥(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+		GLuint viewPosLocation = glGetUniformLocation(shaderID, "viewPos");		//--- viewPos ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½Ä¡
 		glUniform3f(viewPosLocation, cameraPos.x, cameraPos.y, cameraPos.z);
 	}
+}
+
+void CWorld::Jump()
+{
+	double F;
+
+	if (isJump == 2) {
+		isJump = 3;
+		VELOCITY = first_VEL;
+	}
+
+	if (VELOCITY > 0) {
+		F = MASS * VELOCITY * VELOCITY;
+	}
+	else
+		F = -MASS * VELOCITY * VELOCITY;
+
+	PlayerPos.y += F / 50000.f;
+
+	VELOCITY -= 1;
+
+	if (PlayerPos.y <= 2.f) {
+		VELOCITY = first_VEL;
+		PlayerPos.y = 2.f;
+		isJump = false;
+	}
+	cout << PlayerPos.y << endl;
 }
 
 set<CGameObject*, CGameObjectCmp>::iterator CWorld::getObject()
@@ -302,43 +331,43 @@ void CWorld::addNewObject(int ObjectType)
 			tempPos.y = ceil(tempPos.y);
 			tempPos.z = round(tempPos.z);
 			switch (ObjectType) {
-			case ±âº»Èë:
+			case ï¿½âº»ï¿½ï¿½:
 				Objects.insert(new CBase(tempPos));
 				break;
-			case ÀÜµðÈë:
+			case ï¿½Üµï¿½ï¿½ï¿½:
 				Objects.insert(new CGrass(tempPos));
 				break;
-			//case º­:
+			//case ï¿½ï¿½:
 			//	Objects.insert(new CBase(tempPos));
 			//	break;
-			//case ¾çÅÐ:
+			//case ï¿½ï¿½ï¿½ï¿½:
 			//	Objects.insert(new CBase(tempPos));
 			//	break;
 
-			case ³ª¹«:
+			case ï¿½ï¿½ï¿½ï¿½:
 				 MakeTree(tempPos);
 				break;
-			case ³ª¹«ÁÙ±â:
+			case ï¿½ï¿½ï¿½ï¿½ï¿½Ù±ï¿½:
 				Objects.insert(new CTreeTrunk(tempPos));
 				break;
-			case ³ª¹µÀÙ:
+			case ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:
 				Objects.insert(new CLeaves(tempPos));
 				break;
 
 
-			case µÅÁö:
+			case ï¿½ï¿½ï¿½ï¿½:
 				Objects.insert(new CPig(tempPos));
 				break;
-			case ¼Ò:
+			case ï¿½ï¿½:
 				Objects.insert(new CCow(tempPos));
 				break;
-			case ´ß:
+			case ï¿½ï¿½:
 				Objects.insert(new CChicken(tempPos));
 				break;
-			case ¾ç:
+			case ï¿½ï¿½:
 				Objects.insert(new CSheep(tempPos));
 				break;
-			case ¹«³Ê¾ç:
+			case ï¿½ï¿½ï¿½Ê¾ï¿½:
 				Objects.insert(new CSheepNOTUL(tempPos));
 				break;
 			
@@ -352,11 +381,11 @@ void CWorld::addNewObject(int ObjectType)
 
 void CWorld::Initialize()
 {
-	// ¹Ù´Ú
+	// ï¿½Ù´ï¿½
 	for (int i = -25; i <= 24; ++i)
 		for (int j = -25; j <= 24; ++j)
 			Objects.insert(new CGrass{ glm::vec3{i, 0, j} });
-	// ¹Ù´Ú ¾Æ·¡
+	// ï¿½Ù´ï¿½ ï¿½Æ·ï¿½
 	for (int k = -1; k > -5; --k)
 		for (int i = -25; i <= 24; ++i)
 			for (int j = -25; j <= 24; ++j)
@@ -417,9 +446,9 @@ void CWorld::Update()
 		PlayerPos.z += glm::sin(glm::radians(MouseAngle.first)) * 0.075f;
 	}
 	if (isJump) {
-		;
+		Jump();
 	}
-	if (isUp || isDown || isLeft || isRight)
+	if (isUp || isDown || isLeft || isRight || isJump)
 		Player.Update(PlayerPos);
 	Player.Update();
 }

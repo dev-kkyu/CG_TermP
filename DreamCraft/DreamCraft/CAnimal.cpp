@@ -188,7 +188,7 @@ void CAnimal::FixedUpdate()
 	}
 
 	Position.x = round(float_Position.x);
-	Position.y = ceil(float_Position.y);
+	Position.y = round(float_Position.y);
 	Position.z = round(float_Position.z);
 
 	World.Objects.insert(this);
