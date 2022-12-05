@@ -73,6 +73,9 @@
     <Filter Include="GameObject\Block\TreeTrunk">
       <UniqueIdentifier>{929338bf-ae82-48c2-bf0f-a8978f711a4b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Tree">
+      <UniqueIdentifier>{3e915bac-f23a-4d88-84ef-26e5d739f660}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DreamCraft.cpp">
@@ -137,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="CTreeTrunk.cpp">
       <Filter>GameObject\Block\TreeTrunk</Filter>
+    </ClCompile>
+    <ClCompile Include="CTree.cpp">
+      <Filter>GameObject\Tree</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +211,9 @@
     </ClInclude>
     <ClInclude Include="CTreeTrunk.h">
       <Filter>GameObject\Block\TreeTrunk</Filter>
+    </ClInclude>
+    <ClInclude Include="CTree.h">
+      <Filter>GameObject\Tree</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
