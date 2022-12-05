@@ -20,17 +20,6 @@ Weapon::~Weapon()
 
 void Weapon::Update()
 {
-	if (isrotDirec) {
-		rotate += 2.5f;
-		if (rotate > 30.f)
-			isrotDirec = false;
-	}
-	else {
-		rotate -= 2.5f;
-		if (rotate < -30.f)
-			isrotDirec = true;
-	}
-
 	glm::mat4 Scale;
 	glm::mat4 Trans;
 	glm::mat4 Rotate;
@@ -113,6 +102,20 @@ void Weapon::Update()
 		Change = Trans * Change;
 	}
 
+}
+
+void Weapon::FixedUpdate()
+{
+	if (isrotDirec) {
+		rotate += 2.5f;
+		if (rotate > 30.f)
+			isrotDirec = false;
+	}
+	else {
+		rotate -= 2.5f;
+		if (rotate < -30.f)
+			isrotDirec = true;
+	}
 }
 
 

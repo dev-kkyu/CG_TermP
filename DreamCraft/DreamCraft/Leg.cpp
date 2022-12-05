@@ -16,18 +16,6 @@ Leg::~Leg()
 
 void Leg::Update()
 {
-	if (isrotDirec) {
-		rotate += 2.5f;
-		if (rotate > 30.f)
-			isrotDirec = false;
-	}
-	else {
-		rotate -= 2.5f;
-		if (rotate < -30.f)
-			isrotDirec = true;
-	}
-
-
 	glm::mat4 Scale;
 	glm::mat4 Trans;
 	glm::mat4 Rotate;
@@ -57,4 +45,18 @@ void Leg::Update()
 	Change = Trans * Change;
 
 
+}
+
+void Leg::FixedUpdate()
+{
+	if (isrotDirec) {
+		rotate += 2.5f;
+		if (rotate > 30.f)
+			isrotDirec = false;
+	}
+	else {
+		rotate -= 2.5f;
+		if (rotate < -30.f)
+			isrotDirec = true;
+	}
 }

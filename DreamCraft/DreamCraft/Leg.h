@@ -13,5 +13,5 @@ public:
     ~Leg();
 
     void Update() override;
+    void FixedUpdate();
 };
-

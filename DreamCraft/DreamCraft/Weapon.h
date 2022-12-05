@@ -13,5 +13,6 @@ public:
     ~Weapon();
 
     void Update() override;
+    void FixedUpdate();
     void change(glm::vec3 weaponColor);
 };

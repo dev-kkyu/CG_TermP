@@ -443,8 +443,8 @@ void CWorld::Update()
 		Jump();
 	}
 	if (isUp || isDown || isLeft || isRight || isJump)
-		Player.Update(PlayerPos);
-	Player.Update();
+		Player.Update();
+	Player.Update(PlayerPos);
 }
 
 void CWorld::FixedUpdate()

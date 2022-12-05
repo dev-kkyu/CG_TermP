@@ -27,16 +27,32 @@ CPlayer::~CPlayer()
 void CPlayer::Update(glm::vec3 Position)
 {
 	this->Position = Position;
+	this->Direction = -MouseAngle.first;
 
-	nose.setPos(Position);
-	head.setPos(Position);
-	armL.setPos(Position);
-	armR.setPos(Position);
-	body.setPos(Position);
-	legL.setPos(Position);
-	legR.setPos(Position);
-	weapon.setPos(Position);
+	nose.setPos(Position, Direction);
+	head.setPos(Position, Direction);
+	armL.setPos(Position, Direction);
+	armR.setPos(Position, Direction);
+	body.setPos(Position, Direction);
+	legL.setPos(Position, Direction);
+	legR.setPos(Position, Direction);
+	weapon.setPos(Position, Direction);
 
+
+	if (getWeapon() == ¸Ç¼Õ)
+		weapon.change(glm::vec3(0, 0, 0));
+
+	else if (getWeapon() == Ä®)
+		weapon.change(glm::vec3(1, 0, 1));
+
+	else if (getWeapon() == °¡À§)
+		weapon.change(glm::vec3(1, 1, 0));
+
+	else if (getWeapon() == °î±ªÀÌ)
+		weapon.change(glm::vec3(0, 126. / 255, 0));
+
+	else if (getWeapon() == ÃÖ°­¹«±â)
+		weapon.change(glm::vec3(0, 1, 1));
 }
 
 void CPlayer::setWeapon(int Weapon)
@@ -62,33 +78,11 @@ void CPlayer::Initialize()
 
 void CPlayer::Update()
 {
-	Direction = -MouseAngle.first;
-
-	nose.setDirection(Direction);
-	head.setDirection(Direction);
-	armL.setDirection(Direction);
-	armR.setDirection(Direction);
-	body.setDirection(Direction);
-	legL.setDirection(Direction);
-	legR.setDirection(Direction);
-
-	weapon.setDirection(Direction);
-
-	if (getWeapon() == ¸Ç¼Õ)
-		weapon.change(glm::vec3(0, 0, 0));
-
-	else if(getWeapon() == Ä®)
-		weapon.change(glm::vec3(1, 0, 1));
-
-	else if(getWeapon() == °¡À§)
-		weapon.change(glm::vec3(1, 1, 0));
-
-	else if(getWeapon() == °î±ªÀÌ)
-		weapon.change(glm::vec3(0, 126./255, 0));
-
-	else if(getWeapon() == ÃÖ°­¹«±â)
-		weapon.change(glm::vec3(0, 1, 1));
-
+	armL.FixedUpdate();
+	armR.FixedUpdate();
+	legL.FixedUpdate();
+	legR.FixedUpdate();
+	weapon.FixedUpdate();
 }
 
 void CPlayer::FixedUpdate()

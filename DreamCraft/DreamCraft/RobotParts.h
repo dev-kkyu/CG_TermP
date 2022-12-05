@@ -20,8 +20,7 @@ public:
 	virtual ~RobotParts();
 
 	void Render();
-	void setPos(glm::vec3 Position);
-	void setDirection(float Direction);
+	void setPos(glm::vec3 Position, float Direction);
 	virtual void Update() = 0;			//순수 가상함수, 추상클래스
 
 };

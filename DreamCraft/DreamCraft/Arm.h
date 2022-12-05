@@ -13,4 +13,5 @@ public:
     ~Arm();
 
     void Update() override;
+    void FixedUpdate();
 };

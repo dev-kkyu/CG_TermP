@@ -29,13 +29,9 @@ void RobotParts::Render()
 
 }
 
-void RobotParts::setPos(glm::vec3 Position)
+void RobotParts::setPos(glm::vec3 Position, float Direction)
 {
 	this->Position = Position;
-	Update();
-}
-
-void RobotParts::setDirection(float Direction)
-{
 	this->Direction = Direction;
+	Update();
 }

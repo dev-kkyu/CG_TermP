@@ -16,18 +16,6 @@ Arm::~Arm()
 
 void Arm::Update()
 {
-	if (isrotDirec) {
-		rotate += 2.5f;
-		if (rotate > 30.f)
-			isrotDirec = false;
-	}
-	else {
-		rotate -= 2.5f;
-		if (rotate < -30.f)
-			isrotDirec = true;
-	}
-
-
 	glm::mat4 Scale;
 	glm::mat4 Trans;
 	glm::mat4 Rotate;
@@ -58,4 +46,18 @@ void Arm::Update()
 
 	Trans = glm::translate(Unit, glm::vec3(Position.x, Position.y - 2.f, Position.z));		// 내 이동위치로 무브
 	Change = Trans * Change;
+}
+
+void Arm::FixedUpdate()
+{
+	if (isrotDirec) {
+		rotate += 2.5f;
+		if (rotate > 30.f)
+			isrotDirec = false;
+	}
+	else {
+		rotate -= 2.5f;
+		if (rotate < -30.f)
+			isrotDirec = true;
+	}
 }
