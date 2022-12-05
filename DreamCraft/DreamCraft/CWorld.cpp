@@ -2,8 +2,10 @@
 
 CWorld::CWorld() : Player{ CPlayer{glm::vec3(0.f, 2.f, 0.f)} }, PlayerPos{ glm::vec3(0.f, 2.f, 0.f) },
 isUp{ false }, isDown{ false }, isLeft{ false }, isRight{ false }, isJump{ false }, personView{ 1 },
-planToCreateObj(기본블럭)
+planToCreateObj{ 기본블럭 },
+first_VEL{ 25 }, MASS{ 10 }
 {
+	VELOCITY = first_VEL;
 	Initialize();
 }
 
@@ -58,9 +60,7 @@ void CWorld::Keyboard(unsigned char key, int state)
 		case 'j':
 		case 'J':
 		case ' ':
-			if (isJump != 2) {
-				++isJump;
-			}
+			isJump = true;
 			break;
 		case 27:		//Esc버튼
 			glutLeaveMainLoop();
@@ -213,6 +213,33 @@ void CWorld::Camera()
 	}
 }
 
+void CWorld::Jump()
+{
+	double F;
+
+	//if (isJump == 2) {
+	//	isJump = 3;
+	//	VELOCITY = first_VEL;
+	//}
+
+	if (VELOCITY > 0) {
+		F = MASS * VELOCITY * VELOCITY;
+	}
+	else
+		F = -MASS * VELOCITY * VELOCITY;
+
+	PlayerPos.y += F / 50000.f;
+
+	VELOCITY -= 1;
+
+	if (PlayerPos.y <= 2.f) {
+		VELOCITY = first_VEL;
+		PlayerPos.y = 2.f;
+		isJump = false;
+	}
+	//cout << PlayerPos.y << endl;
+}
+
 set<CGameObject*, CGameObjectCmp>::iterator CWorld::getObject()
 {
 	glm::vec3 normalDirection = cameraDirection - cameraPos;
@@ -326,9 +353,9 @@ void CWorld::Update()
 		PlayerPos.z += glm::sin(glm::radians(MouseAngle.first)) * 0.075f;
 	}
 	if (isJump) {
-		;
+		Jump();
 	}
-	if (isUp || isDown || isLeft || isRight)
+	if (isUp || isDown || isLeft || isRight || isJump)
 		Player.Update(PlayerPos);
 	Player.Update();
 }

@@ -20,7 +20,13 @@ private:
 	bool mouseL_On;
 
 	bool isUp, isDown, isLeft, isRight;
-	int isJump;
+	bool isJump;
+
+	// 중력용 변수들
+	int VELOCITY;
+	const int first_VEL;
+	const int MASS;
+
 	int personView;
 
 	int planToCreateObj;
@@ -36,6 +42,8 @@ public:
 	void Mouse(int button, int state);
 
 	void Camera();
+
+	void Jump();
 
 	set<CGameObject*, CGameObjectCmp>::iterator getObject();		//set에서 내가 클릭한 오브젝트의 iterator를 받아온다.
 	void addNewObject(int ObjectType);									//내가 클릭한 오브젝트의 앞쪽에 오브젝트를 생성한다.
