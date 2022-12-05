@@ -9,6 +9,7 @@
 #include "CSheep.h"
 #include "CLeaves.h"
 #include "CTreeTrunk.h"
+#include "CSheepNOTUL.h"
 
 #include <set>
 
