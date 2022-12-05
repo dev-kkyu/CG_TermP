@@ -10,6 +10,8 @@
 #include "CLeaves.h"
 #include "CTreeTrunk.h"
 #include "CSheepNOTUL.h"
+#include "CRice.h"
+#include "CWool.h"
 
 #include <set>
 
