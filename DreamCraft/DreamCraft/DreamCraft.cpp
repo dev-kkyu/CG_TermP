@@ -78,6 +78,8 @@ void main(int argc, char** argv) //--- 윈도우 출력하고 콜백함수 설정
 	InitBuffer();	// VAO, VBO 생성
 	InitTexture();
 
+	glEnable(GL_BLEND);		// 블랜딩 활성화
+
 	glutDisplayFunc(drawScene); //--- 출력 콜백 함수
 	glutReshapeFunc(Reshape);
 	glutKeyboardFunc(Keyboard);

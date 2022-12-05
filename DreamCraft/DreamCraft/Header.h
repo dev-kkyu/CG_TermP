@@ -37,6 +37,10 @@ extern GLuint Texture[50];
 #define º­			203
 #define ¾çÅĞ		204
 
+#define ³ª¹«		220
+#define ³ª¹«ÁÙ±â	221
+#define ³ª¹µÀÙ		222
+
 #define µÅÁö		211
 #define ¼Ò			212
 #define ´ß			213

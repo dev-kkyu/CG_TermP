@@ -50,5 +50,7 @@ public:
 	void Render();			//드로우
 	void Release();			//소멸될 때 할 일
 	int getpersonView();
+
+	void MakeTree(glm::vec3 position);
 };
 

@@ -76,6 +76,9 @@
     <Filter Include="GameObject\Tree">
       <UniqueIdentifier>{3e915bac-f23a-4d88-84ef-26e5d739f660}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Animal\SheepNOTUL">
+      <UniqueIdentifier>{92e48071-f01a-462d-8ae3-daf4b1396acb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DreamCraft.cpp">
@@ -143,6 +146,9 @@
     </ClCompile>
     <ClCompile Include="CTree.cpp">
       <Filter>GameObject\Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="CSheepNOTUL.cpp">
+      <Filter>GameObject\Animal\SheepNOTUL</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +220,9 @@
     </ClInclude>
     <ClInclude Include="CTree.h">
       <Filter>GameObject\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="CSheepNOTUL.h">
+      <Filter>GameObject\Animal\SheepNOTUL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -140,6 +140,7 @@
     <ClCompile Include="CPig.cpp" />
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CSheep.cpp" />
+    <ClCompile Include="CSheepNOTUL.cpp" />
     <ClCompile Include="CTree.cpp" />
     <ClCompile Include="CTreeTrunk.cpp" />
     <ClCompile Include="CWorld.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="CPig.h" />
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CSheep.h" />
+    <ClInclude Include="CSheepNOTUL.h" />
     <ClInclude Include="CTree.h" />
     <ClInclude Include="CTreeTrunk.h" />
     <ClInclude Include="CWorld.h" />

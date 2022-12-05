@@ -12,6 +12,7 @@ void CWorld::Keyboard(unsigned char key, int state)
 	switch (state) {
 	case GLUT_DOWN:
 		switch (key) {					//¹¹ »ý¼ºÇÒÁöµµ Á¤ÇØÁÜ
+			// ¹«±â
 		case '1':
 			Player.setWeapon(¸Ç¼Õ);
 			break;
@@ -27,18 +28,63 @@ void CWorld::Keyboard(unsigned char key, int state)
 		case '9':
 			Player.setWeapon(ÃÖ°­¹«±â);
 			break;
-		case 'b':
+
+			// ºí·Ï
+		case 'u':
 			planToCreateObj = ±âº»Èë;
 			break;
-		case 'n':
+		case 'i':
+			planToCreateObj = ÀÜµðÈë;
+			break;
+		case 'o':
+			planToCreateObj = º­;
+			break;
+		case 'j':
+			planToCreateObj = ¾çÅÐ;
+			break;
+		/*case 'k':
+			planToCreateObj = ;
+			break;
+		case 'l':
+			planToCreateObj = ;
+			break;*/
+		case 'm':
+			planToCreateObj = ³ª¹«;
+			break;
+		case ',':
+			planToCreateObj = ³ª¹«ÁÙ±â;
+			break;
+		case '.':
+			planToCreateObj = ³ª¹µÀÙ;
+			break;
+
+
+			// µ¿¹°
+		case 'z':
+			planToCreateObj = µÅÁö;
+			break;
+		case 'x':
+			planToCreateObj = ¼Ò;
+			break;
+		case 'c':
+			planToCreateObj = ´ß;
+			break;
+		case 'v':
 			planToCreateObj = ¾ç;
 			break;
+		case 'b':
+			planToCreateObj = ¹«³Ê¾ç;
+			break;
+
+			//½ÃÁ¡
 		case 'f':
 			personView = 1;
 			break;
 		case 't':
 			personView = 3;
 			break;
+
+			// ÀÌµ¿
 		case 'w':
 		case 'W':
 			isUp = true;
@@ -55,8 +101,8 @@ void CWorld::Keyboard(unsigned char key, int state)
 		case 'D':
 			isRight = true;
 			break;
-		case 'j':
-		case 'J':
+		//case 'j':
+		//case 'J':
 		case ' ':
 			if (isJump != 2) {
 				++isJump;
@@ -259,12 +305,43 @@ void CWorld::addNewObject(int ObjectType)
 			case ±âº»Èë:
 				Objects.insert(new CBase(tempPos));
 				break;
+			case ÀÜµðÈë:
+				Objects.insert(new CGrass(tempPos));
+				break;
+			//case º­:
+			//	Objects.insert(new CBase(tempPos));
+			//	break;
+			//case ¾çÅÐ:
+			//	Objects.insert(new CBase(tempPos));
+			//	break;
+
+			case ³ª¹«:
+				 MakeTree(tempPos);
+				break;
+			case ³ª¹«ÁÙ±â:
+				Objects.insert(new CTreeTrunk(tempPos));
+				break;
+			case ³ª¹µÀÙ:
+				Objects.insert(new CLeaves(tempPos));
+				break;
+
+
+			case µÅÁö:
+				Objects.insert(new CPig(tempPos));
+				break;
 			case ¼Ò:
 				Objects.insert(new CCow(tempPos));
+				break;
+			case ´ß:
+				Objects.insert(new CChicken(tempPos));
 				break;
 			case ¾ç:
 				Objects.insert(new CSheep(tempPos));
 				break;
+			case ¹«³Ê¾ç:
+				Objects.insert(new CSheepNOTUL(tempPos));
+				break;
+			
 			}
 			break;
 		}
@@ -290,12 +367,9 @@ void CWorld::Initialize()
 	Objects.insert(new CCow{ glm::vec3(5,1,-3) });
 	Objects.insert(new CChicken{ glm::vec3(3,1,-6) });
 
-	Objects.insert(new CTreeTrunk{ glm::vec3(3,1,-16) });
-	Objects.insert(new CTreeTrunk{ glm::vec3(3,2,-16) });
-	Objects.insert(new CLeaves{ glm::vec3(3,3,-16) });
-	Objects.insert(new CLeaves{ glm::vec3(3,3,-15) });
-	Objects.insert(new CLeaves{ glm::vec3(4,3,-16) });
-	Objects.insert(new CLeaves{ glm::vec3(3,4,-16) });
+
+
+
 }
 
 void CWorld::Update()
@@ -372,5 +446,44 @@ void CWorld::Release()
 int CWorld::getpersonView()
 {
 	return personView;
+}
+
+void CWorld::MakeTree(glm::vec3 position)
+{
+	float x{ position.x }, y{ position.y }, z{ position.z };
+
+	for (int i = 0; i < 3; ++i)
+		Objects.insert(new CTreeTrunk{ glm::vec3(x,y + i,z) });
+
+	for (int i = -1; i < 2; ++i) {
+		if (i != 0) {
+			Objects.insert(new CLeaves{ glm::vec3(x + i,y + 2,z) });
+			Objects.insert(new CLeaves{ glm::vec3(x,y + 2,z + i) });
+		}
+	}
+
+	Objects.insert(new CLeaves{ glm::vec3(x + 1,y + 2,z + 1) });
+
+	for (int i = -2; i < 3; ++i) {
+		for (int j = -2; j < 3; ++j) {
+			if (!(i == -2 && j == -2)&& !(i == -2 && j == 2) && !(i == 2 && j == 2) && !(i == 2 && j == -2))
+				Objects.insert(new CLeaves{ glm::vec3(x + i,y + 3,z + j) });
+		}
+	}
+
+
+	for (int i = -1; i < 2; ++i) {
+		for (int j = -1; j < 2; ++j) {
+			if (!(i == 1 && j == 1))
+			Objects.insert(new CLeaves{ glm::vec3(x + i,y + 4,z + j) });
+		}
+	}
+
+	Objects.insert(new CLeaves{ glm::vec3(x ,y + 5,z) });
+	Objects.insert(new CLeaves{ glm::vec3(x ,y + 5,z + 1) });
+
+	Objects.insert(new CLeaves{ glm::vec3(x ,y + 6,z ) });
+
+
 }
 
