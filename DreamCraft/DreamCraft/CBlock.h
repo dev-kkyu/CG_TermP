@@ -5,7 +5,7 @@ class CBlock : public CGameObject
 {
 protected:
 	glm::vec3 Color;
-
+	bool isfragments;
 public:
 	CBlock(glm::vec3 Position);
 	virtual ~CBlock() = 0;			//소멸자도 버츄얼 해주는게 좋음

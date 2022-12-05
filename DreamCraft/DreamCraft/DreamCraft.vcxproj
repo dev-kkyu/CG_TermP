@@ -134,6 +134,7 @@
     <ClCompile Include="CBlock.cpp" />
     <ClCompile Include="CChicken.cpp" />
     <ClCompile Include="CCow.cpp" />
+    <ClCompile Include="CFragments.cpp" />
     <ClCompile Include="CGameObject.cpp" />
     <ClCompile Include="CGrass.cpp" />
     <ClCompile Include="CLeaves.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="CBlock.h" />
     <ClInclude Include="CChicken.h" />
     <ClInclude Include="CCow.h" />
+    <ClInclude Include="CFragments.h" />
     <ClInclude Include="CGameObject.h" />
     <ClInclude Include="CGrass.h" />
     <ClInclude Include="CLeaves.h" />

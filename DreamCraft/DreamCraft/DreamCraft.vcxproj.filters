@@ -85,6 +85,9 @@
     <Filter Include="GameObject\Block\Wool">
       <UniqueIdentifier>{7e6e82c8-0708-4e7a-8748-c1a0ec943936}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Fragments">
+      <UniqueIdentifier>{4e253963-f8ff-494e-a9da-995410d0325e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DreamCraft.cpp">
@@ -161,6 +164,9 @@
     </ClCompile>
     <ClCompile Include="CWool.cpp">
       <Filter>GameObject\Block\Wool</Filter>
+    </ClCompile>
+    <ClCompile Include="CFragments.cpp">
+      <Filter>GameObject\Fragments</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="CWool.h">
       <Filter>GameObject\Block\Wool</Filter>
+    </ClInclude>
+    <ClInclude Include="CFragments.h">
+      <Filter>GameObject\Fragments</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
