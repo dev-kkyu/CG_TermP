@@ -84,9 +84,6 @@
     <ClCompile Include="DreamCraft.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CWorld.cpp">
-      <Filter>World</Filter>
-    </ClCompile>
     <ClCompile Include="CBase.cpp">
       <Filter>GameObject\Block\Base</Filter>
     </ClCompile>
@@ -149,6 +146,9 @@
     </ClCompile>
     <ClCompile Include="CSheepNOTUL.cpp">
       <Filter>GameObject\Animal\SheepNOTUL</Filter>
+    </ClCompile>
+    <ClCompile Include="CWorld.cpp">
+      <Filter>World</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
