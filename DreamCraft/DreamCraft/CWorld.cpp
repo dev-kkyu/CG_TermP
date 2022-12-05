@@ -289,6 +289,13 @@ void CWorld::Initialize()
 	Objects.insert(new CPig{ glm::vec3(-3,1,3) });
 	Objects.insert(new CCow{ glm::vec3(5,1,-3) });
 	Objects.insert(new CChicken{ glm::vec3(3,1,-6) });
+
+	Objects.insert(new CTreeTrunk{ glm::vec3(3,1,-16) });
+	Objects.insert(new CTreeTrunk{ glm::vec3(3,2,-16) });
+	Objects.insert(new CLeaves{ glm::vec3(3,3,-16) });
+	Objects.insert(new CLeaves{ glm::vec3(3,3,-15) });
+	Objects.insert(new CLeaves{ glm::vec3(4,3,-16) });
+	Objects.insert(new CLeaves{ glm::vec3(3,4,-16) });
 }
 
 void CWorld::Update()

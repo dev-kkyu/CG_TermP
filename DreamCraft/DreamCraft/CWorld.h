@@ -7,6 +7,9 @@
 #include "CChicken.h"
 #include "CPig.h"
 #include "CSheep.h"
+#include "CLeaves.h"
+#include "CTreeTrunk.h"
+
 #include <set>
 
 class CWorld

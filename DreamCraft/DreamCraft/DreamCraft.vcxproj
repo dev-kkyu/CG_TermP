@@ -136,9 +136,11 @@
     <ClCompile Include="CCow.cpp" />
     <ClCompile Include="CGameObject.cpp" />
     <ClCompile Include="CGrass.cpp" />
+    <ClCompile Include="CLeaves.cpp" />
     <ClCompile Include="CPig.cpp" />
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CSheep.cpp" />
+    <ClCompile Include="CTreeTrunk.cpp" />
     <ClCompile Include="CWorld.cpp" />
     <ClCompile Include="DreamCraft.cpp" />
     <ClCompile Include="Head.cpp" />
@@ -157,9 +159,11 @@
     <ClInclude Include="CCow.h" />
     <ClInclude Include="CGameObject.h" />
     <ClInclude Include="CGrass.h" />
+    <ClInclude Include="CLeaves.h" />
     <ClInclude Include="CPig.h" />
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CSheep.h" />
+    <ClInclude Include="CTreeTrunk.h" />
     <ClInclude Include="CWorld.h" />
     <ClInclude Include="Head.h" />
     <ClInclude Include="Header.h" />

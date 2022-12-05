@@ -41,7 +41,7 @@ void CPig:: Render() {
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform º¯¼ö¿¡ º¯È¯ °ª Àû¿ëÇÏ±â
 
 		for (int i = 0; i < 6; ++i) {
-			glBindTexture(GL_TEXTURE_2D, Texture[15]);		// µÅÁö¸Ó¸®±Í¿±´ç
+			glBindTexture(GL_TEXTURE_2D, Texture[13]);		// µÅÁö¸Ó¸®±Í¿±´ç
 			glDrawArrays(GL_TRIANGLES, i * 6, 6);
 		}
 

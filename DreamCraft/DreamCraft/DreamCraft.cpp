@@ -231,7 +231,7 @@ void InitTexture()
 			stbi_image_free(data);
 			break;
 
-
+			// ¾ç
 		case 3:
 			filename = "ÅØ½ºÃ³/¾çÅÐ.png";		// ¾çÅÐ
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
@@ -268,7 +268,7 @@ void InitTexture()
 			stbi_image_free(data);
 			break;
 
-
+			// ¼Ò
 		case 8:
 			filename = "ÅØ½ºÃ³/¼ÒÅÐ.png";		// ¼ÒÅÐ
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
@@ -298,7 +298,7 @@ void InitTexture()
 			stbi_image_free(data);
 			break;
 
-
+			// µÅÁö
 		case 12:
 			filename = "ÅØ½ºÃ³/µÅÁöÅÐ.png";		// µÅÁöÅÐ
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
@@ -328,7 +328,7 @@ void InitTexture()
 			stbi_image_free(data);
 			break;
 
-
+			// ´ß
 		case 16:
 			filename = "ÅØ½ºÃ³/´ßÅÐ.png";		// ´ßÅÐ
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
@@ -362,6 +362,29 @@ void InitTexture()
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
+			break;
+
+			// ³ª¹«
+		case 25:
+			filename = "ÅØ½ºÃ³/³ª¹«¿·Åë.png";		// ³ª¹«¿·Åë
+			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
+			break;
+		case 26:
+			filename = "ÅØ½ºÃ³/³ª¹«À­Åë.png";		// ³ª¹«À­Åë
+			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
+			break;
+		case 27:
+			filename = "ÅØ½ºÃ³/³ª¹«¤µÀÙ.png";	// ³ª¹«ÀÙÆÄ¸®
+			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		

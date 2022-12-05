@@ -67,6 +67,12 @@
     <Filter Include="GameObject\Block\Grass">
       <UniqueIdentifier>{7256a908-6eab-448c-9d3c-ae35febf9d2b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Block\leaves">
+      <UniqueIdentifier>{32dd14f0-4b72-40e4-8599-ea0cd6b47b79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Block\TreeTrunk">
+      <UniqueIdentifier>{929338bf-ae82-48c2-bf0f-a8978f711a4b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DreamCraft.cpp">
@@ -125,6 +131,12 @@
     </ClCompile>
     <ClCompile Include="CGrass.cpp">
       <Filter>GameObject\Block\Grass</Filter>
+    </ClCompile>
+    <ClCompile Include="CLeaves.cpp">
+      <Filter>GameObject\Block\leaves</Filter>
+    </ClCompile>
+    <ClCompile Include="CTreeTrunk.cpp">
+      <Filter>GameObject\Block\TreeTrunk</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +199,12 @@
     </ClInclude>
     <ClInclude Include="CGrass.h">
       <Filter>GameObject\Block\Grass</Filter>
+    </ClInclude>
+    <ClInclude Include="CLeaves.h">
+      <Filter>GameObject\Block\leaves</Filter>
+    </ClInclude>
+    <ClInclude Include="CTreeTrunk.h">
+      <Filter>GameObject\Block\TreeTrunk</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
