@@ -1,7 +1,7 @@
 #include "CWorld.h"
 
 CWorld::CWorld() : Player{ CPlayer{glm::vec3(0.f, 2.f, 0.f)} }, PlayerPos{ glm::vec3(0.f, 2.f, 0.f) },
-isUp{ false }, isDown{ false }, isLeft{ false }, isRight{ false }, isJump{ false }, personView{ 1 },
+isUp{ false }, isDown{ false }, isLeft{ false }, isRight{ false }, isJump{ 0 }, personView{ 1 },
 planToCreateObj{ 기본블럭 },
 first_VEL{ 25 }, MASS{ 10 }
 {
@@ -60,7 +60,9 @@ void CWorld::Keyboard(unsigned char key, int state)
 		case 'j':
 		case 'J':
 		case ' ':
-			isJump = true;
+			if (isJump != 2) {
+				++isJump;
+			}
 			break;
 		case 27:		//Esc버튼
 			glutLeaveMainLoop();
@@ -217,10 +219,10 @@ void CWorld::Jump()
 {
 	double F;
 
-	//if (isJump == 2) {
-	//	isJump = 3;
-	//	VELOCITY = first_VEL;
-	//}
+	if (isJump == 2) {
+		isJump = 3;
+		VELOCITY = first_VEL;
+	}
 
 	if (VELOCITY > 0) {
 		F = MASS * VELOCITY * VELOCITY;
@@ -237,7 +239,7 @@ void CWorld::Jump()
 		PlayerPos.y = 2.f;
 		isJump = false;
 	}
-	//cout << PlayerPos.y << endl;
+	cout << PlayerPos.y << endl;
 }
 
 set<CGameObject*, CGameObjectCmp>::iterator CWorld::getObject()

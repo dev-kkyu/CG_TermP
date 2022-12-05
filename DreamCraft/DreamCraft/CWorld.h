@@ -20,7 +20,7 @@ private:
 	bool mouseL_On;
 
 	bool isUp, isDown, isLeft, isRight;
-	bool isJump;
+	int isJump;
 
 	// 중력용 변수들
 	int VELOCITY;
