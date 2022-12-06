@@ -3,9 +3,8 @@
 CWorld::CWorld() : Player{ CPlayer{glm::vec3(0.f, 2.f, 0.f)} }, PlayerPos{ glm::vec3(0.f, 2.f, 0.f) },
 isUp{ false }, isDown{ false }, isLeft{ false }, isRight{ false }, isJump{ 0 }, personView{ 1 },
 planToCreateObj{ 기본흙 },
-first_VEL{ 25 }, MASS{ 10 }
+VELOCITY{ 0 }, first_VEL{ 25 }, MASS{ 10 }
 {
-	VELOCITY = 0;
 	Initialize();
 }
 
@@ -330,6 +329,172 @@ void CWorld::Gravity()
 	//cout << PlayerPos.y << endl;
 }
 
+void CWorld::Move()
+{
+	float speed = 0.075f;
+
+	float SinValue = glm::sin(glm::radians(MouseAngle.first));
+	float CosValue = glm::cos(glm::radians(MouseAngle.first));
+
+	// 충돌처리 후 이동
+	if (isUp) {
+		bool isCollide{ false };
+		for (int i = 0; i < 4; ++i) {
+			float dx, dz;
+			switch (i)
+			{
+			case 0:
+				dx = 0.25f;
+				dz = 0.25f;
+				break;
+			case 1:
+				dx = 0.25f;
+				dz = -0.25f;
+				break;
+			case 2:
+				dx = -0.25f;
+				dz = 0.25f;
+				break;
+			case 3:
+				dx = -0.25f;
+				dz = -0.25f;
+				break;
+			}
+			CBase tmpU(glm::vec3(round(PlayerPos.x + dx + SinValue * speed), round(PlayerPos.y), round(PlayerPos.z + dz - CosValue * speed)));
+			CBase tmpU2(glm::vec3(round(PlayerPos.x + dx + SinValue * speed), round(PlayerPos.y - 1.f), round(PlayerPos.z + dz - CosValue * speed)));
+			if (Objects.find(&tmpU) != Objects.end()) {
+				isCollide = true;
+				break;
+			}
+			if (Objects.find(&tmpU2) != Objects.end()) {
+				isCollide = true;
+				break;
+			}
+		}
+		if (not isCollide) {
+			PlayerPos.x += SinValue * speed;
+			PlayerPos.z -= CosValue * speed;
+		}
+	}
+	if (isDown) {
+		bool isCollide{ false };
+		for (int i = 0; i < 4; ++i) {
+			float dx, dz;
+			switch (i)
+			{
+			case 0:
+				dx = 0.25f;
+				dz = 0.25f;
+				break;
+			case 1:
+				dx = 0.25f;
+				dz = -0.25f;
+				break;
+			case 2:
+				dx = -0.25f;
+				dz = 0.25f;
+				break;
+			case 3:
+				dx = -0.25f;
+				dz = -0.25f;
+				break;
+			}
+			CBase tmpD(glm::vec3(round(PlayerPos.x + dx - SinValue * speed), round(PlayerPos.y), round(PlayerPos.z + dz + CosValue * speed)));
+			CBase tmpD2(glm::vec3(round(PlayerPos.x + dx - SinValue * speed), round(PlayerPos.y - 1.f), round(PlayerPos.z + dz + CosValue * speed)));
+			if (Objects.find(&tmpD) != Objects.end()) {
+				isCollide = true;
+				break;
+			}
+			if (Objects.find(&tmpD2) != Objects.end()) {
+				isCollide = true;
+				break;
+			}
+		}
+		if (not isCollide) {
+			PlayerPos.x -= SinValue * speed;
+			PlayerPos.z += CosValue * speed;
+		}
+	}
+	if (isLeft) {
+		bool isCollide{ false };
+		for (int i = 0; i < 4; ++i) {
+			float dx, dz;
+			switch (i)
+			{
+			case 0:
+				dx = 0.25f;
+				dz = 0.25f;
+				break;
+			case 1:
+				dx = 0.25f;
+				dz = -0.25f;
+				break;
+			case 2:
+				dx = -0.25f;
+				dz = 0.25f;
+				break;
+			case 3:
+				dx = -0.25f;
+				dz = -0.25f;
+				break;
+			}
+			CBase tmpL(glm::vec3(round(PlayerPos.x + dx - CosValue * speed), round(PlayerPos.y), round(PlayerPos.z + dz - SinValue * speed)));
+			CBase tmpL2(glm::vec3(round(PlayerPos.x + dx - CosValue * speed), round(PlayerPos.y - 1.f), round(PlayerPos.z + dz - SinValue * speed)));
+			if (Objects.find(&tmpL) != Objects.end()) {
+				isCollide = true;
+				break;
+			}
+			if (Objects.find(&tmpL2) != Objects.end()) {
+				isCollide = true;
+				break;
+			}
+		}
+		if (not isCollide) {
+			PlayerPos.x -= CosValue * speed;
+			PlayerPos.z -= SinValue * speed;
+		}
+	}
+	if (isRight) {
+		bool isCollide{ false };
+		for (int i = 0; i < 4; ++i) {
+			float dx, dz;
+			switch (i)
+			{
+			case 0:
+				dx = 0.25f;
+				dz = 0.25f;
+				break;
+			case 1:
+				dx = 0.25f;
+				dz = -0.25f;
+				break;
+			case 2:
+				dx = -0.25f;
+				dz = 0.25f;
+				break;
+			case 3:
+				dx = -0.25f;
+				dz = -0.25f;
+				break;
+			}
+			CBase tmpR(glm::vec3(round(PlayerPos.x + dx + CosValue * speed), round(PlayerPos.y), round(PlayerPos.z + dz + SinValue * speed)));
+			CBase tmpR2(glm::vec3(round(PlayerPos.x + dx + CosValue * speed), round(PlayerPos.y - 1.f), round(PlayerPos.z + dz + SinValue * speed)));
+			if (Objects.find(&tmpR) != Objects.end()) {
+				isCollide = true;
+				break;
+			}
+			if (Objects.find(&tmpR2) != Objects.end()) {
+				isCollide = true;
+				break;
+			}
+		}
+		if (not isCollide) {
+			PlayerPos.x += CosValue * speed;
+			PlayerPos.z += SinValue * speed;
+		}
+	}
+}
+
 set<CGameObject*, CGameObjectCmp>::iterator CWorld::getObject()
 {
 	glm::vec3 normalDirection = cameraDirection - cameraPos;
@@ -467,171 +632,7 @@ void CWorld::Update()
 
 	Gravity();												// 자유낙하 + 점프
 
-
-
-	float speed = 0.075f;
-
-	float SinValue = glm::sin(glm::radians(MouseAngle.first));
-	float CosValue = glm::cos(glm::radians(MouseAngle.first));
-
-	// 충돌처리 후 이동
-	if (isUp) {
-		bool isCollide{ false };
-		for (int i = 0; i < 4; ++i) {
-			float dx, dz;
-			switch (i)
-			{
-			case 0:
-				dx = 0.25f;
-				dz = 0.25f;
-				break;
-			case 1:
-				dx = 0.25f;
-				dz = -0.25f;
-				break;
-			case 2:
-				dx = -0.25f;
-				dz = 0.25f;
-				break;
-			case 3:
-				dx = -0.25f;
-				dz = -0.25f;
-				break;
-			}
-			CBase tmpU(glm::vec3(round(PlayerPos.x + dx + SinValue * speed), round(PlayerPos.y), round(PlayerPos.z + dz - CosValue * speed)));
-			CBase tmpU2(glm::vec3(round(PlayerPos.x + dx + SinValue * speed), round(PlayerPos.y - 1.f), round(PlayerPos.z + dz - CosValue * speed)));
-			if (Objects.find(&tmpU) != Objects.end()) {
-				isCollide = true;
-				break;
-			}
-			if (Objects.find(&tmpU2) != Objects.end()) {
-				isCollide = true;
-				break;
-			}
-		}
-		if (not isCollide) {
-			PlayerPos.x += SinValue * speed;
-			PlayerPos.z -= CosValue * speed;
-		}
-	}
-	if (isDown) {
-		bool isCollide{ false };
-		for (int i = 0; i < 4; ++i) {
-			float dx, dz;
-			switch (i)
-			{
-			case 0:
-				dx = 0.25f;
-				dz = 0.25f;
-				break;
-			case 1:
-				dx = 0.25f;
-				dz = -0.25f;
-				break;
-			case 2:
-				dx = -0.25f;
-				dz = 0.25f;
-				break;
-			case 3:
-				dx = -0.25f;
-				dz = -0.25f;
-				break;
-			}
-			CBase tmpD(glm::vec3(round(PlayerPos.x + dx - SinValue * speed), round(PlayerPos.y), round(PlayerPos.z + dz + CosValue * speed)));
-			CBase tmpD2(glm::vec3(round(PlayerPos.x + dx - SinValue * speed), round(PlayerPos.y - 1.f), round(PlayerPos.z + dz + CosValue * speed)));
-			if (Objects.find(&tmpD) != Objects.end()) {
-				isCollide = true;
-				break;
-			}
-			if (Objects.find(&tmpD2) != Objects.end()) {
-				isCollide = true;
-				break;
-			}
-		}
-		if (not isCollide) {
-			PlayerPos.x -= SinValue * speed;
-			PlayerPos.z += CosValue * speed;
-		}
-	}
-	if (isLeft) {
-		bool isCollide{ false };
-		for (int i = 0; i < 4; ++i) {
-			float dx, dz;
-			switch (i)
-			{
-			case 0:
-				dx = 0.25f;
-				dz = 0.25f;
-				break;
-			case 1:
-				dx = 0.25f;
-				dz = -0.25f;
-				break;
-			case 2:
-				dx = -0.25f;
-				dz = 0.25f;
-				break;
-			case 3:
-				dx = -0.25f;
-				dz = -0.25f;
-				break;
-			}
-			CBase tmpL(glm::vec3(round(PlayerPos.x+dx - CosValue * speed), round(PlayerPos.y), round(PlayerPos.z +dz- SinValue * speed)));
-			CBase tmpL2(glm::vec3(round(PlayerPos.x+dx - CosValue * speed), round(PlayerPos.y - 1.f), round(PlayerPos.z +dz- SinValue * speed)));
-			if (Objects.find(&tmpL) != Objects.end()) {
-				isCollide = true;
-				break;
-			}
-			if (Objects.find(&tmpL2) != Objects.end()) {
-				isCollide = true;
-				break;
-			}
-		}
-		if (not isCollide) {
-			PlayerPos.x -= CosValue * speed;
-			PlayerPos.z -= SinValue * speed;
-		}
-	}
-	if (isRight) {
-		bool isCollide{ false };
-		for (int i = 0; i < 4; ++i) {
-			float dx, dz;
-			switch (i)
-			{
-			case 0:
-				dx = 0.25f;
-				dz = 0.25f;
-				break;
-			case 1:
-				dx = 0.25f;
-				dz = -0.25f;
-				break;
-			case 2:
-				dx = -0.25f;
-				dz = 0.25f;
-				break;
-			case 3:
-				dx = -0.25f;
-				dz = -0.25f;
-				break;
-			}
-			CBase tmpR(glm::vec3(round(PlayerPos.x +dx+ CosValue * speed), round(PlayerPos.y), round(PlayerPos.z +dz+ SinValue * speed)));
-			CBase tmpR2(glm::vec3(round(PlayerPos.x +dx+ CosValue * speed), round(PlayerPos.y - 1.f), round(PlayerPos.z +dz+ SinValue * speed)));
-			if (Objects.find(&tmpR) != Objects.end()) {
-				isCollide = true;
-				break;
-			}
-			if (Objects.find(&tmpR2) != Objects.end()) {
-				isCollide = true;
-				break;
-			}
-		}
-		if (not isCollide) {
-			PlayerPos.x += CosValue * speed;
-			PlayerPos.z += SinValue * speed;
-		}
-
-	}
+	Move();													// 키 입력에 따른 충돌처리가 된 이동
 
 	if (isUp || isDown || isLeft || isRight || isJump)
 		Player.Update();
