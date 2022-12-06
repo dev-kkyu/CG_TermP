@@ -1,4 +1,5 @@
 #include "CGrass.h"
+#include "CFragments.h"
 
 CGrass::CGrass(glm::vec3 Position) : CBlock{ Position }
 {
@@ -29,10 +30,28 @@ void CGrass::Initialize()
 	Trans = glm::translate(Unit, Position);
 
 	Change = Trans * Change;
+
+	for (int i = 0; i < 100; ++i)
+		myFragments.push_back(new CFragments{ Position ,ÀÜµðÈë });
 }
 
 void CGrass::Update()
 {
+	static int time = 0;
+	if (isfragments) {
+		Color = glm::vec3(1, 0, 0);
+		if (time > 50) {
+			time = 0;
+			isfragments = false;
+		}
+		else
+			++time;
+	}
+
+	if (isfragments)
+		for (CFragments*& fragments : myFragments)
+			fragments->Update();
+
 }
 
 void CGrass::FixedUpdate()
@@ -49,10 +68,6 @@ void CGrass::Render()
 	GLuint model = glGetUniformLocation(shaderID, "modelTransform");
 	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(Change));
 
-	//for (int i = 0; i < 6; ++i) {
-	//	glBindTexture(GL_TEXTURE_2D, Texture[1]);
-	//	glDrawArrays(GL_TRIANGLES, i * 6, 6);
-	//}
 
 	glBindTexture(GL_TEXTURE_2D, Texture[1]);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
@@ -71,8 +86,14 @@ void CGrass::Render()
 
 	glBindTexture(GL_TEXTURE_2D, Texture[1]);
 	glDrawArrays(GL_TRIANGLES, 30, 6);
+
+
+	if (isfragments)
+		for (CFragments*& fragments : myFragments)
+			fragments->Render();
 }
 
 void CGrass::Release()
 {
+	
 }

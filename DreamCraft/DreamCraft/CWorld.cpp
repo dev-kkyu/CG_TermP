@@ -540,12 +540,12 @@ void CWorld::addNewObject(int ObjectType)
 			case 잔디흙:
 				Objects.insert(new CGrass(tempPos));
 				break;
-				//case 벼:
-				//	Objects.insert(new CBase(tempPos));
-				//	break;
-				//case 양털:
-				//	Objects.insert(new CBase(tempPos));
-				//	break;
+			case 벼:
+				Objects.insert(new CRice(tempPos));
+				break;
+			case 양털:
+				Objects.insert(new CWool(tempPos));
+				break;
 
 			case 나무:
 				MakeTree(tempPos);
@@ -668,14 +668,12 @@ void CWorld::MakeTree(glm::vec3 position)
 {
 	float x{ position.x }, y{ position.y }, z{ position.z };
 
-	for (int i = 0; i < 3; ++i)
+	for (int i = 0; i < 4; ++i)
 		Objects.insert(new CTreeTrunk{ glm::vec3(x,y + i,z) });
 
 	for (int i = -1; i < 2; ++i) {
-		if (i != 0) {
 			Objects.insert(new CLeaves{ glm::vec3(x + i,y + 2,z) });
 			Objects.insert(new CLeaves{ glm::vec3(x,y + 2,z + i) });
-		}
 	}
 
 	Objects.insert(new CLeaves{ glm::vec3(x + 1,y + 2,z + 1) });

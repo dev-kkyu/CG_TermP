@@ -29,6 +29,7 @@ void CBlock::be_Attacked(int Weapon)
 		break;
 	}
 	Color = Color * (Hp / 10.f);
+	isfragments = true;
 }
 
 void CBlock::Initialize()

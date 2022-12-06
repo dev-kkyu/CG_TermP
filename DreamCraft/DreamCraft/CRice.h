@@ -1,15 +1,13 @@
 #pragma once
 #include "CBlock.h"
-//#include "CFragments.h"
 
-class CFragments;
-class CGrass : public CBlock
+class CRice : public CBlock
 {
 private:
-	vector<CFragments*> myFragments;
+
 public:
-	CGrass(glm::vec3 Position);
-	virtual ~CGrass();			//소멸자도 버츄얼 해주는게 좋음
+	CRice(glm::vec3 Position);
+	virtual ~CRice();			//소멸자도 버츄얼 해주는게 좋음
 
 	virtual void Initialize() override;		//생성될 때 할 일
 	virtual void Update() override;			//타이머에서 할 일
