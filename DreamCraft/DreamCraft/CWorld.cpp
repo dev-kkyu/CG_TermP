@@ -218,10 +218,7 @@ void CWorld::Camera()
 		cameraDirRot = glm::rotate(cameraDirRot, glm::radians(-MouseAngle.second), glm::vec3(1.f, 0.f, 0.f));
 		DirectionPos = cameraDirRot * glm::vec4(DirectionPos, 1.f);
 
-		glm::vec3 cPos = glm::vec3(0, 0, -0.25);
-		cPos = glm::rotate(glm::mat4(1.f), glm::radians(-MouseAngle.first), glm::vec3(0.f, 1.f, 0.f)) * glm::vec4(cPos, 1.f);
-
-		cameraPos = glm::vec3(PlayerPos.x + cPos.x, PlayerPos.y - 0.4f, PlayerPos.z + cPos.z); //--- 카메라 위치 (어디서 볼건지)
+		cameraPos = PlayerPos;						//--- 카메라 위치 (어디서 볼건지)
 		cameraDirection = PlayerPos + DirectionPos; //--- 카메라 바라보는 방향 (어디볼건지 하면될듯)
 		glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f); //--- 카메라 위쪽 방향->벡터임(방향만) (음수하면 화면 상하거꾸로보임)
 
@@ -236,19 +233,19 @@ void CWorld::Camera()
 	}
 	else if (3 == personView) {
 		// 카메라 변환
-		glm::vec3 DirectionPos{ 0, 0, -5.f };				//카메라 방향 원본
+		glm::vec3 cPos{ 0, 0, 7.5f };						// 카메라 위치 원본
+		glm::vec3 DirectionPos{ 0, 0, -5.f };				// 카메라 방향 원본
+
 		glm::mat4 cameraDirRot = glm::rotate(glm::mat4(1.f), glm::radians(-MouseAngle.first), glm::vec3(0.f, 1.f, 0.f));
 		cameraDirRot = glm::rotate(cameraDirRot, glm::radians(-MouseAngle.second), glm::vec3(1.f, 0.f, 0.f));
+		cPos = cameraDirRot * glm::vec4(cPos, 1.f);
 		DirectionPos = cameraDirRot * glm::vec4(DirectionPos, 1.f);
 
-		glm::vec3 cPos = glm::vec3(0, 0, -0.25);
-		cPos = glm::rotate(glm::mat4(1.f), glm::radians(-MouseAngle.first), glm::vec3(0.f, 1.f, 0.f)) * glm::vec4(cPos, 1.f);
-
-		cameraPos = glm::vec3(PlayerPos.x + cPos.x, PlayerPos.y - 0.4f, PlayerPos.z + cPos.z); //--- 카메라 위치 (어디서 볼건지)
+		cameraPos = PlayerPos + cPos; //--- 카메라 위치 (어디서 볼건지)
 		cameraDirection = PlayerPos + DirectionPos; //--- 카메라 바라보는 방향 (어디볼건지 하면될듯)
 		glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f); //--- 카메라 위쪽 방향->벡터임(방향만) (음수하면 화면 상하거꾸로보임)
 
-		glm::mat4 view = glm::translate(glm::mat4(1.f), glm::vec3(0, -1, -5)) * glm::lookAt(cameraPos, cameraDirection, cameraUp);// *cameraRevolution;
+		glm::mat4 view = glm::lookAt(cameraPos, cameraDirection, cameraUp);
 
 		GLuint viewLocation = glGetUniformLocation(shaderID, "viewTransform"); //--- 뷰잉 변환 설정
 		glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(view));
@@ -500,83 +497,121 @@ set<CGameObject*, CGameObjectCmp>::iterator CWorld::getObject()
 	glm::vec3 normalDirection = cameraDirection - cameraPos;
 	normalDirection = glm::normalize(normalDirection);
 
-	for (int i = 1; i < 65; ++i) {
-		glm::vec3 tempPos(cameraPos + (normalDirection * (i / 10.f)));
-		tempPos.x = round(tempPos.x);
-		tempPos.y = ceil(tempPos.y);
-		tempPos.z = round(tempPos.z);
-		CBase tempBlock(tempPos);
-		auto itr = Objects.find(&tempBlock);
-		if (itr != Objects.end()) {
-			(*itr)->show();
-			return itr;
+	if (1 == personView)
+		for (int i = 2; i < 65; ++i) {
+			glm::vec3 tempPos(cameraPos + (normalDirection * (i / 10.f)));
+			tempPos.x = round(tempPos.x);
+			tempPos.y = ceil(tempPos.y);
+			tempPos.z = round(tempPos.z);
+			CBase tempBlock(tempPos);
+			auto itr = Objects.find(&tempBlock);
+			if (itr != Objects.end()) {
+				(*itr)->show();
+				return itr;
+			}
 		}
-	}
+	else if (3 == personView)
+		for (int i = 77; i < 140; ++i) {
+			glm::vec3 tempPos(cameraPos + (normalDirection * (i / 10.f)));
+			tempPos.x = round(tempPos.x);
+			tempPos.y = ceil(tempPos.y);
+			tempPos.z = round(tempPos.z);
+			CBase tempBlock(tempPos);
+			auto itr = Objects.find(&tempBlock);
+			if (itr != Objects.end()) {
+				(*itr)->show();
+				return itr;
+			}
+		}
 	return Objects.end();
 }
 
-void CWorld::addNewObject(int ObjectType)
+void CWorld::addNewObject(const int& ObjectType)
 {
 	glm::vec3 normalDirection = cameraDirection - cameraPos;
 	normalDirection = glm::normalize(normalDirection);
 
-	for (int i = 1; i < 65; ++i) {
-		glm::vec3 tempPos(cameraPos + (normalDirection * (i / 10.f)));
-		tempPos.x = round(tempPos.x);
-		tempPos.y = ceil(tempPos.y);
-		tempPos.z = round(tempPos.z);
-		CBase tempBlock(tempPos);
-		auto itr = Objects.find(&tempBlock);
-		if (itr != Objects.end()) {
-			(*itr)->show();
-			tempPos = glm::vec3(cameraPos + (normalDirection * ((i - 1) / 10.f)));
+	if (1 == personView)
+		for (int i = 2; i < 65; ++i) {
+			glm::vec3 tempPos(cameraPos + (normalDirection * (i / 10.f)));
 			tempPos.x = round(tempPos.x);
 			tempPos.y = ceil(tempPos.y);
 			tempPos.z = round(tempPos.z);
-			switch (ObjectType) {
-			case 기본흙:
-				Objects.insert(new CBase(tempPos));
+			CBase tempBlock(tempPos);
+			auto itr = Objects.find(&tempBlock);
+			if (itr != Objects.end()) {
+				(*itr)->show();
+				tempPos = glm::vec3(cameraPos + (normalDirection * ((i - 1) / 10.f)));
+				tempPos.x = round(tempPos.x);
+				tempPos.y = ceil(tempPos.y);
+				tempPos.z = round(tempPos.z);
+				insertObject(ObjectType, tempPos);
 				break;
-			case 잔디흙:
-				Objects.insert(new CGrass(tempPos));
-				break;
-			case 벼:
-				Objects.insert(new CRice(tempPos));
-				break;
-			case 양털:
-				Objects.insert(new CWool(tempPos));
-				break;
-
-			case 나무:
-				MakeTree(tempPos);
-				break;
-			case 나무줄기:
-				Objects.insert(new CTreeTrunk(tempPos));
-				break;
-			case 나뭇잎:
-				Objects.insert(new CLeaves(tempPos));
-				break;
-
-
-			case 돼지:
-				Objects.insert(new CPig(tempPos));
-				break;
-			case 소:
-				Objects.insert(new CCow(tempPos));
-				break;
-			case 닭:
-				Objects.insert(new CChicken(tempPos));
-				break;
-			case 양:
-				Objects.insert(new CSheep(tempPos));
-				break;
-			case 무너양:
-				Objects.insert(new CSheepNOTUL(tempPos));
-				break;
-
 			}
-			break;
 		}
+	else if (3 == personView)
+		for (int i = 77; i < 140; ++i) {
+			glm::vec3 tempPos(cameraPos + (normalDirection * (i / 10.f)));
+			tempPos.x = round(tempPos.x);
+			tempPos.y = ceil(tempPos.y);
+			tempPos.z = round(tempPos.z);
+			CBase tempBlock(tempPos);
+			auto itr = Objects.find(&tempBlock);
+			if (itr != Objects.end()) {
+				(*itr)->show();
+				tempPos = glm::vec3(cameraPos + (normalDirection * ((i - 1) / 10.f)));
+				tempPos.x = round(tempPos.x);
+				tempPos.y = ceil(tempPos.y);
+				tempPos.z = round(tempPos.z);
+				insertObject(ObjectType, tempPos);
+				break;
+			}
+		}
+}
+
+void CWorld::insertObject(const int& ObjectType, const glm::vec3& ObjectPos)
+{
+	switch (ObjectType) {
+	case 기본흙:
+		Objects.insert(new CBase(ObjectPos));
+		break;
+	case 잔디흙:
+		Objects.insert(new CGrass(ObjectPos));
+		break;
+	case 벼:
+		Objects.insert(new CRice(ObjectPos));
+		break;
+	case 양털:
+		Objects.insert(new CWool(ObjectPos));
+		break;
+
+	case 나무:
+		MakeTree(ObjectPos);
+		break;
+	case 나무줄기:
+		Objects.insert(new CTreeTrunk(ObjectPos));
+		break;
+	case 나뭇잎:
+		Objects.insert(new CLeaves(ObjectPos));
+		break;
+
+
+	case 돼지:
+		Objects.insert(new CPig(ObjectPos));
+		break;
+	case 소:
+		Objects.insert(new CCow(ObjectPos));
+		break;
+	case 닭:
+		Objects.insert(new CChicken(ObjectPos));
+		break;
+	case 양:
+		Objects.insert(new CSheep(ObjectPos));
+		break;
+	case 무너양:
+		Objects.insert(new CSheepNOTUL(ObjectPos));
+		break;
+
 	}
 }
 
@@ -672,8 +707,8 @@ void CWorld::MakeTree(glm::vec3 position)
 		Objects.insert(new CTreeTrunk{ glm::vec3(x,y + i,z) });
 
 	for (int i = -1; i < 2; ++i) {
-			Objects.insert(new CLeaves{ glm::vec3(x + i,y + 2,z) });
-			Objects.insert(new CLeaves{ glm::vec3(x,y + 2,z + i) });
+		Objects.insert(new CLeaves{ glm::vec3(x + i,y + 2,z) });
+		Objects.insert(new CLeaves{ glm::vec3(x,y + 2,z + i) });
 	}
 
 	Objects.insert(new CLeaves{ glm::vec3(x + 1,y + 2,z + 1) });

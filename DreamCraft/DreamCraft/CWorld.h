@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "Header.h"
 #include "CBase.h"
 #include "CGrass.h"
@@ -29,7 +29,7 @@ private:
 	bool isUp, isDown, isLeft, isRight;
 	int isJump;
 
-	// Áß·Â¿ë º¯¼öµé
+	// ì¤‘ë ¥ìš© ë³€ìˆ˜ë“¤
 	int VELOCITY;
 	const int first_VEL;
 	const int MASS;
@@ -53,14 +53,15 @@ public:
 	void Gravity();
 	void Move();
 
-	set<CGameObject*, CGameObjectCmp>::iterator getObject();		//set¿¡¼­ ³»°¡ Å¬¸¯ÇÑ ¿ÀºêÁ§Æ®ÀÇ iterator¸¦ ¹Ş¾Æ¿Â´Ù.
-	void addNewObject(int ObjectType);									//³»°¡ Å¬¸¯ÇÑ ¿ÀºêÁ§Æ®ÀÇ ¾ÕÂÊ¿¡ ¿ÀºêÁ§Æ®¸¦ »ı¼ºÇÑ´Ù.
+	set<CGameObject*, CGameObjectCmp>::iterator getObject();		//setì—ì„œ ë‚´ê°€ í´ë¦­í•œ ì˜¤ë¸Œì íŠ¸ì˜ iteratorë¥¼ ë°›ì•„ì˜¨ë‹¤.
+	void addNewObject(const int& ObjectType);									//ë‚´ê°€ í´ë¦­í•œ ì˜¤ë¸Œì íŠ¸ì˜ ì•ìª½ì— ì˜¤ë¸Œì íŠ¸ë¥¼ ìƒì„±í•œë‹¤.
+	void insertObject(const int& ObjectType, const glm::vec3& ObjectPos);
 
-	void Initialize();		//»ı¼ºµÉ ¶§ ÇÒ ÀÏ
-	void Update();			//Å¸ÀÌ¸Ó¿¡¼­ ÇÒ ÀÏ
-	void FixedUpdate();		//Ãæµ¹Ã³¸® µî
-	void Render();			//µå·Î¿ì
-	void Release();			//¼Ò¸êµÉ ¶§ ÇÒ ÀÏ
+	void Initialize();		//ìƒì„±ë  ë•Œ í•  ì¼
+	void Update();			//íƒ€ì´ë¨¸ì—ì„œ í•  ì¼
+	void FixedUpdate();		//ì¶©ëŒì²˜ë¦¬ ë“±
+	void Render();			//ë“œë¡œìš°
+	void Release();			//ì†Œë©¸ë  ë•Œ í•  ì¼
 	int getpersonView();
 
 	void MakeTree(glm::vec3 position);
