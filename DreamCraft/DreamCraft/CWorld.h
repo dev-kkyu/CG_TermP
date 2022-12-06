@@ -48,7 +48,7 @@ public:
 
 	void Camera();
 
-	void Jump();
+	void Gravity();
 
 	set<CGameObject*, CGameObjectCmp>::iterator getObject();		//set에서 내가 클릭한 오브젝트의 iterator를 받아온다.
 	void addNewObject(int ObjectType);									//내가 클릭한 오브젝트의 앞쪽에 오브젝트를 생성한다.
@@ -62,4 +62,3 @@ public:
 
 	void MakeTree(glm::vec3 position);
 };
-

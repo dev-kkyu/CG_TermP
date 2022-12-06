@@ -115,22 +115,22 @@ void CPlayer::Release()
 
 float CPlayer::getLeft()
 {
-	return Position.x - 0.5f;
+	return Position.x - 0.25f;
 }
 
 float CPlayer::getRight()
 {
-	return Position.x + 0.5f;
+	return Position.x + 0.25f;
 }
 
 float CPlayer::getBehind()
 {
-	return Position.z - 0.5f;
+	return Position.z - 0.25f;
 }
 
 float CPlayer::getFront()
 {
-	return Position.z + 0.5f;
+	return Position.z + 0.25f;
 }
 
 float CPlayer::getBottom()
