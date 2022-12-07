@@ -49,6 +49,8 @@ void CWorld::Keyboard(unsigned char key, int state)
 			case 'l':
 				planToCreateObj = ;
 				break;*/
+
+			// 나무
 		case 'm':
 			planToCreateObj = 나무;
 			break;
@@ -58,7 +60,12 @@ void CWorld::Keyboard(unsigned char key, int state)
 		case '.':
 			planToCreateObj = 나뭇잎;
 			break;
-
+		case 'M':
+			planToCreateObj = 나무2;
+			break;
+		case '<':
+			planToCreateObj = 나무줄기2;
+			break;
 
 			// 동물
 		case 'z':
@@ -557,6 +564,13 @@ void CWorld::addNewObject(int ObjectType)
 				Objects.insert(new CLeaves(tempPos));
 				break;
 
+			case 나무2:
+				MakeTree2(tempPos);
+				break;
+			case 나무줄기2:
+				Objects.insert(new CBirchTrunk(tempPos));
+				break;
+
 
 			case 돼지:
 				Objects.insert(new CPig(tempPos));
@@ -700,3 +714,28 @@ void CWorld::MakeTree(glm::vec3 position)
 
 
 }
+
+void CWorld::MakeTree2(glm::vec3 position)
+{
+	float x{ position.x }, y{ position.y }, z{ position.z };
+
+	for (int i = 0; i < 5; ++i)
+		Objects.insert(new CBirchTrunk{ glm::vec3(x,y + i,z) });
+
+	for (int i = -2; i < 3; ++i) {
+		for (int j = -2; j < 3; ++j) {
+			Objects.insert(new CLeaves{ glm::vec3(x + i,y + 3,z + j) });
+		}
+	}
+
+	for (int i = -1; i < 2; ++i) {
+		for (int j = -1; j < 2; ++j) {
+			Objects.insert(new CLeaves{ glm::vec3(x + i,y + 4,z + j) });
+		}
+	}
+
+	Objects.insert(new CLeaves{ glm::vec3(x ,y + 5,z) });
+
+
+}
+

@@ -50,8 +50,10 @@ void CRice::Render()
 	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(Change));
 
 	for (int i = 0; i < 6; ++i) {
-		glBindTexture(GL_TEXTURE_2D, Texture[28]);
-		glDrawArrays(GL_TRIANGLES, i * 6, 6);
+		if (i != 2 && i != 4) {
+			glBindTexture(GL_TEXTURE_2D, Texture[31]);
+			glDrawArrays(GL_TRIANGLES, i * 6, 6);
+		}
 	}
 }
 

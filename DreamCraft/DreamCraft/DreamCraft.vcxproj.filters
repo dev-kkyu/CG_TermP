@@ -88,6 +88,9 @@
     <Filter Include="GameObject\Fragments">
       <UniqueIdentifier>{4e253963-f8ff-494e-a9da-995410d0325e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Block\BirchTrunk">
+      <UniqueIdentifier>{f1b5735d-5b48-4c61-bf25-acadd42edfc0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DreamCraft.cpp">
@@ -167,6 +170,9 @@
     </ClCompile>
     <ClCompile Include="CFragments.cpp">
       <Filter>GameObject\Fragments</Filter>
+    </ClCompile>
+    <ClCompile Include="CBirchTrunk.cpp">
+      <Filter>GameObject\Block\BirchTrunk</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -250,6 +256,9 @@
     </ClInclude>
     <ClInclude Include="CFragments.h">
       <Filter>GameObject\Fragments</Filter>
+    </ClInclude>
+    <ClInclude Include="CBirchTrunk.h">
+      <Filter>GameObject\Block\BirchTrunk</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

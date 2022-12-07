@@ -8,7 +8,7 @@ out vec4 FragColor;			//--- 최종 객체의 색 저장
 
 uniform vec3 lightPos;		//--- 조명의 위치
 uniform vec3 lightColor;	//--- 조명의 색
-uniform vec3 objectColor;	//--- 객체의 색
+uniform vec4 objectColor;	//--- 객체의 색
 
 uniform vec3 viewPos;		//--- 카메라 위치
 
@@ -41,11 +41,12 @@ void main()
 	vec3 specular = specularLight * lightColor;						//--- 거울 반사 조명값: 거울반사값 * 조명색상값
 
 	
-	vec3 result;
+	vec4 result;
 	if(1 == selectColor)			// 1이면 텍스처, 아니면 objectColor
-		result = vec3(texture(outTexture, TexCoord) * vec4((ambient + diffuse + specular), 1.0));
+		result = (texture(outTexture, TexCoord) * vec4((ambient + diffuse + specular), 1.0));
 	else
-		result = (ambient + diffuse + specular) * objectColor;		//--- 최종 조명 설정된 픽셀 색상: (주변조명 + 산란반사조명 + 거울반사조명) * 객체 색상
+		result = vec4((ambient + diffuse + specular),1) * objectColor;		//--- 최종 조명 설정된 픽셀 색상: (주변조명 + 산란반사조명 + 거울반사조명) * 객체 색상
 
-	FragColor = vec4 (result, 1.0);									//--- 픽셀 색을 출력
+//	FragColor = vec4 (result, 1.0);									//--- 픽셀 색을 출력
+	FragColor = result;									//--- 픽셀 색을 출력
 }

@@ -131,6 +131,7 @@
     <ClCompile Include="Body.cpp" />
     <ClCompile Include="CAnimal.cpp" />
     <ClCompile Include="CBase.cpp" />
+    <ClCompile Include="CBirchTrunk.cpp" />
     <ClCompile Include="CBlock.cpp" />
     <ClCompile Include="CChicken.cpp" />
     <ClCompile Include="CCow.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="Body.h" />
     <ClInclude Include="CAnimal.h" />
     <ClInclude Include="CBase.h" />
+    <ClInclude Include="CBirchTrunk.h" />
     <ClInclude Include="CBlock.h" />
     <ClInclude Include="CChicken.h" />
     <ClInclude Include="CCow.h" />

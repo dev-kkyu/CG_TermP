@@ -15,7 +15,7 @@ void CFragments::Initialize()
 	random_device r;
 	default_random_engine ge(r());
 	std::uniform_real_distribution<float> x(Position.x-0.7, Position.x+0.7);
-	std::uniform_real_distribution<float> y(Position.y-1, Position.y+0.2);
+	std::uniform_real_distribution<float> y(Position.y-1.2, Position.y+0.2);
 	std::uniform_real_distribution<float> z(Position.z-0.7, Position.z+0.7);
 	std::uniform_real_distribution<float> sped(0.1, 1);
 
@@ -101,7 +101,7 @@ void CFragments::Render()
 
 	
 	
-	glUniform3f(Color, color.r, color.g, color.b);
+	glUniform4f(Color, color.r, color.g, color.b,1);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 
 }

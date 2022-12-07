@@ -38,8 +38,10 @@ extern GLuint Texture[50];
 #define 양털		204
 
 #define 나무		220
-#define 나무줄기	221
-#define 나뭇잎		222
+#define 나무2		221
+#define 나무줄기	222
+#define 나무줄기2	223
+#define 나뭇잎		224
 
 #define 돼지		211
 #define 소			212
