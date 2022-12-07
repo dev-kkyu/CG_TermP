@@ -613,7 +613,10 @@ void CWorld::Initialize()
 	Objects.insert(new CCow{ glm::vec3(5,1,-3) });
 	Objects.insert(new CChicken{ glm::vec3(3,1,-6) });
 
-
+	MakeCloud(glm::vec3(0, 0, 0));
+	MakeCloud2(glm::vec3(8, 0, -4));
+	MakeCloud3(glm::vec3(10, 0, -10));
+	MakeCloud4(glm::vec3(-5, 0, -8));
 
 
 }
@@ -736,6 +739,81 @@ void CWorld::MakeTree2(glm::vec3 position)
 
 	Objects.insert(new CLeaves{ glm::vec3(x ,y + 5,z) });
 
+
+}
+
+void CWorld::MakeCloud(glm::vec3 position)
+{
+	float x{ position.x }, y{ position.y }, z{ position.z };
+	int sky{ 30 };
+
+	for (int i = 2; i < 7; ++i)
+		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z) });
+
+	for (int i = 1; i < 5; ++i)
+		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z+1) });
+
+	for (int i = 0; i < 5; ++i)
+		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z+2) });
+
+	for (int i = 3; i < 6; ++i)
+		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z+3) });
+
+}
+
+
+void CWorld::MakeCloud2(glm::vec3 position)
+{
+	float x{ position.x }, y{ position.y }, z{ position.z };
+	int sky{ 30 };
+
+	for (int i = 0; i < 4; ++i)
+		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z) });
+
+	for (int i = 1; i < 4; ++i)
+		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z + 1) });
+
+	for (int i = 0; i < 3; ++i)
+		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z + 2) });
+
+}
+
+void CWorld::MakeCloud3(glm::vec3 position)
+{
+	float x{ position.x }, y{ position.y }, z{ position.z };
+	int sky{ 30 };
+
+	for (int i = 4; i < 8; ++i)
+		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z) });
+
+	for (int i = 2; i < 8; ++i)
+		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z + 1) });
+
+	for (int i = 0; i < 6; ++i)
+		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z + 2) });
+
+	for (int i = 1; i < 6; ++i)
+		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z + 3) });
+
+}
+
+
+void CWorld::MakeCloud4(glm::vec3 position)
+{
+	float x{ position.x }, y{ position.y }, z{ position.z };
+	int sky{ 30 };
+
+	for (int i = 2; i < 4; ++i)
+		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z) });
+
+	for (int i = 1; i < 4; ++i)
+		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z + 1) });
+
+	for (int i = 0; i < 5; ++i)
+		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z + 2) });
+
+	for (int i = 1; i < 4; ++i)
+		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z + 3) });
 
 }
 

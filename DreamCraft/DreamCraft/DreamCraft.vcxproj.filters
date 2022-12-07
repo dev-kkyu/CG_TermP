@@ -91,6 +91,9 @@
     <Filter Include="GameObject\Block\BirchTrunk">
       <UniqueIdentifier>{f1b5735d-5b48-4c61-bf25-acadd42edfc0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameObject\Block\Cloud">
+      <UniqueIdentifier>{40bede83-9353-4cb8-a2a2-c28c897d4eed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DreamCraft.cpp">
@@ -173,6 +176,9 @@
     </ClCompile>
     <ClCompile Include="CBirchTrunk.cpp">
       <Filter>GameObject\Block\BirchTrunk</Filter>
+    </ClCompile>
+    <ClCompile Include="CCloud.cpp">
+      <Filter>GameObject\Block\Cloud</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +265,9 @@
     </ClInclude>
     <ClInclude Include="CBirchTrunk.h">
       <Filter>GameObject\Block\BirchTrunk</Filter>
+    </ClInclude>
+    <ClInclude Include="CCloud.h">
+      <Filter>GameObject\Block\Cloud</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

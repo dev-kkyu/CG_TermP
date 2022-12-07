@@ -134,6 +134,7 @@
     <ClCompile Include="CBirchTrunk.cpp" />
     <ClCompile Include="CBlock.cpp" />
     <ClCompile Include="CChicken.cpp" />
+    <ClCompile Include="CCloud.cpp" />
     <ClCompile Include="CCow.cpp" />
     <ClCompile Include="CFragments.cpp" />
     <ClCompile Include="CGameObject.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="CBirchTrunk.h" />
     <ClInclude Include="CBlock.h" />
     <ClInclude Include="CChicken.h" />
+    <ClInclude Include="CCloud.h" />
     <ClInclude Include="CCow.h" />
     <ClInclude Include="CFragments.h" />
     <ClInclude Include="CGameObject.h" />
