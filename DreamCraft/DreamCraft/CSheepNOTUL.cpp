@@ -3,21 +3,24 @@
 #include "CWorld.h"
 extern CWorld World;
 
-CSheepNOTUL::CSheepNOTUL(glm::vec3 Position) : CAnimal{ Position }
+CSheepNOTUL::CSheepNOTUL(glm::vec3 Position, Form animalForm) 
+	: CAnimal{ Position, animalForm, 무너양 }
 {
 }
 
 CSheepNOTUL::~CSheepNOTUL()
 {
+	Release();
 }
 
 void CSheepNOTUL::Release()
 {
+	World.died_Objects.insert(new CSheepNOTUL{ Position, Form::item });
 }
 
 void CSheepNOTUL::Render()
 {
-	if (Hp > 5) {
+	if (animalForm == Form::creature) {
 		
 		glBindVertexArray(BlockVAO);
 
@@ -33,7 +36,7 @@ void CSheepNOTUL::Render()
 		}
 		
 	}
-	else {			// 양죽음
+	else if (animalForm == Form::item) {			// 양죽음
 		glBindVertexArray(BlockVAO);
 
 		GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용

@@ -490,6 +490,35 @@ void CWorld::Move()
 			PlayerPos.z += SinValue * speed;
 		}
 	}
+
+
+	// item 얻기
+	{
+		CBase ItemTemp(glm::vec3(round(PlayerPos.x), round(PlayerPos.y - 1), round(PlayerPos.z)));
+		auto itr = died_Objects.find(&ItemTemp);
+		if (itr != died_Objects.end()) {
+			switch (((CAnimal*)*itr)->animalType) {
+			case 닭:
+				++itemCount.Chicken;
+				break;
+			case 소:
+				++itemCount.Cow;
+				break;
+			case 돼지:
+				++itemCount.Pig;
+				break;
+			case 양:
+			case 무너양:
+				++itemCount.Sheep;
+				break;
+			}
+			delete (*itr);
+			died_Objects.erase(itr);
+
+			itemCount.show();
+		}
+	}
+
 }
 
 set<CGameObject*, CGameObjectCmp>::iterator CWorld::getObject()
@@ -597,19 +626,19 @@ void CWorld::insertObject(const int& ObjectType, const glm::vec3& ObjectPos)
 
 
 	case 돼지:
-		Objects.insert(new CPig(ObjectPos));
+		Objects.insert(new CPig(ObjectPos, Form::creature));
 		break;
 	case 소:
-		Objects.insert(new CCow(ObjectPos));
+		Objects.insert(new CCow(ObjectPos, Form::creature));
 		break;
 	case 닭:
-		Objects.insert(new CChicken(ObjectPos));
+		Objects.insert(new CChicken(ObjectPos, Form::creature));
 		break;
 	case 양:
-		Objects.insert(new CSheep(ObjectPos));
+		Objects.insert(new CSheep(ObjectPos, Form::creature));
 		break;
 	case 무너양:
-		Objects.insert(new CSheepNOTUL(ObjectPos));
+		Objects.insert(new CSheepNOTUL(ObjectPos, Form::creature));
 		break;
 
 	}
@@ -629,10 +658,10 @@ void CWorld::Initialize()
 			for (int j = -25; j <= 24; ++j)
 				Objects.insert(new CBase{ glm::vec3{i, k, j} });
 
-	Objects.insert(new CSheep{ glm::vec3(3,1,3) });
-	Objects.insert(new CPig{ glm::vec3(-3,1,3) });
-	Objects.insert(new CCow{ glm::vec3(5,1,-3) });
-	Objects.insert(new CChicken{ glm::vec3(3,1,-6) });
+	Objects.insert(new CSheep{ glm::vec3(3,1,3) , Form::creature});
+	Objects.insert(new CPig{ glm::vec3(-3,1,3) , Form::creature });
+	Objects.insert(new CCow{ glm::vec3(5,1,-3) , Form::creature });
+	Objects.insert(new CChicken{ glm::vec3(3,1,-6) , Form::creature });
 
 
 
@@ -651,10 +680,10 @@ void CWorld::Update()
 			auto temp = getObject();
 			if (temp != Objects.end()) {
 				(*temp)->be_Attacked(Player.getWeapon());
-				if ((*temp)->isDead()) {
-					delete (*temp);
-					Objects.erase(temp);
-				}
+				//if ((*temp)->isDead()) {
+				//	delete (*temp);
+				//	Objects.erase(temp);
+				//}
 			}
 			time = 1;
 		}
@@ -684,6 +713,9 @@ void CWorld::Render()
 	Camera();
 
 	for (auto Object : Objects) {
+		Object->Render();
+	}
+	for (auto Object : died_Objects) {
 		Object->Render();
 	}
 

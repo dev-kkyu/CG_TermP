@@ -73,9 +73,6 @@
     <Filter Include="GameObject\Block\TreeTrunk">
       <UniqueIdentifier>{929338bf-ae82-48c2-bf0f-a8978f711a4b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Tree">
-      <UniqueIdentifier>{3e915bac-f23a-4d88-84ef-26e5d739f660}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject\Animal\SheepNOTUL">
       <UniqueIdentifier>{92e48071-f01a-462d-8ae3-daf4b1396acb}</UniqueIdentifier>
     </Filter>
@@ -85,8 +82,11 @@
     <Filter Include="GameObject\Block\Wool">
       <UniqueIdentifier>{7e6e82c8-0708-4e7a-8748-c1a0ec943936}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\Fragments">
+    <Filter Include="GameObject\Block\Fragments">
       <UniqueIdentifier>{4e253963-f8ff-494e-a9da-995410d0325e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Block\Tree">
+      <UniqueIdentifier>{3e915bac-f23a-4d88-84ef-26e5d739f660}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -151,7 +151,7 @@
       <Filter>GameObject\Block\TreeTrunk</Filter>
     </ClCompile>
     <ClCompile Include="CTree.cpp">
-      <Filter>GameObject\Tree</Filter>
+      <Filter>GameObject\Block\Tree</Filter>
     </ClCompile>
     <ClCompile Include="CSheepNOTUL.cpp">
       <Filter>GameObject\Animal\SheepNOTUL</Filter>
@@ -166,7 +166,7 @@
       <Filter>GameObject\Block\Wool</Filter>
     </ClCompile>
     <ClCompile Include="CFragments.cpp">
-      <Filter>GameObject\Fragments</Filter>
+      <Filter>GameObject\Block\Fragments</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -237,7 +237,7 @@
       <Filter>GameObject\Block\TreeTrunk</Filter>
     </ClInclude>
     <ClInclude Include="CTree.h">
-      <Filter>GameObject\Tree</Filter>
+      <Filter>GameObject\Block\Tree</Filter>
     </ClInclude>
     <ClInclude Include="CSheepNOTUL.h">
       <Filter>GameObject\Animal\SheepNOTUL</Filter>
@@ -249,7 +249,7 @@
       <Filter>GameObject\Block\Wool</Filter>
     </ClInclude>
     <ClInclude Include="CFragments.h">
-      <Filter>GameObject\Fragments</Filter>
+      <Filter>GameObject\Block\Fragments</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

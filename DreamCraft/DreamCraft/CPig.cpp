@@ -1,21 +1,26 @@
 #include "CPig.h"
+#include "CWorld.h"
+extern CWorld World;
 
-CPig::CPig(glm::vec3 Position) : CAnimal{ Position }
+CPig::CPig(glm::vec3 Position, Form animalForm) 
+	: CAnimal{ Position, animalForm, µÅÁö }
 {
 }
 
 CPig::~CPig()
 {
+	Release();
 }
 
 void CPig::Release()
 {
+	World.died_Objects.insert(new CPig{ Position, Form::item });
 }
 
 void CPig:: Render() {
 
 
-	if (Hp > 5) {
+	if (animalForm == Form::creature) {
 
 		glBindVertexArray(BlockVAO);
 
@@ -30,7 +35,7 @@ void CPig:: Render() {
 			glDrawArrays(GL_TRIANGLES, i * 6, 6);
 		}
 	}
-	else {		// µ¿¹° Á×À½
+	else if (animalForm == Form::item) {		// µ¿¹° Á×À½
 
 		glBindVertexArray(BlockVAO);
 

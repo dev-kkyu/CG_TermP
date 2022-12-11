@@ -1,6 +1,11 @@
 #pragma once
 #include "CGameObject.h"
 
+enum Form {
+	creature,
+	item
+};
+
 class CAnimal : public CGameObject
 {
 protected:
@@ -17,9 +22,12 @@ protected:
 	glm::vec3 origin_Color;
 	bool Attacked, Attacked_Motion, hold_Scissors;
 	
+public:
+	const int animalType;
+	const Form animalForm;
 
 public:
-	CAnimal(glm::vec3 Position);
+	CAnimal(glm::vec3 Position, Form animalForm, int animalType);
 	virtual ~CAnimal() = 0;			// 소멸자도 버츄얼 해주는게 좋음
 
 	virtual void be_Attacked(int Weapon);

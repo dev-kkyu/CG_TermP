@@ -1,5 +1,8 @@
 #include "CBlock.h"
 
+#include "CWorld.h"
+extern CWorld World;
+
 CBlock::CBlock(glm::vec3 Position) : CGameObject{Position}
 {
 	//Initialize();
@@ -30,6 +33,12 @@ void CBlock::be_Attacked(int Weapon)
 	}
 	Color = Color * (Hp / 10.f);
 	isfragments = true;
+
+	if (isDead()) {
+		World.Objects.erase(this);
+		delete this;
+		return;
+	}
 }
 
 void CBlock::Initialize()

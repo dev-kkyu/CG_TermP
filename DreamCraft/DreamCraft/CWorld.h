@@ -15,6 +15,18 @@
 
 #include <set>
 
+struct Item {
+	int Chicken;
+	int Cow;
+	int Pig;
+	int Sheep;
+
+	void show() {
+		cout << "닭 : " << Chicken << ", 소 : " << Cow << endl;
+		cout << "양 : " << Sheep << ", 돼지 : " << Pig << endl;
+	}
+};
+
 class CWorld
 {
 private:
@@ -38,8 +50,11 @@ private:
 
 	int planToCreateObj;
 
+	Item itemCount{};
+
 public:
 	set<CGameObject*, CGameObjectCmp> Objects;
+	set<CGameObject*, CGameObjectCmp> died_Objects;
 
 public:
 	CWorld();

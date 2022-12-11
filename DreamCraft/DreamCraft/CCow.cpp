@@ -2,21 +2,24 @@
 #include "CWorld.h"
 extern CWorld World;
 
-CCow::CCow(glm::vec3 Position) : CAnimal{ Position }
+CCow::CCow(glm::vec3 Position, Form animalForm) 
+	: CAnimal{ Position , animalForm, ¼Ò }
 {
 }
 
 CCow::~CCow()
 {
+	Release();
 }
 
 void CCow::Release()
 {
+	World.died_Objects.insert(new CCow{ Position, Form::item });
 }
 
 void CCow::Render()
 {
-	if (Hp > 5) {
+	if (animalForm == Form::creature) {
 
 		glBindVertexArray(BlockVAO);
 
@@ -31,7 +34,7 @@ void CCow::Render()
 			glDrawArrays(GL_TRIANGLES, i * 6, 6);
 		}
 	}
-	else {		// µ¿¹° Á×À½
+	else if (animalForm == Form::item) {		// µ¿¹° Á×À½
 
 		glBindVertexArray(BlockVAO);
 

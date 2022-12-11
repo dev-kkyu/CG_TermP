@@ -1,22 +1,28 @@
 #include "CChicken.h"
 
-CChicken::CChicken(glm::vec3 Position) : CAnimal{ Position }
+#include "CWorld.h"
+extern CWorld World;
+
+CChicken::CChicken(glm::vec3 Position, Form animalForm)
+	: CAnimal{ Position, animalForm, ´ß }
 {
 }
 
 CChicken::~CChicken()
 {
+	Release();
 }
 
 void CChicken::Release()
 {
+	World.died_Objects.insert(new CChicken{ Position, Form::item });
 }
 
 void CChicken::Render() 
 {
 
 
-	if (Hp > 5) {
+	if (animalForm == Form::creature) {
 
 		glBindVertexArray(BlockVAO);
 
@@ -31,7 +37,7 @@ void CChicken::Render()
 			glDrawArrays(GL_TRIANGLES, i * 6, 6);
 		}
 	}
-	else {		// µ¿¹° Á×À½
+	else if (animalForm == Form::item) {		// µ¿¹° Á×À½
 
 		glBindVertexArray(BlockVAO);
 
@@ -45,7 +51,6 @@ void CChicken::Render()
 			glBindTexture(GL_TEXTURE_2D, Texture[20]);		// ´ß¸Ó¸®±Í¿±´ç
 			glDrawArrays(GL_TRIANGLES, i * 6, 6);
 		}
-
 	}
 }
 

@@ -3,21 +3,24 @@
 #include "CWorld.h"
 extern CWorld World;
 
-CSheep::CSheep(glm::vec3 Position) : CAnimal{ Position }
+CSheep::CSheep(glm::vec3 Position, Form animalForm) 
+	: CAnimal{ Position, animalForm, 양 }
 {
 }
 
 CSheep::~CSheep()
 {
+	Release();
 }
 
 void CSheep::Release()
 {
+	World.died_Objects.insert(new CSheep{ Position, Form::item });
 }
 
 void CSheep::Render()
 {
-	if (Hp > 5) {
+	if (animalForm == Form::creature) {
 		if (hold_Scissors && !hairless) {
 			glBindVertexArray(BlockVAO);
 
@@ -74,7 +77,7 @@ void CSheep::Render()
 
 		}
 	}
-	else {			// 양죽음
+	else if (animalForm == Form::item) {			// 양죽음
 		glBindVertexArray(BlockVAO);
 
 		GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용
