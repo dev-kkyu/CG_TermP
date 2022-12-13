@@ -47,10 +47,24 @@ void CChicken::Render()
 		GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform º¯¼ö¿¡ º¯È¯ °ª Àû¿ëÇÏ±â
 
-		for (int i = 0; i < 6; ++i) {
-			glBindTexture(GL_TEXTURE_2D, Texture[20]);		// ´ß¸Ó¸®±Í¿±´ç
-			glDrawArrays(GL_TRIANGLES, i * 6, 6);
-		}
+		//for (int i = 0; i < 6; ++i) {
+		//	glBindTexture(GL_TEXTURE_2D, Texture[20]);		// ´ß¸Ó¸®±Í¿±´ç
+		//	glDrawArrays(GL_TRIANGLES, i * 6, 6);
+		//}
+
+		glBindTexture(GL_TEXTURE_2D, Texture[17]);		
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		glBindTexture(GL_TEXTURE_2D, Texture[17]);		
+		glDrawArrays(GL_TRIANGLES, 6, 6);
+
+		glBindTexture(GL_TEXTURE_2D, Texture[17]);		
+		glDrawArrays(GL_TRIANGLES, 18, 6);
+
+		glBindTexture(GL_TEXTURE_2D, Texture[17]);		
+		glDrawArrays(GL_TRIANGLES, 30, 6);
+
+
 	}
 }
 

@@ -12,6 +12,8 @@
 #include "CSheepNOTUL.h"
 #include "CRice.h"
 #include "CWool.h"
+#include "CBirchTrunk.h"
+#include "CCloud.h"
 
 #include <set>
 
@@ -80,4 +82,14 @@ public:
 	int getpersonView();
 
 	void MakeTree(glm::vec3 position);
+	void MakeTree2(glm::vec3 position);
+
+	void MakeCloud(glm::vec3 position);
+	void MakeCloud2(glm::vec3 position);
+	void MakeCloud3(glm::vec3 position);
+	void MakeCloud4(glm::vec3 position);
+	
+	void MakeWorld();
+
+
 };

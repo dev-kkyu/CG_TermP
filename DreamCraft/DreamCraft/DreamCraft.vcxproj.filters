@@ -87,6 +87,11 @@
     </Filter>
     <Filter Include="GameObject\Block\Tree">
       <UniqueIdentifier>{3e915bac-f23a-4d88-84ef-26e5d739f660}</UniqueIdentifier>
+    <Filter Include="GameObject\Block\BirchTrunk">
+      <UniqueIdentifier>{f1b5735d-5b48-4c61-bf25-acadd42edfc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Block\Cloud">
+      <UniqueIdentifier>{40bede83-9353-4cb8-a2a2-c28c897d4eed}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +172,12 @@
     </ClCompile>
     <ClCompile Include="CFragments.cpp">
       <Filter>GameObject\Block\Fragments</Filter>
+    </ClCompile>
+    <ClCompile Include="CBirchTrunk.cpp">
+      <Filter>GameObject\Block\BirchTrunk</Filter>
+    </ClCompile>
+    <ClCompile Include="CCloud.cpp">
+      <Filter>GameObject\Block\Cloud</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -250,6 +261,12 @@
     </ClInclude>
     <ClInclude Include="CFragments.h">
       <Filter>GameObject\Block\Fragments</Filter>
+    </ClInclude>
+    <ClInclude Include="CBirchTrunk.h">
+      <Filter>GameObject\Block\BirchTrunk</Filter>
+    </ClInclude>
+    <ClInclude Include="CCloud.h">
+      <Filter>GameObject\Block\Cloud</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
