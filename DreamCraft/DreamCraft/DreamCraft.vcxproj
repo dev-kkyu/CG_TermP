@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{be9c95d7-05b3-4bcc-85d1-05092f7688f8}</ProjectGuid>
+    <ProjectGuid>{f21695bb-aefd-449a-892f-7bddce2bff1e}</ProjectGuid>
     <RootNamespace>DreamCraft</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -145,6 +145,8 @@
     <ClCompile Include="CRice.cpp" />
     <ClCompile Include="CSheep.cpp" />
     <ClCompile Include="CSheepNOTUL.cpp" />
+    <ClCompile Include="CSheep_NoTER.cpp" />
+    <ClCompile Include="CSheep_YesTER.cpp" />
     <ClCompile Include="CTree.cpp" />
     <ClCompile Include="CTreeTrunk.cpp" />
     <ClCompile Include="CWool.cpp" />
@@ -175,6 +177,8 @@
     <ClInclude Include="CRice.h" />
     <ClInclude Include="CSheep.h" />
     <ClInclude Include="CSheepNOTUL.h" />
+    <ClInclude Include="CSheep_NoTER.h" />
+    <ClInclude Include="CSheep_YesTER.h" />
     <ClInclude Include="CTree.h" />
     <ClInclude Include="CTreeTrunk.h" />
     <ClInclude Include="CWool.h" />

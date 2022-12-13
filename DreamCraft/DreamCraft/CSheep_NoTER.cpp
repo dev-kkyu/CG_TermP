@@ -3,7 +3,7 @@
 #include "CWorld.h"
 extern CWorld World;
 
-CSheep_NoTER::CSheep_NoTER(glm::vec3 Position) : CAnimal{ Position }
+CSheep_NoTER::CSheep_NoTER(glm::vec3 Position, Form animalForm) : CSheep{ Position, animalForm }
 {
 }
 

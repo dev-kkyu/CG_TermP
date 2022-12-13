@@ -14,107 +14,126 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="World">
-      <UniqueIdentifier>{c926d563-51fe-4a14-94ae-b3640fde5a3d}</UniqueIdentifier>
+      <UniqueIdentifier>{122449de-eeba-43a7-b526-69f6bd076d59}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject">
-      <UniqueIdentifier>{210014e2-a7b5-4468-8a6f-469f94b0a807}</UniqueIdentifier>
+      <UniqueIdentifier>{66c250c7-396b-4135-b7fe-5b01147e0f78}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject\Block">
-      <UniqueIdentifier>{fe5fc2d6-9889-48de-92b6-180031278680}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Player">
-      <UniqueIdentifier>{34a6a604-4f6c-47de-a545-69b38497411d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Block\Base">
-      <UniqueIdentifier>{47f1c92b-aede-4867-a83b-b8af7c9d9c4d}</UniqueIdentifier>
+      <UniqueIdentifier>{548fbfdd-0d64-4c13-bae6-9333558ae9a6}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject\Animal">
-      <UniqueIdentifier>{da44e1eb-63ca-48fe-9182-8f044f33237c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Animal\Cow">
-      <UniqueIdentifier>{ba0fb90b-53a1-4d08-8520-dff1bb444887}</UniqueIdentifier>
+      <UniqueIdentifier>{15b365cc-900a-49f8-99c5-1faa7531f0fd}</UniqueIdentifier>
     </Filter>
     <Filter Include="RobotParts">
-      <UniqueIdentifier>{1a54fd21-be3b-49b6-996b-4646440ba926}</UniqueIdentifier>
+      <UniqueIdentifier>{d7fcbb04-bab5-4a7c-ad05-86eec8ec8420}</UniqueIdentifier>
     </Filter>
-    <Filter Include="RobotParts\Arm">
-      <UniqueIdentifier>{96a50e07-8763-4832-9c46-9a883a914f9f}</UniqueIdentifier>
+    <Filter Include="GameObject\Block\Base">
+      <UniqueIdentifier>{ce562d65-b383-476f-9c94-e008d2923941}</UniqueIdentifier>
     </Filter>
-    <Filter Include="RobotParts\Body">
-      <UniqueIdentifier>{3fce438a-853d-4041-a0b7-4e059e754662}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="RobotParts\Head">
-      <UniqueIdentifier>{17929603-9012-4500-8462-356f99035aa9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="RobotParts\Leg">
-      <UniqueIdentifier>{133feefd-66c5-4fab-81d0-884f2a3b6e42}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="RobotParts\Nose">
-      <UniqueIdentifier>{03aad9ff-bc62-4066-aadf-328ce211d5cb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="RobotParts\Weapon">
-      <UniqueIdentifier>{7046fe4b-d11e-44ae-aad6-3ec8d5eef3de}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Animal\Pig">
-      <UniqueIdentifier>{f32524e0-332b-44cf-9e5a-ab6f8025f0cf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Animal\Sheep">
-      <UniqueIdentifier>{49d19146-0fdb-471e-abc7-d4359a81a4b3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Animal\Chicken">
-      <UniqueIdentifier>{a4c456ff-a1b7-404d-8a82-a87ad0f97219}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Block\Grass">
-      <UniqueIdentifier>{7256a908-6eab-448c-9d3c-ae35febf9d2b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Block\leaves">
-      <UniqueIdentifier>{32dd14f0-4b72-40e4-8599-ea0cd6b47b79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Block\TreeTrunk">
-      <UniqueIdentifier>{929338bf-ae82-48c2-bf0f-a8978f711a4b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Animal\SheepNOTUL">
-      <UniqueIdentifier>{92e48071-f01a-462d-8ae3-daf4b1396acb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Block\Rice">
-      <UniqueIdentifier>{68474742-9ab6-423c-951d-9bd5d79cabe5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Block\Wool">
-      <UniqueIdentifier>{7e6e82c8-0708-4e7a-8748-c1a0ec943936}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Block\Fragments">
-      <UniqueIdentifier>{4e253963-f8ff-494e-a9da-995410d0325e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject\Block\Tree">
-      <UniqueIdentifier>{3e915bac-f23a-4d88-84ef-26e5d739f660}</UniqueIdentifier>
     <Filter Include="GameObject\Block\BirchTrunk">
-      <UniqueIdentifier>{f1b5735d-5b48-4c61-bf25-acadd42edfc0}</UniqueIdentifier>
+      <UniqueIdentifier>{4912f5a7-b52d-4415-afc0-fea04e608108}</UniqueIdentifier>
     </Filter>
     <Filter Include="GameObject\Block\Cloud">
-      <UniqueIdentifier>{40bede83-9353-4cb8-a2a2-c28c897d4eed}</UniqueIdentifier>
+      <UniqueIdentifier>{6d19480b-afce-4a9c-9cf0-1d34045b8ad1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Block\Fragments">
+      <UniqueIdentifier>{88b5c1eb-d8d5-4868-8c40-f1d8891d03ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Block\Grass">
+      <UniqueIdentifier>{d6f26bc3-119b-4cef-9704-42b4fc44b948}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Block\Leaves">
+      <UniqueIdentifier>{0ff3f9e6-699c-429b-9681-2723c63a4794}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Block\Rice">
+      <UniqueIdentifier>{c410e659-5a1e-422f-abc7-c70978874939}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Block\Tree">
+      <UniqueIdentifier>{26c12399-7115-4fbe-a2ca-ac5d5b20c8fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Block\TreeTrunk">
+      <UniqueIdentifier>{be3daab4-7d30-49eb-a4d9-f69db4699244}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Block\Wool">
+      <UniqueIdentifier>{a6871ddc-731b-403c-ad59-8bccdac1dbc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RobotParts\Arm">
+      <UniqueIdentifier>{fad00db9-3f8c-4d0c-80bc-36ececedc500}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RobotParts\Body">
+      <UniqueIdentifier>{d18b09fb-cd32-404e-aae5-42061458481e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RobotParts\Head">
+      <UniqueIdentifier>{f5a7bc3e-7ae9-4471-99c1-3d41340f9eb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RobotParts\Nose">
+      <UniqueIdentifier>{2aac3038-07d2-4eaf-8ae2-030f3b373ed8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Player">
+      <UniqueIdentifier>{f4458d63-731e-4c9a-95e2-3b6ba40d0307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RobotParts\Leg">
+      <UniqueIdentifier>{b2e9dcb5-1fca-4cd0-9105-271dae7900e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RobotParts\Weapon">
+      <UniqueIdentifier>{12a5890b-d704-4691-87ea-086be4f5b30a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Animal\Chicken">
+      <UniqueIdentifier>{a3340364-3a80-4d60-943c-bc7f8169f97e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Animal\Cow">
+      <UniqueIdentifier>{c43746d2-2496-4a79-981a-ce688a639d58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Animal\Pig">
+      <UniqueIdentifier>{3ecf556c-e555-4885-a8f9-d737211c33a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Animal\Sheep">
+      <UniqueIdentifier>{ab6de8f2-915e-42b9-85ec-e1f1dc6309a9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DreamCraft.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="CBase.cpp">
-      <Filter>GameObject\Block\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="CPlayer.cpp">
-      <Filter>GameObject\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="CGameObject.cpp">
-      <Filter>GameObject</Filter>
+    <ClCompile Include="CAnimal.cpp">
+      <Filter>GameObject\Animal</Filter>
     </ClCompile>
     <ClCompile Include="CBlock.cpp">
       <Filter>GameObject\Block</Filter>
     </ClCompile>
-    <ClCompile Include="CAnimal.cpp">
-      <Filter>GameObject\Animal</Filter>
+    <ClCompile Include="CBase.cpp">
+      <Filter>GameObject\Block\Base</Filter>
     </ClCompile>
-    <ClCompile Include="CCow.cpp">
-      <Filter>GameObject\Animal\Cow</Filter>
+    <ClCompile Include="CBirchTrunk.cpp">
+      <Filter>GameObject\Block\BirchTrunk</Filter>
+    </ClCompile>
+    <ClCompile Include="CCloud.cpp">
+      <Filter>GameObject\Block\Cloud</Filter>
+    </ClCompile>
+    <ClCompile Include="CFragments.cpp">
+      <Filter>GameObject\Block\Fragments</Filter>
+    </ClCompile>
+    <ClCompile Include="CGrass.cpp">
+      <Filter>GameObject\Block\Grass</Filter>
+    </ClCompile>
+    <ClCompile Include="CLeaves.cpp">
+      <Filter>GameObject\Block\Leaves</Filter>
+    </ClCompile>
+    <ClCompile Include="CRice.cpp">
+      <Filter>GameObject\Block\Rice</Filter>
+    </ClCompile>
+    <ClCompile Include="CTree.cpp">
+      <Filter>GameObject\Block\Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="CTreeTrunk.cpp">
+      <Filter>GameObject\Block\TreeTrunk</Filter>
+    </ClCompile>
+    <ClCompile Include="CWool.cpp">
+      <Filter>GameObject\Block\Wool</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameObject.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Arm.cpp">
       <Filter>RobotParts\Arm</Filter>
@@ -134,11 +153,20 @@
     <ClCompile Include="RobotParts.cpp">
       <Filter>RobotParts</Filter>
     </ClCompile>
+    <ClCompile Include="CWorld.cpp">
+      <Filter>World</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>GameObject\Player</Filter>
+    </ClCompile>
     <ClCompile Include="Weapon.cpp">
       <Filter>RobotParts\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="CChicken.cpp">
       <Filter>GameObject\Animal\Chicken</Filter>
+    </ClCompile>
+    <ClCompile Include="CCow.cpp">
+      <Filter>GameObject\Animal\Cow</Filter>
     </ClCompile>
     <ClCompile Include="CPig.cpp">
       <Filter>GameObject\Animal\Pig</Filter>
@@ -146,61 +174,55 @@
     <ClCompile Include="CSheep.cpp">
       <Filter>GameObject\Animal\Sheep</Filter>
     </ClCompile>
-    <ClCompile Include="CGrass.cpp">
-      <Filter>GameObject\Block\Grass</Filter>
+    <ClCompile Include="CSheep_NoTER.cpp">
+      <Filter>GameObject\Animal\Sheep</Filter>
     </ClCompile>
-    <ClCompile Include="CLeaves.cpp">
-      <Filter>GameObject\Block\leaves</Filter>
-    </ClCompile>
-    <ClCompile Include="CTreeTrunk.cpp">
-      <Filter>GameObject\Block\TreeTrunk</Filter>
-    </ClCompile>
-    <ClCompile Include="CTree.cpp">
-      <Filter>GameObject\Block\Tree</Filter>
+    <ClCompile Include="CSheep_YesTER.cpp">
+      <Filter>GameObject\Animal\Sheep</Filter>
     </ClCompile>
     <ClCompile Include="CSheepNOTUL.cpp">
-      <Filter>GameObject\Animal\SheepNOTUL</Filter>
-    </ClCompile>
-    <ClCompile Include="CWorld.cpp">
-      <Filter>World</Filter>
-    </ClCompile>
-    <ClCompile Include="CRice.cpp">
-      <Filter>GameObject\Block\Rice</Filter>
-    </ClCompile>
-    <ClCompile Include="CWool.cpp">
-      <Filter>GameObject\Block\Wool</Filter>
-    </ClCompile>
-    <ClCompile Include="CFragments.cpp">
-      <Filter>GameObject\Block\Fragments</Filter>
-    </ClCompile>
-    <ClCompile Include="CBirchTrunk.cpp">
-      <Filter>GameObject\Block\BirchTrunk</Filter>
-    </ClCompile>
-    <ClCompile Include="CCloud.cpp">
-      <Filter>GameObject\Block\Cloud</Filter>
+      <Filter>GameObject\Animal\Sheep</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CWorld.h">
-      <Filter>World</Filter>
-    </ClInclude>
-    <ClInclude Include="CBase.h">
-      <Filter>GameObject\Block\Base</Filter>
+    <ClInclude Include="CAnimal.h">
+      <Filter>GameObject\Animal</Filter>
     </ClInclude>
     <ClInclude Include="CBlock.h">
       <Filter>GameObject\Block</Filter>
     </ClInclude>
-    <ClInclude Include="CPlayer.h">
-      <Filter>GameObject\Player</Filter>
+    <ClInclude Include="CBase.h">
+      <Filter>GameObject\Block\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="CBirchTrunk.h">
+      <Filter>GameObject\Block\BirchTrunk</Filter>
+    </ClInclude>
+    <ClInclude Include="CCloud.h">
+      <Filter>GameObject\Block\Cloud</Filter>
+    </ClInclude>
+    <ClInclude Include="CFragments.h">
+      <Filter>GameObject\Block\Fragments</Filter>
+    </ClInclude>
+    <ClInclude Include="CGrass.h">
+      <Filter>GameObject\Block\Grass</Filter>
+    </ClInclude>
+    <ClInclude Include="CLeaves.h">
+      <Filter>GameObject\Block\Leaves</Filter>
+    </ClInclude>
+    <ClInclude Include="CRice.h">
+      <Filter>GameObject\Block\Rice</Filter>
+    </ClInclude>
+    <ClInclude Include="CTree.h">
+      <Filter>GameObject\Block\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="CTreeTrunk.h">
+      <Filter>GameObject\Block\TreeTrunk</Filter>
+    </ClInclude>
+    <ClInclude Include="CWool.h">
+      <Filter>GameObject\Block\Wool</Filter>
     </ClInclude>
     <ClInclude Include="CGameObject.h">
       <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="CAnimal.h">
-      <Filter>GameObject\Animal</Filter>
-    </ClInclude>
-    <ClInclude Include="CCow.h">
-      <Filter>GameObject\Animal\Cow</Filter>
     </ClInclude>
     <ClInclude Include="Arm.h">
       <Filter>RobotParts\Arm</Filter>
@@ -220,14 +242,26 @@
     <ClInclude Include="RobotParts.h">
       <Filter>RobotParts</Filter>
     </ClInclude>
-    <ClInclude Include="Weapon.h">
-      <Filter>RobotParts\Weapon</Filter>
+    <ClInclude Include="CWorld.h">
+      <Filter>World</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>GameObject\Player</Filter>
     </ClInclude>
     <ClInclude Include="Header.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>RobotParts\Weapon</Filter>
+    </ClInclude>
     <ClInclude Include="CChicken.h">
       <Filter>GameObject\Animal\Chicken</Filter>
+    </ClInclude>
+    <ClInclude Include="CCow.h">
+      <Filter>GameObject\Animal\Cow</Filter>
     </ClInclude>
     <ClInclude Include="CPig.h">
       <Filter>GameObject\Animal\Pig</Filter>
@@ -235,38 +269,14 @@
     <ClInclude Include="CSheep.h">
       <Filter>GameObject\Animal\Sheep</Filter>
     </ClInclude>
-    <ClInclude Include="stb_image.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="CSheep_NoTER.h">
+      <Filter>GameObject\Animal\Sheep</Filter>
     </ClInclude>
-    <ClInclude Include="CGrass.h">
-      <Filter>GameObject\Block\Grass</Filter>
-    </ClInclude>
-    <ClInclude Include="CLeaves.h">
-      <Filter>GameObject\Block\leaves</Filter>
-    </ClInclude>
-    <ClInclude Include="CTreeTrunk.h">
-      <Filter>GameObject\Block\TreeTrunk</Filter>
-    </ClInclude>
-    <ClInclude Include="CTree.h">
-      <Filter>GameObject\Block\Tree</Filter>
+    <ClInclude Include="CSheep_YesTER.h">
+      <Filter>GameObject\Animal\Sheep</Filter>
     </ClInclude>
     <ClInclude Include="CSheepNOTUL.h">
-      <Filter>GameObject\Animal\SheepNOTUL</Filter>
-    </ClInclude>
-    <ClInclude Include="CRice.h">
-      <Filter>GameObject\Block\Rice</Filter>
-    </ClInclude>
-    <ClInclude Include="CWool.h">
-      <Filter>GameObject\Block\Wool</Filter>
-    </ClInclude>
-    <ClInclude Include="CFragments.h">
-      <Filter>GameObject\Block\Fragments</Filter>
-    </ClInclude>
-    <ClInclude Include="CBirchTrunk.h">
-      <Filter>GameObject\Block\BirchTrunk</Filter>
-    </ClInclude>
-    <ClInclude Include="CCloud.h">
-      <Filter>GameObject\Block\Cloud</Filter>
+      <Filter>GameObject\Animal\Sheep</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
