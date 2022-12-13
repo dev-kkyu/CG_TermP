@@ -15,13 +15,18 @@ uniform vec3 viewPos;		//--- 카메라 위치
 uniform sampler2D outTexture;	//--- 텍스처 샘플러
 
 uniform int selectColor;	//--- 텍스처를 그릴지 색상을 그릴지 선택(기본-색상)
+uniform int normalOption;
 
 void main()
 {
 	float ambientLight = 0.5;										//--- 주변 조명 계수: 0.0 ≤ ambientLight ≤ 1.
 	vec3 ambient = ambientLight * lightColor;						//--- 주변 조명 값
 
-	vec3 normalVector = normalize (Normal);							//--- 노말값을 정규화한다.
+	vec3 normalVector;
+	if(1 == normalOption)
+		normalVector = normalize(-FragPos);							//--- 노말값을 정규화한다.
+	else
+		normalVector = normalize (Normal);							//--- 노말값을 정규화한다.
 	vec3 lightDir = normalize (lightPos - FragPos);					//--- 표면과 조명의 위치로 조명의 방향을 결정한다.
 
 	float diffuseLight = max (dot (normalVector, lightDir), 0.0);	//--- N과 L의 내적 값으로 강도 조절 (음의 값을 가질 수 없게 한다.)

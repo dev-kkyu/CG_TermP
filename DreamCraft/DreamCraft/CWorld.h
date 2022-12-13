@@ -31,6 +31,7 @@ struct Item {
 
 class CWorld
 {
+	GLUquadricObj* qobj;			// 실린더 생성하자
 private:
 	CPlayer Player;
 	glm::vec3 PlayerPos;

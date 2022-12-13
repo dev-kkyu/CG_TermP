@@ -78,7 +78,16 @@ void main(int argc, char** argv) //--- 윈도우 출력하고 콜백함수 설정
 	InitBuffer();	// VAO, VBO 생성
 	InitTexture();
 
-	glEnable(GL_BLEND);		// 블랜딩 활성화
+	glEnable(GL_DEPTH_TEST);	//은면제거
+	glEnable(GL_DITHER);        // 표면을 매끄럽게
+	glEnable(GL_CULL_FACE);     // 컬링
+	glEnable(GL_LINE_SMOOTH);   // 안티 앨리어싱
+	glEnable(GL_POLYGON_SMOOTH);// 안티 앨리어싱
+	glShadeModel(GL_SMOOTH);    // 부드러운 음영을 수행합니다.
+
+	glEnable(GL_BLEND);			// 블렌딩 기능을 활성화한다.
+	//glEnable(GL_CULL_FACE);		// 뒷면 제거
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	//지수를 원본 컬러 벡터 Csource의 알파값으로 설정
 
 	glutDisplayFunc(drawScene); //--- 출력 콜백 함수
 	glutReshapeFunc(Reshape);
@@ -391,7 +400,7 @@ void InitTexture()
 			break;
 
 
-		
+
 
 		case 28:
 			filename = "텍스처/나무/나무옆통2.png";		// 나무옆통
@@ -407,15 +416,15 @@ void InitTexture()
 			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
-		//case 30:
-		//	filename = "텍스처/나무/나무ㅅ잎2.png";	// 나무잎파리
-		//	data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
-		//	//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-		//	glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-		//	stbi_image_free(data);
-		//	break;
+			//case 30:
+			//	filename = "텍스처/나무/나무ㅅ잎2.png";	// 나무잎파리
+			//	data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			//	//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			//	glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			//	stbi_image_free(data);
+			//	break;
 
-		// 벼
+			// 벼
 		case 31:
 			filename = "텍스처/벼.png";	// 벼
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
@@ -436,26 +445,7 @@ void InitTexture()
 
 GLvoid drawScene() //--- 콜백 함수: 그리기 콜백 함수
 {
-	glEnable(GL_DEPTH_TEST);	//은면제거
-	glEnable(GL_DITHER);        // 표면을 매끄럽게
-	glEnable(GL_CULL_FACE);     // 컬링
-	glEnable(GL_LINE_SMOOTH);   // 안티 앨리어싱
-	glEnable(GL_POLYGON_SMOOTH);// 안티 앨리어싱
-	glShadeModel(GL_SMOOTH);    // 부드러운 음영을 수행합니다.
-
-	glEnable(GL_BLEND);			// 블렌딩 기능을 활성화한다.
-	glEnable(GL_CULL_FACE);		// 뒷면 제거
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	//지수를 원본 컬러 벡터 Csource의 알파값으로 설정
-
-	glClearColor(0.f, 0.f, 0.f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	//조명 색상과 위치
-	GLuint lightColorLocation = glGetUniformLocation(shaderID, "lightColor");	//--- lightColor 값 전달: (1.0, 1.0, 1.0) 백색
-	glUniform3f(lightColorLocation, 1.f, 1.f, 1.f);
-	GLuint lightPosLocation = glGetUniformLocation(shaderID, "lightPos"); //--- lightPos 값 전달: (0.0, 0.0, 5.0);
-	glUniform3f(lightPosLocation, 0.0, 10.0, 50.0);
-
 
 	World.Render();
 

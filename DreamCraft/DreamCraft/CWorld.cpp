@@ -655,6 +655,7 @@ void CWorld::insertObject(const int& ObjectType, const glm::vec3& ObjectPos)
 
 void CWorld::Initialize()
 {
+	qobj = gluNewQuadric();		// 실린더 객체 생성
 	MakeWorld();
 }
 
@@ -700,6 +701,64 @@ void CWorld::FixedUpdate()
 
 void CWorld::Render()
 {
+	// 태양 표현
+	{
+		glClearColor(0.5f, 1.f, 1.f, 1.0f);					// 기본 하늘색은 하늘색
+
+		//조명 색상과 위치
+		GLuint lightColorLocation = glGetUniformLocation(shaderID, "lightColor");	//--- lightColor 값 전달: (1.0, 1.0, 1.0) 백색
+		glUniform3f(lightColorLocation, 1.f, 1.f, 1.f);
+		GLuint lightPosLocation = glGetUniformLocation(shaderID, "lightPos"); //--- lightPos 값 전달: (0.0, 0.0, 5.0);
+		glUniform3f(lightPosLocation, 0.0, 50.0, 0.0);
+
+		glBindVertexArray(BlockVAO);
+
+		GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 색상 사용
+		GLuint objectColorLocation = glGetUniformLocation(shaderID, "objectColor");	//--- 색상 사용
+		glUniform1i(selectColorLocation, 0);
+		glUniform4f(objectColorLocation, 1, 1, 1, 1);
+
+		glm::mat4 change = glm::translate(glm::mat4(1.f), glm::vec3(0, 55, 0)) * glm::scale(glm::mat4(1.f), glm::vec3(10, 0.1, 10));
+
+		GLuint model = glGetUniformLocation(shaderID, "modelTransform");
+		glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(change));
+
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+	}
+
+
+	// 하늘 표현식입니다. 나는 천재
+	{
+		GLuint normalOption = glGetUniformLocation(shaderID, "normalOption");
+		GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 색상 사용
+		GLuint objectColorLocation = glGetUniformLocation(shaderID, "objectColor");	//--- 색상 사용
+		GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
+		glDisable(GL_CULL_FACE);
+		glUniform1i(normalOption, 1);
+		glUniform1i(selectColorLocation, 0);
+		glm::mat4 Rotate = glm::rotate(glm::mat4(1.f), glm::radians(-90.f), glm::vec3(1, 0, 0));
+		glm::mat4 change;
+
+		change = glm::translate(glm::mat4(1.f), glm::vec3(0, -40, 0)) * Rotate;
+		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(change));
+		glUniform4f(objectColorLocation, 1, 1, 1, 0.2);
+		gluCylinder(qobj, 110.0, 110.0, 80.0, 100, 8);
+
+		change = glm::translate(glm::mat4(1.f), glm::vec3(0, -30, 0)) * Rotate;
+		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(change));
+		glUniform4f(objectColorLocation, 1, 1, 1, 0.2);
+		gluCylinder(qobj, 100.0, 100.0, 60.0, 100, 8);
+
+		change = glm::translate(glm::mat4(1.f), glm::vec3(0, -20, 0)) * Rotate;
+		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(change));
+		glUniform4f(objectColorLocation, 1, 1, 1, 0.2);
+		gluCylinder(qobj, 90.0, 90.0, 40.0, 100, 8);
+
+		glUniform1i(normalOption, 0);
+		glEnable(GL_CULL_FACE);
+	}
+
+
 	Camera();
 
 	for (auto Object : Objects) {
