@@ -72,4 +72,8 @@ public:
 	void MakeCloud2(glm::vec3 position);
 	void MakeCloud3(glm::vec3 position);
 	void MakeCloud4(glm::vec3 position);
+	
+	void MakeWorld();
+
+
 };

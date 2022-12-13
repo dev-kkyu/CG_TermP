@@ -1,6 +1,6 @@
 ﻿#include "CWorld.h"
 
-CWorld::CWorld() : Player{ CPlayer{glm::vec3(0.f, 2.f, 0.f)} }, PlayerPos{ glm::vec3(0.f, 2.f, 0.f) },
+CWorld::CWorld() : Player{ CPlayer{glm::vec3(0.f, 10.f, 0.f)} }, PlayerPos{ glm::vec3(0.f, 10.f, 0.f) },
 isUp{ false }, isDown{ false }, isLeft{ false }, isRight{ false }, isJump{ 0 }, personView{ 1 },
 planToCreateObj{ 기본흙 },
 VELOCITY{ 0 }, first_VEL{ 25 }, MASS{ 10 }
@@ -598,26 +598,7 @@ void CWorld::addNewObject(int ObjectType)
 
 void CWorld::Initialize()
 {
-	// 바닥
-	for (int i = -25; i <= 24; ++i)
-		for (int j = -25; j <= 24; ++j)
-			Objects.insert(new CGrass{ glm::vec3{i, 0, j} });
-	// 바닥 아래
-	for (int k = -1; k > -5; --k)
-		for (int i = -25; i <= 24; ++i)
-			for (int j = -25; j <= 24; ++j)
-				Objects.insert(new CBase{ glm::vec3{i, k, j} });
-
-	Objects.insert(new CSheep{ glm::vec3(3,1,3) });
-	Objects.insert(new CPig{ glm::vec3(-3,1,3) });
-	Objects.insert(new CCow{ glm::vec3(5,1,-3) });
-	Objects.insert(new CChicken{ glm::vec3(3,1,-6) });
-
-	MakeCloud(glm::vec3(0, 0, 0));
-	MakeCloud2(glm::vec3(8, 0, -4));
-	MakeCloud3(glm::vec3(10, 0, -10));
-	MakeCloud4(glm::vec3(-5, 0, -8));
-
+	MakeWorld();
 
 }
 
@@ -683,7 +664,7 @@ int CWorld::getpersonView()
 
 void CWorld::MakeTree(glm::vec3 position)
 {
-	float x{ position.x }, y{ position.y }, z{ position.z };
+	float x{ position.x }, y{ position.y+1 }, z{ position.z };
 
 	for (int i = 0; i < 4; ++i)
 		Objects.insert(new CTreeTrunk{ glm::vec3(x,y + i,z) });
@@ -720,7 +701,7 @@ void CWorld::MakeTree(glm::vec3 position)
 
 void CWorld::MakeTree2(glm::vec3 position)
 {
-	float x{ position.x }, y{ position.y }, z{ position.z };
+	float x{ position.x }, y{ position.y+1 }, z{ position.z };
 
 	for (int i = 0; i < 5; ++i)
 		Objects.insert(new CBirchTrunk{ glm::vec3(x,y + i,z) });
@@ -761,7 +742,6 @@ void CWorld::MakeCloud(glm::vec3 position)
 
 }
 
-
 void CWorld::MakeCloud2(glm::vec3 position)
 {
 	float x{ position.x }, y{ position.y }, z{ position.z };
@@ -797,7 +777,6 @@ void CWorld::MakeCloud3(glm::vec3 position)
 
 }
 
-
 void CWorld::MakeCloud4(glm::vec3 position)
 {
 	float x{ position.x }, y{ position.y }, z{ position.z };
@@ -814,6 +793,111 @@ void CWorld::MakeCloud4(glm::vec3 position)
 
 	for (int i = 1; i < 4; ++i)
 		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z + 3) });
+
+}
+
+void CWorld::MakeWorld()
+{
+
+	// 바닥 아래
+	for (int k = -1; k > -5; --k)
+		for (int i = -25; i <= 24; ++i)
+			for (int j = -25; j <= 24; ++j)
+				Objects.insert(new CBase{ glm::vec3{i, k, j} });
+
+	// 바닥 0
+	for (int i = -25; i <= 24; ++i)
+		for (int j = -25; j <= 24; ++j) {
+			if (i >= -7 && i <= 23 && j >= -24 && j <= 5)
+				Objects.insert(new CGrass{ glm::vec3{i, 0, j} });
+			else
+				Objects.insert(new CBase{ glm::vec3{i, 0, j} });
+		}
+
+	// 바닥 1
+	for (int i = -25; i <= 24; ++i)
+		for (int j = -25; j <= 24; ++j) {
+			if (!(i >= -7 && i <= 23 && j >= -24 && j <= 5)) {
+				if (i >= -7 && i <= 24 && j == -25)
+					Objects.insert(new CGrass{ glm::vec3{i, 1, j} });
+				else if (i == 24 && j >= -25 && j <= 5)
+					Objects.insert(new CGrass{ glm::vec3{i, 1, j} });
+				else if (i >= -24 && i <= -6 && j >= -24 && j <= 10)
+					Objects.insert(new CGrass{ glm::vec3{i, 1, j} });
+				else if (i >= -7&& i <= 24 && j >= 5 && j <= 10)
+					Objects.insert(new CGrass{ glm::vec3{i, 1, j} });
+				else {
+					Objects.insert(new CBase{ glm::vec3{i, 1, j} });
+					Objects.insert(new CGrass{ glm::vec3{i, 2, j} });
+				}
+			}
+		}
+
+
+	
+	MakeTree(glm::vec3(-7, 0, - 24));
+	MakeTree(glm::vec3(-8, 2, -25));
+	MakeTree(glm::vec3(23, 0, -9));
+	MakeTree(glm::vec3(20, 0, 0));
+	MakeTree(glm::vec3(16, 0, -19));
+	MakeTree(glm::vec3(11, 0, -22));
+	MakeTree(glm::vec3(23, 0, -23));
+	MakeTree(glm::vec3(21, 0, -16));
+	MakeTree(glm::vec3(8, 0, -5));
+	MakeTree(glm::vec3(-23, 1, 6));
+	MakeTree(glm::vec3(-12, 1, -9));
+	MakeTree(glm::vec3(-20, 2, 21));
+	MakeTree(glm::vec3(-3, 2, 14));
+	MakeTree(glm::vec3(5, 2, 22));
+	MakeTree(glm::vec3(21, 2, 17));
+	MakeTree(glm::vec3(23, 2, 23));
+
+	MakeTree2(glm::vec3(-14, 2, 14));
+	MakeTree2(glm::vec3(-18, 1, -23));
+	MakeTree2(glm::vec3(-25, 1, -19));
+	MakeTree2(glm::vec3(-25, 2, -19	));
+	MakeTree2(glm::vec3(-24, 1, -18));
+	MakeTree2(glm::vec3(-25, 2, -19));
+	MakeTree2(glm::vec3(-21, 1, -6));
+	MakeTree2(glm::vec3(2, 1, 10));
+	MakeTree2(glm::vec3(23, 1, 7));
+	MakeTree2(glm::vec3(16, 2, 22));
+
+
+
+
+
+
+
+
+
+	//Objects.insert(new CSheep{ glm::vec3(3,1+1,3) });
+	//Objects.insert(new CPig{ glm::vec3(-3,1+1,3) });
+	//Objects.insert(new CCow{ glm::vec3(5,1+2,-3) });
+	//Objects.insert(new CChicken{ glm::vec3(3,1+3,-6) });
+
+	MakeCloud(glm::vec3(-25, 0, -25));
+	MakeCloud2(glm::vec3(-25, 0, -16));
+	MakeCloud3(glm::vec3(-20, 0, -10));
+	MakeCloud4(glm::vec3(-15, 0, -8));
+
+	MakeCloud(glm::vec3(-23, 0, 3));
+	MakeCloud2(glm::vec3(-19, 0, 14));
+	MakeCloud3(glm::vec3(-10, 0, 10));
+	MakeCloud4(glm::vec3(-16, 0, 23));
+
+	MakeCloud(glm::vec3(3, 0, 16));
+	MakeCloud2(glm::vec3(18, 0, 4));
+	MakeCloud3(glm::vec3(10, 0, 10));
+	MakeCloud4(glm::vec3(26, 0, 18));
+	MakeCloud4(glm::vec3(7, 0, 24));
+
+	MakeCloud(glm::vec3(6, 0, -3));
+	MakeCloud2(glm::vec3(8, 0, -10));
+	MakeCloud2(glm::vec3(18, 0, -14));
+	MakeCloud3(glm::vec3(11, 0, -24));
+	MakeCloud4(glm::vec3(25, 0, -18));
+	
 
 }
 
