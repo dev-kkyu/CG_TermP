@@ -140,6 +140,9 @@
     <ClCompile Include="CBirchTrunk.cpp" />
     <ClCompile Include="CBlock.cpp" />
     <ClCompile Include="CChicken.cpp" />
+    <ClCompile Include="CChickenBody.cpp" />
+    <ClCompile Include="CChickenHead.cpp" />
+    <ClCompile Include="CChickenLeg.cpp" />
     <ClCompile Include="CCloud.cpp" />
     <ClCompile Include="CCow.cpp" />
     <ClCompile Include="CFragments.cpp" />
@@ -173,6 +176,9 @@
     <ClInclude Include="CBirchTrunk.h" />
     <ClInclude Include="CBlock.h" />
     <ClInclude Include="CChicken.h" />
+    <ClInclude Include="CChickenBody.h" />
+    <ClInclude Include="CChickenHead.h" />
+    <ClInclude Include="CChickenLeg.h" />
     <ClInclude Include="CCloud.h" />
     <ClInclude Include="CCow.h" />
     <ClInclude Include="CFragments.h" />

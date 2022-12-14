@@ -103,6 +103,9 @@
     <Filter Include="AnimalParts\Body">
       <UniqueIdentifier>{bbbbe034-ac0c-4a0d-b9a1-818685ee44a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AnimalParts\ChickenParts">
+      <UniqueIdentifier>{b2bc730e-2a7e-44de-a33f-03d55d878988}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DreamCraft.cpp">
@@ -197,6 +200,15 @@
     </ClCompile>
     <ClCompile Include="AnimalHead.cpp">
       <Filter>AnimalParts\Head</Filter>
+    </ClCompile>
+    <ClCompile Include="CChickenBody.cpp">
+      <Filter>AnimalParts\ChickenParts</Filter>
+    </ClCompile>
+    <ClCompile Include="CChickenHead.cpp">
+      <Filter>AnimalParts\ChickenParts</Filter>
+    </ClCompile>
+    <ClCompile Include="CChickenLeg.cpp">
+      <Filter>AnimalParts\ChickenParts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -295,6 +307,15 @@
     </ClInclude>
     <ClInclude Include="AnimalHead.h">
       <Filter>AnimalParts\Head</Filter>
+    </ClInclude>
+    <ClInclude Include="CChickenBody.h">
+      <Filter>AnimalParts\ChickenParts</Filter>
+    </ClInclude>
+    <ClInclude Include="CChickenHead.h">
+      <Filter>AnimalParts\ChickenParts</Filter>
+    </ClInclude>
+    <ClInclude Include="CChickenLeg.h">
+      <Filter>AnimalParts\ChickenParts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
