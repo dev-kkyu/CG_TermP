@@ -792,7 +792,7 @@ void CWorld::Render()
 
 
 	// 인벤토리 표시
-	viewInventory();
+	//viewInventory();
 }
 
 void CWorld::Release()
@@ -921,7 +921,7 @@ void CWorld::MakeTree(glm::vec3 position)
 
 void CWorld::MakeTree2(glm::vec3 position)
 {
-	float x{ position.x }, y{ position.y+1 }, z{ position.z };
+	float x{ position.x }, y{ position.y }, z{ position.z };
 
 	for (int i = 0; i < 5; ++i)
 		Objects.insert(new CBirchTrunk{ glm::vec3(x,y + i,z) });
