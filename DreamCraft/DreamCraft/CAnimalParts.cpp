@@ -14,3 +14,8 @@ void CAnimalParts::setPos(glm::vec3 Position, float Direction)
 	this->Position = Position;
 	this->Direction = Direction;
 }
+
+void CAnimalParts::setType(int animalType)
+{
+	this->animalType = animalType;
+}
