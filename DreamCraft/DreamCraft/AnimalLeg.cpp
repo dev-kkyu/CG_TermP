@@ -1,6 +1,7 @@
 #include "AnimalLeg.h"
 
-AnimalLeg::AnimalLeg(glm::vec3 Position, int LocationX, int LocationZ) : CAnimalParts{ Position }, LocationX{ LocationX }, LocationZ{ LocationZ }, rotateValue(0.f), isrotDirec(false)
+AnimalLeg::AnimalLeg(glm::vec3 Position, int LocationX, int LocationZ, int animalType)
+	: CAnimalParts{ Position, animalType }, LocationX{ LocationX }, LocationZ{ LocationZ }, rotateValue(0.f), isrotDirec(false)
 {
 }
 

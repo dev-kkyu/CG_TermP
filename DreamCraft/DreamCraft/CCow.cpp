@@ -4,11 +4,11 @@ extern CWorld World;
 
 CCow::CCow(glm::vec3 Position, Form animalForm) 
 	: CAnimal{ Position , animalForm, 社 },
-	Head{ AnimalHead(Position) }, Body{AnimalBody{Position}},
-	Leg1{AnimalLeg{Position, -1, -1}},
-	Leg2{AnimalLeg{Position, -1, 1}},
-	Leg3{AnimalLeg{Position, 1, -1}},
-	Leg4{AnimalLeg{Position, 1, 1}}
+	Head{ AnimalHead(Position, 社) }, Body{AnimalBody{Position, 社}},
+	Leg1{AnimalLeg{Position, -1, -1, 社}},
+	Leg2{AnimalLeg{Position, -1, 1, 社}},
+	Leg3{AnimalLeg{Position, 1, -1, 社}},
+	Leg4{AnimalLeg{Position, 1, 1, 社}}
 {
 }
 

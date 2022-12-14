@@ -1,6 +1,6 @@
 #include "AnimalBody.h"
 
-AnimalBody::AnimalBody(glm::vec3 Position) : CAnimalParts{ Position }
+AnimalBody::AnimalBody(glm::vec3 Position, int animalType) : CAnimalParts{ Position, animalType }
 {
 }
 

@@ -1,6 +1,7 @@
 #include "CAnimalParts.h"
 
-CAnimalParts::CAnimalParts(glm::vec3 Position) : Unit{ glm::mat4(1.f) }, Change{ glm::mat4(1.f) }, Position{ Position }, Direction{ 0.f }
+CAnimalParts::CAnimalParts(glm::vec3 Position, int animalType)
+	: Unit{ glm::mat4(1.f) }, Change{ glm::mat4(1.f) }, animalType{ animalType }, Position{ Position }, Direction{ 0.f }
 {
 }
 

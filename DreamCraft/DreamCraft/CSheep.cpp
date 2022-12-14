@@ -5,11 +5,11 @@ extern CWorld World;
 
 CSheep::CSheep(glm::vec3 Position, Form animalForm, int animalType) 
 	: CAnimal{ Position, animalForm, animalType }, hairless{ false },
-	Head{ AnimalHead(Position) }, Body{ AnimalBody{Position} },
-	Leg1{ AnimalLeg{Position, -1, -1} },
-	Leg2{ AnimalLeg{Position, -1, 1} },
-	Leg3{ AnimalLeg{Position, 1, -1} },
-	Leg4{ AnimalLeg{Position, 1, 1} }
+	Head{ AnimalHead(Position, animalType) }, Body{ AnimalBody{Position, animalType} },
+	Leg1{ AnimalLeg{Position, -1, -1, animalType} },
+	Leg2{ AnimalLeg{Position, -1, 1, animalType} },
+	Leg3{ AnimalLeg{Position, 1, -1, animalType} },
+	Leg4{ AnimalLeg{Position, 1, 1, animalType} }
 {
 }
 

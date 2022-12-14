@@ -11,8 +11,10 @@ protected:
 
 	float Direction;
 
+	int animalType;
+
 public:
-	CAnimalParts(glm::vec3 Position);
+	CAnimalParts(glm::vec3 Position, int animalType);
 	virtual ~CAnimalParts();
 
 	virtual void Render() = 0;

@@ -4,11 +4,11 @@ extern CWorld World;
 
 CPig::CPig(glm::vec3 Position, Form animalForm) 
 	: CAnimal{ Position, animalForm, µÅÁö },
-	Head{ AnimalHead(Position) }, Body{ AnimalBody{Position} },
-	Leg1{ AnimalLeg{Position, -1, -1} },
-	Leg2{ AnimalLeg{Position, -1, 1} },
-	Leg3{ AnimalLeg{Position, 1, -1} },
-	Leg4{ AnimalLeg{Position, 1, 1} }
+	Head{ AnimalHead(Position, µÅÁö) }, Body{ AnimalBody{Position, µÅÁö} },
+	Leg1{ AnimalLeg{Position, -1, -1, µÅÁö} },
+	Leg2{ AnimalLeg{Position, -1, 1, µÅÁö} },
+	Leg3{ AnimalLeg{Position, 1, -1, µÅÁö} },
+	Leg4{ AnimalLeg{Position, 1, 1, µÅÁö} }
 {
 }
 

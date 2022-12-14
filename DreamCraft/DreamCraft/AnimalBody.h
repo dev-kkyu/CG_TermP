@@ -5,7 +5,7 @@ class AnimalBody : public CAnimalParts
 {
 
 public:
-	AnimalBody(glm::vec3 Position);
+	AnimalBody(glm::vec3 Position, int animalType);
 	~AnimalBody();
 
 	virtual void Render() override;
