@@ -36,7 +36,11 @@ struct Item {
 
 class CWorld
 {
+private:
+	bool gameStart;
+
 	GLUquadricObj* qobj;			// 실린더 생성하자
+
 private:
 	CPlayer Player;
 	glm::vec3 PlayerPos;

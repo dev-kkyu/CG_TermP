@@ -1,6 +1,6 @@
 ﻿#include "CWorld.h"
 
-CWorld::CWorld() : Player{ CPlayer{glm::vec3(0.f, 10.f, 0.f)} }, PlayerPos{ glm::vec3(0.f, 10.f, 0.f) },
+CWorld::CWorld() : Player{ CPlayer{glm::vec3(0.f, 10.f, 0.f)} }, PlayerPos{ glm::vec3(0.f, 10.f, 0.f) }, gameStart{ false },
 isUp{ false }, isDown{ false }, isLeft{ false }, isRight{ false }, isJump{ 0 }, personView{ 1 },
 planToCreateObj{ 기본흙 },
 VELOCITY{ 0 }, first_VEL{ 25 }, MASS{ 10 }
@@ -50,7 +50,7 @@ void CWorld::Keyboard(unsigned char key, int state)
 				planToCreateObj = ;
 				break;*/
 
-			// 나무
+				// 나무
 		case 'm':
 			planToCreateObj = 나무;
 			break;
@@ -107,6 +107,7 @@ void CWorld::Keyboard(unsigned char key, int state)
 			isRight = true;
 			break;
 		case ' ':
+			gameStart = true;
 			if (isJump == 0)
 				isJump = 1;
 			else if (isJump == 3)
@@ -664,38 +665,40 @@ void CWorld::Initialize()
 
 void CWorld::Update()
 {
-	for (auto Object : Objects) {
-		Object->Update();
-	}
-
-	static int time = 0;
-	if (mouseL_On) {										// 누르고 있으면 공격
-		if (0 == time) {
-			auto temp = getObject();
-			if (temp != Objects.end()) {
-				(*temp)->be_Attacked(Player.getWeapon());
-				if ((*temp)->isDead()) {
-					delete (*temp);
-					Objects.erase(temp);
-				}
-			}
-			time = 1;
+	if (gameStart) {
+		for (auto Object : Objects) {
+			Object->Update();
 		}
-		else
-			time = (time + 1) % 20;
+
+		static int time = 0;
+		if (mouseL_On) {										// 누르고 있으면 공격
+			if (0 == time) {
+				auto temp = getObject();
+				if (temp != Objects.end()) {
+					(*temp)->be_Attacked(Player.getWeapon());
+					if ((*temp)->isDead()) {
+						delete (*temp);
+						Objects.erase(temp);
+					}
+				}
+				time = 1;
+			}
+			else
+				time = (time + 1) % 20;
+		}
+		else {
+			time = 0;
+		}
+
+		Gravity();												// 자유낙하 + 점프
+
+		Move();													// 키 입력에 따른 충돌처리가 된 이동
+
+		if (isUp || isDown || isLeft || isRight || isJump)
+			Player.Update();
+
+		Player.Update(PlayerPos);
 	}
-	else {
-		time = 0;
-	}
-
-	Gravity();												// 자유낙하 + 점프
-
-	Move();													// 키 입력에 따른 충돌처리가 된 이동
-
-	if (isUp || isDown || isLeft || isRight || isJump)
-		Player.Update();
-
-	Player.Update(PlayerPos);
 }
 
 void CWorld::FixedUpdate()
@@ -704,6 +707,25 @@ void CWorld::FixedUpdate()
 
 void CWorld::Render()
 {
+	if (not gameStart) {
+		GLuint projectionLocation = glGetUniformLocation(shaderID, "projectionTransform"); //--- 투영 변환 값 설정
+		glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(glm::mat4(1.f)));
+
+		GLuint viewLocation = glGetUniformLocation(shaderID, "viewTransform"); //--- 뷰잉 변환 설정
+		glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(glm::mat4(1.f)));
+
+		GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
+		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(glm::mat4(1.f)));
+
+		GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용
+		glUniform1i(selectColorLocation, 2);
+
+		glBindVertexArray(InvenVAO);
+
+		glBindTexture(GL_TEXTURE_2D, Texture[49]);
+		glDrawArrays(GL_QUADS, 0, 4);
+	}
+
 	// 투영변환 - 원근투영
 	glm::mat4 projection = glm::perspective(glm::radians(45.f), (float)winWidth / (float)winHeight, 0.1f, 200.f);
 	GLuint projectionLocation = glGetUniformLocation(shaderID, "projectionTransform"); //--- 투영 변환 값 설정
@@ -792,7 +814,7 @@ void CWorld::Render()
 
 
 	// 인벤토리 표시
-	//viewInventory();
+	viewInventory();
 }
 
 void CWorld::Release()
@@ -952,13 +974,13 @@ void CWorld::MakeCloud(glm::vec3 position)
 		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z) });
 
 	for (int i = 1; i < 5; ++i)
-		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z+1) });
+		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z + 1) });
 
 	for (int i = 0; i < 5; ++i)
-		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z+2) });
+		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z + 2) });
 
 	for (int i = 3; i < 6; ++i)
-		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z+3) });
+		Objects.insert(new CCloud{ glm::vec3(x + i,y + sky,z + 3) });
 
 }
 
@@ -1044,7 +1066,7 @@ void CWorld::MakeWorld()
 					Objects.insert(new CGrass{ glm::vec3{i, 1, j} });
 				else if (i >= -24 && i <= -6 && j >= -24 && j <= 10)
 					Objects.insert(new CGrass{ glm::vec3{i, 1, j} });
-				else if (i >= -7&& i <= 24 && j >= 5 && j <= 10)
+				else if (i >= -7 && i <= 24 && j >= 5 && j <= 10)
 					Objects.insert(new CGrass{ glm::vec3{i, 1, j} });
 				else {
 					Objects.insert(new CBase{ glm::vec3{i, 1, j} });
@@ -1054,8 +1076,8 @@ void CWorld::MakeWorld()
 		}
 
 
-	
-	MakeTree(glm::vec3(-7, 0+1, - 24));
+
+	MakeTree(glm::vec3(-7, 0 + 1, -24));
 	MakeTree(glm::vec3(-8, 2 + 1, -25));
 	MakeTree(glm::vec3(23, 0 + 1, -9));
 	MakeTree(glm::vec3(20, 0 + 1, 0));
@@ -1075,7 +1097,7 @@ void CWorld::MakeWorld()
 	MakeTree2(glm::vec3(-14, 2 + 1, 14));
 	MakeTree2(glm::vec3(-18, 1 + 1, -23));
 	MakeTree2(glm::vec3(-25, 1 + 1, -19));
-	MakeTree2(glm::vec3(-25, 2 + 1, -19	));
+	MakeTree2(glm::vec3(-25, 2 + 1, -19));
 	MakeTree2(glm::vec3(-24, 1 + 1, -18));
 	MakeTree2(glm::vec3(-25, 2 + 1, -19));
 	MakeTree2(glm::vec3(-21, 1 + 1, -6));
@@ -1117,7 +1139,7 @@ void CWorld::MakeWorld()
 	MakeCloud2(glm::vec3(18, 0, -14));
 	MakeCloud3(glm::vec3(11, 0, -24));
 	MakeCloud4(glm::vec3(25, 0, -18));
-	
+
 
 }
 
