@@ -4,9 +4,10 @@
 class CRice : public CBlock
 {
 private:
+	bool isItem;
 
 public:
-	CRice(glm::vec3 Position);
+	CRice(glm::vec3 Position, bool isItem);
 	virtual ~CRice();			//소멸자도 버츄얼 해주는게 좋음
 
 	virtual void Initialize() override;		//생성될 때 할 일

@@ -23,11 +23,14 @@ struct Item {
 	int Pig;
 	int Sheep;
 	int SheepTer;
+	int Rice;
 
 	void show() {
 		cout << "닭 : " << Chicken << ", 소 : " << Cow << endl;
 		cout << "양 : " << Sheep << ", 돼지 : " << Pig << endl;
 		cout << "양털아이템 : " << SheepTer << endl;
+		cout << "벼 : " << Rice << endl;
+		cout << endl;
 	}
 };
 
@@ -60,6 +63,7 @@ private:
 public:
 	set<CGameObject*, CGameObjectCmp> Objects;
 	set<CGameObject*, CGameObjectCmp> died_Objects;
+	set<CGameObject*, CGameObjectCmp> mined_Objects;
 
 public:
 	CWorld();

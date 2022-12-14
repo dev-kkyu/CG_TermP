@@ -503,6 +503,7 @@ void CWorld::Move()
 	{
 		CBase ItemTemp(glm::vec3(round(PlayerPos.x), round(PlayerPos.y - 1), round(PlayerPos.z)));
 		auto itr = died_Objects.find(&ItemTemp);
+		auto itr2 = mined_Objects.find(&ItemTemp);
 		if (itr != died_Objects.end()) {
 			switch (((CAnimal*)*itr)->animalType) {
 			case 닭:
@@ -523,6 +524,13 @@ void CWorld::Move()
 			}
 			delete (*itr);
 			died_Objects.erase(itr);
+
+			itemCount.show();
+		}
+		else if (itr2 != mined_Objects.end()) {
+			++itemCount.Rice;
+			delete (*itr2);
+			mined_Objects.erase(itr2);
 
 			itemCount.show();
 		}
@@ -617,7 +625,7 @@ void CWorld::insertObject(const int& ObjectType, const glm::vec3& ObjectPos)
 		Objects.insert(new CGrass(ObjectPos));
 		break;
 	case 벼:
-		Objects.insert(new CRice(ObjectPos));
+		Objects.insert(new CRice(ObjectPos, false));
 		break;
 	case 양털:
 		Objects.insert(new CWool(ObjectPos));
@@ -777,6 +785,9 @@ void CWorld::Render()
 		Object->Render();
 	}
 	for (auto Object : died_Objects) {
+		Object->Render();
+	}
+	for (auto Object : mined_Objects) {
 		Object->Render();
 	}
 
