@@ -12,16 +12,39 @@ void AnimalBody::Render()
 {
 	glBindVertexArray(BlockVAO);
 
-	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");
-	glUniform1i(selectColorLocation, 0);	//--- 색상 사용(텍스쳐 적용할 때 바꿔주기
+	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용
+	glUniform1i(selectColorLocation, 1);
 
-	GLuint Color = glGetUniformLocation(shaderID, "objectColor");
-	glUniform4f(Color, 1, 1, 0, 1);
+	GLuint model = glGetUniformLocation(shaderID, "modelTransform");
+	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(Change));
 
-	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
+	switch (animalType)
+	{
+	case 소:
+		
+		for (int i = 0; i < 6; ++i) {
+			glBindTexture(GL_TEXTURE_2D, Texture[8]);
+			glDrawArrays(GL_TRIANGLES, i * 6, 6);
+		}
 
-	glDrawArrays(GL_TRIANGLES, 0, 36);
+		break;
+	case 돼지:
+
+		for (int i = 0; i < 6; ++i) {
+			glBindTexture(GL_TEXTURE_2D, Texture[12]);
+			glDrawArrays(GL_TRIANGLES, i * 6, 6);
+		}
+
+		break;
+	case 양:
+
+		for (int i = 0; i < 6; ++i) {
+			glBindTexture(GL_TEXTURE_2D, Texture[3]);
+			glDrawArrays(GL_TRIANGLES, i * 6, 6);
+		}
+
+		break;
+	}
 }
 
 void AnimalBody::Update()
