@@ -52,11 +52,6 @@ void CAnimal::be_Attacked(int Weapon)
 	}
 }
 
-//int CAnimal::getWeapon(int Weapon)		
-//{
-//	return Weapon;
-//}
-
 void CAnimal::Initialize()
 {
 	Hp = 10;
@@ -183,13 +178,17 @@ void CAnimal::FixedUpdate()
 	}
 
 	if (animalForm == Form::creature) {
-		World.Objects.erase(this);
+		CBase temp{ glm::vec3(round(float_Position.x), round(float_Position.y), round(float_Position.z)) };
+		if (World.Objects.find(&temp) == World.Objects.end()) {
 
-		Position.x = round(float_Position.x);
-		Position.y = round(float_Position.y);
-		Position.z = round(float_Position.z);
+			World.Objects.erase(this);
 
-		World.Objects.insert(this);
+			Position.x = round(float_Position.x);
+			Position.y = round(float_Position.y);
+			Position.z = round(float_Position.z);
+
+			World.Objects.insert(this);
+		}
 	}
 }
 

@@ -80,9 +80,6 @@ void CWorld::Keyboard(unsigned char key, int state)
 		case 'v':
 			planToCreateObj = 양;
 			break;
-		//case 'b':
-		//	planToCreateObj = 무너양;
-		//	break;
 
 			//시점
 		case 'f':
@@ -654,10 +651,6 @@ void CWorld::insertObject(const int& ObjectType, const glm::vec3& ObjectPos)
 	case 양:
 		Objects.insert(new CSheep(ObjectPos, Form::creature, 양));
 		break;
-	//case 무너양:
-	//	Objects.insert(new CSheepNOTUL(ObjectPos, Form::creature));
-	//	break;
-
 	}
 }
 
