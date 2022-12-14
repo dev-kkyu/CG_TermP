@@ -47,4 +47,4 @@ extern GLuint Texture[50];
 #define 소			212
 #define 닭			213
 #define 양			214
-#define 무너양		215
+#define 양털아이템	215

@@ -80,9 +80,9 @@ void CWorld::Keyboard(unsigned char key, int state)
 		case 'v':
 			planToCreateObj = 양;
 			break;
-		case 'b':
-			planToCreateObj = 무너양;
-			break;
+		//case 'b':
+		//	planToCreateObj = 무너양;
+		//	break;
 
 			//시점
 		case 'f':
@@ -515,8 +515,10 @@ void CWorld::Move()
 				++itemCount.Pig;
 				break;
 			case 양:
-			case 무너양:
 				++itemCount.Sheep;
+				break;
+			case 양털아이템:
+				++itemCount.SheepTer;
 				break;
 			}
 			delete (*itr);
@@ -642,11 +644,11 @@ void CWorld::insertObject(const int& ObjectType, const glm::vec3& ObjectPos)
 		Objects.insert(new CChicken(ObjectPos, Form::creature));
 		break;
 	case 양:
-		Objects.insert(new CSheep(ObjectPos, Form::creature));
+		Objects.insert(new CSheep(ObjectPos, Form::creature, 양));
 		break;
-	case 무너양:
-		Objects.insert(new CSheepNOTUL(ObjectPos, Form::creature));
-		break;
+	//case 무너양:
+	//	Objects.insert(new CSheepNOTUL(ObjectPos, Form::creature));
+	//	break;
 
 	}
 }
@@ -671,10 +673,10 @@ void CWorld::Update()
 			auto temp = getObject();
 			if (temp != Objects.end()) {
 				(*temp)->be_Attacked(Player.getWeapon());
-				//if ((*temp)->isDead()) {
-				//	delete (*temp);
-				//	Objects.erase(temp);
-				//}
+				if ((*temp)->isDead()) {
+					delete (*temp);
+					Objects.erase(temp);
+				}
 			}
 			time = 1;
 		}
@@ -739,20 +741,30 @@ void CWorld::Render()
 		glm::mat4 Rotate = glm::rotate(glm::mat4(1.f), glm::radians(-90.f), glm::vec3(1, 0, 0));
 		glm::mat4 change;
 
+		change = glm::translate(glm::mat4(1.f), glm::vec3(0, -50, 0)) * Rotate;
+		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(change));
+		glUniform4f(objectColorLocation, 1, 1, 1, 0.2);
+		gluCylinder(qobj, 165.0, 165.0, 100.0, 100, 10);
+
 		change = glm::translate(glm::mat4(1.f), glm::vec3(0, -40, 0)) * Rotate;
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(change));
 		glUniform4f(objectColorLocation, 1, 1, 1, 0.2);
-		gluCylinder(qobj, 110.0, 110.0, 80.0, 100, 8);
+		gluCylinder(qobj, 160.0, 160.0, 80.0, 100, 8);
 
 		change = glm::translate(glm::mat4(1.f), glm::vec3(0, -30, 0)) * Rotate;
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(change));
 		glUniform4f(objectColorLocation, 1, 1, 1, 0.2);
-		gluCylinder(qobj, 100.0, 100.0, 60.0, 100, 8);
+		gluCylinder(qobj, 155.0, 155.0, 60.0, 100, 6);
 
 		change = glm::translate(glm::mat4(1.f), glm::vec3(0, -20, 0)) * Rotate;
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(change));
 		glUniform4f(objectColorLocation, 1, 1, 1, 0.2);
-		gluCylinder(qobj, 90.0, 90.0, 40.0, 100, 8);
+		gluCylinder(qobj, 150.0, 150.0, 40.0, 100, 4);
+
+		change = glm::translate(glm::mat4(1.f), glm::vec3(0, -10, 0)) * Rotate;
+		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(change));
+		glUniform4f(objectColorLocation, 1, 1, 1, 0.2);
+		gluCylinder(qobj, 145.0, 145.0, 20.0, 100, 2);
 
 		glUniform1i(normalOption, 0);
 		glEnable(GL_CULL_FACE);

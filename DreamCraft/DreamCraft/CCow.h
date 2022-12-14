@@ -1,9 +1,19 @@
 #pragma once
 #include "CAnimal.h"
 
+#include "AnimalHead.h"
+#include "AnimalBody.h"
+#include "AnimalLeg.h"
+
 class CCow : public CAnimal
 {
 private:
+	AnimalHead Head;
+	AnimalBody Body;
+	AnimalLeg Leg1;
+	AnimalLeg Leg2;
+	AnimalLeg Leg3;
+	AnimalLeg Leg4;
 
 public:
 	CCow(glm::vec3 Position, Form animalForm);
@@ -11,5 +21,6 @@ public:
 
 	virtual void Release() override;			//¼Ò¸êµÉ ¶§ ÇÒ ÀÏ
 
+	virtual void Update() override;
 	virtual void Render() override;		// ÅÐ ±ðÀº ¾ç, ¾È ±ðÀº ¾ç
 };

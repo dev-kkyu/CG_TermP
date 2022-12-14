@@ -124,12 +124,18 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <StackReserveSize>
+      </StackReserveSize>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimalBody.cpp" />
+    <ClCompile Include="AnimalHead.cpp" />
+    <ClCompile Include="AnimalLeg.cpp" />
     <ClCompile Include="Arm.cpp" />
     <ClCompile Include="Body.cpp" />
     <ClCompile Include="CAnimal.cpp" />
+    <ClCompile Include="CAnimalParts.cpp" />
     <ClCompile Include="CBase.cpp" />
     <ClCompile Include="CBirchTrunk.cpp" />
     <ClCompile Include="CBlock.cpp" />
@@ -144,9 +150,6 @@
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CRice.cpp" />
     <ClCompile Include="CSheep.cpp" />
-    <ClCompile Include="CSheepNOTUL.cpp" />
-    <ClCompile Include="CSheep_NoTER.cpp" />
-    <ClCompile Include="CSheep_YesTER.cpp" />
     <ClCompile Include="CTree.cpp" />
     <ClCompile Include="CTreeTrunk.cpp" />
     <ClCompile Include="CWool.cpp" />
@@ -159,9 +162,13 @@
     <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimalBody.h" />
+    <ClInclude Include="AnimalHead.h" />
+    <ClInclude Include="AnimalLeg.h" />
     <ClInclude Include="Arm.h" />
     <ClInclude Include="Body.h" />
     <ClInclude Include="CAnimal.h" />
+    <ClInclude Include="CAnimalParts.h" />
     <ClInclude Include="CBase.h" />
     <ClInclude Include="CBirchTrunk.h" />
     <ClInclude Include="CBlock.h" />
@@ -176,9 +183,6 @@
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CRice.h" />
     <ClInclude Include="CSheep.h" />
-    <ClInclude Include="CSheepNOTUL.h" />
-    <ClInclude Include="CSheep_NoTER.h" />
-    <ClInclude Include="CSheep_YesTER.h" />
     <ClInclude Include="CTree.h" />
     <ClInclude Include="CTreeTrunk.h" />
     <ClInclude Include="CWool.h" />

@@ -34,11 +34,6 @@ void CBlock::be_Attacked(int Weapon)
 	Color = Color * (Hp / 10.f);
 	isfragments = true;
 
-	if (isDead()) {
-		World.Objects.erase(this);
-		delete this;
-		return;
-	}
 }
 
 void CBlock::Initialize()

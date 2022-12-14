@@ -86,8 +86,9 @@ void main(int argc, char** argv) //--- 윈도우 출력하고 콜백함수 설정
 	glShadeModel(GL_SMOOTH);    // 부드러운 음영을 수행합니다.
 
 	glEnable(GL_BLEND);			// 블렌딩 기능을 활성화한다.
-	//glEnable(GL_CULL_FACE);		// 뒷면 제거
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	//지수를 원본 컬러 벡터 Csource의 알파값으로 설정
+
+	glClearColor(0.5f, 1.f, 1.f, 1.0f);					// 기본 하늘색은 하늘색
 
 	glutDisplayFunc(drawScene); //--- 출력 콜백 함수
 	glutReshapeFunc(Reshape);

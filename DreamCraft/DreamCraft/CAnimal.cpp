@@ -185,11 +185,6 @@ void CAnimal::FixedUpdate()
 	if (animalForm == Form::creature) {
 		World.Objects.erase(this);
 
-		if (isDead()) {
-			delete this;
-			return;
-		}
-
 		Position.x = round(float_Position.x);
 		Position.y = round(float_Position.y);
 		Position.z = round(float_Position.z);

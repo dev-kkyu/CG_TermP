@@ -9,7 +9,7 @@
 #include "CSheep.h"
 #include "CLeaves.h"
 #include "CTreeTrunk.h"
-#include "CSheepNOTUL.h"
+//#include "CSheepNOTUL.h"
 #include "CRice.h"
 #include "CWool.h"
 #include "CBirchTrunk.h"
@@ -22,10 +22,12 @@ struct Item {
 	int Cow;
 	int Pig;
 	int Sheep;
+	int SheepTer;
 
 	void show() {
 		cout << "닭 : " << Chicken << ", 소 : " << Cow << endl;
 		cout << "양 : " << Sheep << ", 돼지 : " << Pig << endl;
+		cout << "양털아이템 : " << SheepTer << endl;
 	}
 };
 

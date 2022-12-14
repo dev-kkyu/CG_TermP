@@ -91,6 +91,18 @@
     <Filter Include="GameObject\Animal\Sheep">
       <UniqueIdentifier>{ab6de8f2-915e-42b9-85ec-e1f1dc6309a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AnimalParts">
+      <UniqueIdentifier>{5277cf9e-f9b5-41ef-b8fe-64323165adc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AnimalParts\Head">
+      <UniqueIdentifier>{aa40315f-3b63-4d7c-8a7b-21a3aa008550}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AnimalParts\Leg">
+      <UniqueIdentifier>{e823e69a-88f6-4d77-b952-55cf698ba3fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AnimalParts\Body">
+      <UniqueIdentifier>{bbbbe034-ac0c-4a0d-b9a1-818685ee44a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DreamCraft.cpp">
@@ -174,14 +186,17 @@
     <ClCompile Include="CSheep.cpp">
       <Filter>GameObject\Animal\Sheep</Filter>
     </ClCompile>
-    <ClCompile Include="CSheep_NoTER.cpp">
-      <Filter>GameObject\Animal\Sheep</Filter>
+    <ClCompile Include="CAnimalParts.cpp">
+      <Filter>AnimalParts</Filter>
     </ClCompile>
-    <ClCompile Include="CSheep_YesTER.cpp">
-      <Filter>GameObject\Animal\Sheep</Filter>
+    <ClCompile Include="AnimalLeg.cpp">
+      <Filter>AnimalParts\Leg</Filter>
     </ClCompile>
-    <ClCompile Include="CSheepNOTUL.cpp">
-      <Filter>GameObject\Animal\Sheep</Filter>
+    <ClCompile Include="AnimalBody.cpp">
+      <Filter>AnimalParts\Body</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimalHead.cpp">
+      <Filter>AnimalParts\Head</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -269,14 +284,17 @@
     <ClInclude Include="CSheep.h">
       <Filter>GameObject\Animal\Sheep</Filter>
     </ClInclude>
-    <ClInclude Include="CSheep_NoTER.h">
-      <Filter>GameObject\Animal\Sheep</Filter>
+    <ClInclude Include="CAnimalParts.h">
+      <Filter>AnimalParts</Filter>
     </ClInclude>
-    <ClInclude Include="CSheep_YesTER.h">
-      <Filter>GameObject\Animal\Sheep</Filter>
+    <ClInclude Include="AnimalLeg.h">
+      <Filter>AnimalParts\Leg</Filter>
     </ClInclude>
-    <ClInclude Include="CSheepNOTUL.h">
-      <Filter>GameObject\Animal\Sheep</Filter>
+    <ClInclude Include="AnimalBody.h">
+      <Filter>AnimalParts\Body</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimalHead.h">
+      <Filter>AnimalParts\Head</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
