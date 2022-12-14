@@ -711,6 +711,13 @@ void CWorld::FixedUpdate()
 
 void CWorld::Render()
 {
+	// 투영변환 - 원근투영
+	glm::mat4 projection = glm::perspective(glm::radians(45.f), (float)winWidth / (float)winHeight, 0.1f, 200.f);
+	GLuint projectionLocation = glGetUniformLocation(shaderID, "projectionTransform"); //--- 투영 변환 값 설정
+	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projection));
+
+	Camera();
+
 	// 태양 표현
 	{
 		glClearColor(0.5f, 1.f, 1.f, 1.0f);					// 기본 하늘색은 하늘색
@@ -777,13 +784,6 @@ void CWorld::Render()
 		glUniform1i(normalOption, 0);
 		glEnable(GL_CULL_FACE);
 	}
-
-	// 투영변환 - 원근투영
-	glm::mat4 projection = glm::perspective(glm::radians(45.f), (float)winWidth / (float)winHeight, 0.1f, 200.f);
-	GLuint projectionLocation = glGetUniformLocation(shaderID, "projectionTransform"); //--- 투영 변환 값 설정
-	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projection));
-
-	Camera();
 
 	for (auto Object : Objects) {
 		Object->Render();
