@@ -400,8 +400,6 @@ void InitTexture()
 			break;
 
 
-
-
 		case 28:
 			filename = "텍스처/나무/나무옆통2.png";		// 나무옆통
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
@@ -412,8 +410,8 @@ void InitTexture()
 		case 29:
 			filename = "텍스처/나무/나무윗통2.png";		// 나무윗통
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
-			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 			//case 30:
