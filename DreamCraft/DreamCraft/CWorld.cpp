@@ -778,6 +778,10 @@ void CWorld::Render()
 		glEnable(GL_CULL_FACE);
 	}
 
+	// 투영변환 - 원근투영
+	glm::mat4 projection = glm::perspective(glm::radians(45.f), (float)winWidth / (float)winHeight, 0.1f, 200.f);
+	GLuint projectionLocation = glGetUniformLocation(shaderID, "projectionTransform"); //--- 투영 변환 값 설정
+	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(projection));
 
 	Camera();
 
@@ -792,10 +796,92 @@ void CWorld::Render()
 	}
 
 	Player.Render();
+
+
+	// 인벤토리 표시
+	viewInventory();
 }
 
 void CWorld::Release()
 {
+}
+
+void CWorld::viewInventory()
+{
+	// 투영변환 - 원근투영
+	GLuint projectionLocation = glGetUniformLocation(shaderID, "projectionTransform"); //--- 투영 변환 값 설정
+	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(glm::mat4(1.f)));
+
+	GLuint viewLocation = glGetUniformLocation(shaderID, "viewTransform"); //--- 뷰잉 변환 설정
+	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(glm::mat4(1.f)));
+
+	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
+
+	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용
+	glUniform1i(selectColorLocation, 1);
+
+	glBindVertexArray(InvenVAO);
+	glm::mat4 Change;
+	glm::mat4 Trans;
+	glm::mat4 Scale;
+	int num;
+
+	Scale = glm::scale(glm::mat4(1.f), glm::vec3(0.2, 0.1, 0.1));
+
+	// 치킨
+	Trans = glm::translate(glm::mat4(1.f), glm::vec3(-0.8, 0.9, 0));
+	Change = Trans * Scale;
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
+	num = itemCount.Chicken;
+	if (num > 5)num = 5;
+	glBindTexture(GL_TEXTURE_2D, ItemTexture[0][num]);
+	glDrawArrays(GL_QUADS, 0, 4);
+
+	// 돼지
+	Trans = glm::translate(glm::mat4(1.f), glm::vec3(-0.8, 0.7, 0));
+	Change = Trans * Scale;
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
+	num = itemCount.Pig;
+	if (num > 5)num = 5;
+	glBindTexture(GL_TEXTURE_2D, ItemTexture[1][num]);
+	glDrawArrays(GL_QUADS, 0, 4);
+
+	// 벼
+	Trans = glm::translate(glm::mat4(1.f), glm::vec3(-0.8, 0.5, 0));
+	Change = Trans * Scale;
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
+	num = itemCount.Rice;
+	if (num > 5)num = 5;
+	glBindTexture(GL_TEXTURE_2D, ItemTexture[2][num]);
+	glDrawArrays(GL_QUADS, 0, 4);
+
+	// 소
+	Trans = glm::translate(glm::mat4(1.f), glm::vec3(-0.8, 0.3, 0));
+	Change = Trans * Scale;
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
+	num = itemCount.Cow;
+	if (num > 5)num = 5;
+	glBindTexture(GL_TEXTURE_2D, ItemTexture[3][num]);
+	glDrawArrays(GL_QUADS, 0, 4);
+
+	// 양
+	Trans = glm::translate(glm::mat4(1.f), glm::vec3(-0.8, 0.1, 0));
+	Change = Trans * Scale;
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
+	num = itemCount.Sheep;
+	if (num > 5)num = 5;
+	glBindTexture(GL_TEXTURE_2D, ItemTexture[4][num]);
+	glDrawArrays(GL_QUADS, 0, 4);
+
+	// 양털
+	Trans = glm::translate(glm::mat4(1.f), glm::vec3(-0.8, -0.1, 0));
+	Change = Trans * Scale;
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
+	num = itemCount.SheepTer;
+	if (num > 5)num = 5;
+	glBindTexture(GL_TEXTURE_2D, ItemTexture[5][num]);
+	glDrawArrays(GL_QUADS, 0, 4);
+
 }
 
 int CWorld::getpersonView()

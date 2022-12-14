@@ -19,11 +19,11 @@
 
 struct Item {
 	int Chicken;
-	int Cow;
 	int Pig;
+	int Rice;
+	int Cow;
 	int Sheep;
 	int SheepTer;
-	int Rice;
 
 	void show() {
 		cout << "닭 : " << Chicken << ", 소 : " << Cow << endl;
@@ -86,6 +86,9 @@ public:
 	void FixedUpdate();		//충돌처리 등
 	void Render();			//드로우
 	void Release();			//소멸될 때 할 일
+
+	void viewInventory();
+
 	int getpersonView();
 
 	void MakeTree(glm::vec3 position);

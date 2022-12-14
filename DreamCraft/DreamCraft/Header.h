@@ -18,11 +18,12 @@
 using namespace std;
 
 extern GLint winWidth, winHeight;
-extern GLuint BlockVAO, edgeVAO;
+extern GLuint BlockVAO, InvenVAO;
 extern GLuint shaderID; //--- 세이더 프로그램 이름
 
 extern pair<float, float> MouseAngle;
 extern GLuint Texture[50];
+extern GLuint ItemTexture[6][6];
 
 
 #define 맨손		100
