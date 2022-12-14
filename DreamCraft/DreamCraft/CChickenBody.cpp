@@ -13,15 +13,16 @@ void CChickenBody::Render()
 	glBindVertexArray(BlockVAO);
 
 	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용
-	glUniform1i(selectColorLocation, 0);
-
-	GLuint objectColor = glGetUniformLocation(shaderID, "objectColor");
-	glUniform4f(objectColor, 0.5, 1, 1, 1);
+	glUniform1i(selectColorLocation, 1);
 
 	GLuint model = glGetUniformLocation(shaderID, "modelTransform");
 	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(Change));
 
-	glDrawArrays(GL_TRIANGLES, 0, 36);
+
+	for (int i = 0; i < 6; ++i) {
+		glBindTexture(GL_TEXTURE_2D, Texture[16]);
+		glDrawArrays(GL_TRIANGLES, i * 6, 6);
+	}
 }
 
 void CChickenBody::Update()

@@ -884,7 +884,7 @@ int CWorld::getpersonView()
 
 void CWorld::MakeTree(glm::vec3 position)
 {
-	float x{ position.x }, y{ position.y+1 }, z{ position.z };
+	float x{ position.x }, y{ position.y }, z{ position.z };
 
 	for (int i = 0; i < 4; ++i)
 		Objects.insert(new CTreeTrunk{ glm::vec3(x,y + i,z) });
@@ -1055,33 +1055,33 @@ void CWorld::MakeWorld()
 
 
 	
-	MakeTree(glm::vec3(-7, 0, - 24));
-	MakeTree(glm::vec3(-8, 2, -25));
-	MakeTree(glm::vec3(23, 0, -9));
-	MakeTree(glm::vec3(20, 0, 0));
-	MakeTree(glm::vec3(16, 0, -19));
-	MakeTree(glm::vec3(11, 0, -22));
-	MakeTree(glm::vec3(23, 0, -23));
-	MakeTree(glm::vec3(21, 0, -16));
-	MakeTree(glm::vec3(8, 0, -5));
-	MakeTree(glm::vec3(-23, 1, 6));
-	MakeTree(glm::vec3(-12, 1, -9));
-	MakeTree(glm::vec3(-20, 2, 21));
-	MakeTree(glm::vec3(-3, 2, 14));
-	MakeTree(glm::vec3(5, 2, 22));
-	MakeTree(glm::vec3(21, 2, 17));
-	MakeTree(glm::vec3(23, 2, 23));
+	MakeTree(glm::vec3(-7, 0+1, - 24));
+	MakeTree(glm::vec3(-8, 2 + 1, -25));
+	MakeTree(glm::vec3(23, 0 + 1, -9));
+	MakeTree(glm::vec3(20, 0 + 1, 0));
+	MakeTree(glm::vec3(16, 0 + 1, -19));
+	MakeTree(glm::vec3(11, 0 + 1, -22));
+	MakeTree(glm::vec3(23, 0 + 1, -23));
+	MakeTree(glm::vec3(21, 0 + 1, -16));
+	MakeTree(glm::vec3(8, 0 + 1, -5));
+	MakeTree(glm::vec3(-23, 1 + 1, 6));
+	MakeTree(glm::vec3(-12, 1 + 1, -9));
+	MakeTree(glm::vec3(-20, 2 + 1, 21));
+	MakeTree(glm::vec3(-3, 2 + 1, 14));
+	MakeTree(glm::vec3(5, 2 + 1, 22));
+	MakeTree(glm::vec3(21, 2 + 1, 17));
+	MakeTree(glm::vec3(23, 2 + 1, 23));
 
-	MakeTree2(glm::vec3(-14, 2, 14));
-	MakeTree2(glm::vec3(-18, 1, -23));
-	MakeTree2(glm::vec3(-25, 1, -19));
-	MakeTree2(glm::vec3(-25, 2, -19	));
-	MakeTree2(glm::vec3(-24, 1, -18));
-	MakeTree2(glm::vec3(-25, 2, -19));
-	MakeTree2(glm::vec3(-21, 1, -6));
-	MakeTree2(glm::vec3(2, 1, 10));
-	MakeTree2(glm::vec3(23, 1, 7));
-	MakeTree2(glm::vec3(16, 2, 22));
+	MakeTree2(glm::vec3(-14, 2 + 1, 14));
+	MakeTree2(glm::vec3(-18, 1 + 1, -23));
+	MakeTree2(glm::vec3(-25, 1 + 1, -19));
+	MakeTree2(glm::vec3(-25, 2 + 1, -19	));
+	MakeTree2(glm::vec3(-24, 1 + 1, -18));
+	MakeTree2(glm::vec3(-25, 2 + 1, -19));
+	MakeTree2(glm::vec3(-21, 1 + 1, -6));
+	MakeTree2(glm::vec3(2, 1 + 1, 10));
+	MakeTree2(glm::vec3(23, 1 + 1, 7));
+	MakeTree2(glm::vec3(16, 2 + 1, 22));
 
 
 
