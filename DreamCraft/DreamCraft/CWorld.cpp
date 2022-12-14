@@ -333,6 +333,17 @@ void CWorld::Gravity()
 
 void CWorld::Move()
 {
+	if (isUp || isDown || isLeft || isRight) {
+		static int time = 0;
+		if (time == 0) {
+			time = 1;
+			Sound.Move();
+		}
+		else {
+			time = (time + 1) % 30;
+		}
+	}
+
 	float speed = 0.075f;
 
 	float SinValue = glm::sin(glm::radians(MouseAngle.first));
@@ -533,7 +544,6 @@ void CWorld::Move()
 			itemCount.show();
 		}
 	}
-
 }
 
 set<CGameObject*, CGameObjectCmp>::iterator CWorld::getObject()
@@ -653,6 +663,7 @@ void CWorld::insertObject(const int& ObjectType, const glm::vec3& ObjectPos)
 		Objects.insert(new CSheep(ObjectPos, Form::creature, 양));
 		break;
 	}
+	Sound.Init();
 }
 
 
@@ -676,6 +687,7 @@ void CWorld::Update()
 				auto temp = getObject();
 				if (temp != Objects.end()) {
 					(*temp)->be_Attacked(Player.getWeapon());
+					Sound.Attack();
 					if ((*temp)->isDead()) {
 						delete (*temp);
 						Objects.erase(temp);

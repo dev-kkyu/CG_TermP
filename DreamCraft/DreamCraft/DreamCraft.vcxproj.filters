@@ -106,6 +106,9 @@
     <Filter Include="AnimalParts\ChickenParts">
       <UniqueIdentifier>{b2bc730e-2a7e-44de-a33f-03d55d878988}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{9d352091-7721-48b9-bbd5-4e5847e5b607}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DreamCraft.cpp">
@@ -209,6 +212,9 @@
     </ClCompile>
     <ClCompile Include="CChickenLeg.cpp">
       <Filter>AnimalParts\ChickenParts</Filter>
+    </ClCompile>
+    <ClCompile Include="CSound.cpp">
+      <Filter>Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -316,6 +322,9 @@
     </ClInclude>
     <ClInclude Include="CChickenLeg.h">
       <Filter>AnimalParts\ChickenParts</Filter>
+    </ClInclude>
+    <ClInclude Include="CSound.h">
+      <Filter>Sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -153,6 +153,7 @@
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CRice.cpp" />
     <ClCompile Include="CSheep.cpp" />
+    <ClCompile Include="CSound.cpp" />
     <ClCompile Include="CTree.cpp" />
     <ClCompile Include="CTreeTrunk.cpp" />
     <ClCompile Include="CWool.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CRice.h" />
     <ClInclude Include="CSheep.h" />
+    <ClInclude Include="CSound.h" />
     <ClInclude Include="CTree.h" />
     <ClInclude Include="CTreeTrunk.h" />
     <ClInclude Include="CWool.h" />
