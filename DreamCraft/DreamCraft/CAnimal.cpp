@@ -119,7 +119,7 @@ void CAnimal::Update()
 
 void CAnimal::FixedUpdate()
 {
-	float speed = 0.02;
+	float speed = 0.005;
 
 	if (pow(before_Position.x - Position.x, 2)
 		+ pow(before_Position.z - Position.z, 2) >= pow(Travel, 2)) {  // 한 방향으로 travel만큼 이동했으면

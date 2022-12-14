@@ -84,6 +84,27 @@ void AnimalLeg::Render()
 		glDrawArrays(GL_TRIANGLES, 30, 6);
 
 		break;
+	case 무너양:
+
+		glBindTexture(GL_TEXTURE_2D, Texture[6]);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		glBindTexture(GL_TEXTURE_2D, Texture[6]);
+		glDrawArrays(GL_TRIANGLES, 6, 6);
+
+		glBindTexture(GL_TEXTURE_2D, Texture[3]);	// 위
+		glDrawArrays(GL_TRIANGLES, 12, 6);
+
+		glBindTexture(GL_TEXTURE_2D, Texture[6]);
+		glDrawArrays(GL_TRIANGLES, 18, 6);
+
+		glBindTexture(GL_TEXTURE_2D, Texture[3]);	// 바닥
+		glDrawArrays(GL_TRIANGLES, 24, 6);
+
+		glBindTexture(GL_TEXTURE_2D, Texture[6]);
+		glDrawArrays(GL_TRIANGLES, 30, 6);
+
+		break;
 	}
 
 }

@@ -74,6 +74,15 @@ void CSheep::Render()
 			//glDrawArrays(GL_TRIANGLES, 0, 36);
 
 			hairless = true;				// 털 깎인 양으로 빠꾸는 변수 on
+
+			Head.setType(무너양);
+			Body.setType(무너양);
+			Leg1.setType(무너양);
+			Leg2.setType(무너양);
+			Leg3.setType(무너양);
+			Leg4.setType(무너양);
+
+			// 양털아이템 블럭 생성
 			World.died_Objects.insert(new CSheep{ Position, Form::item, 양털아이템 });
 			//Wool = true;					// 양털 생성하는 변수 on
 			//Wool_Position = Position;		// 양털이 깎인 위치 저장
@@ -134,10 +143,18 @@ void CSheep::Render()
 		// animal 의 생성자에서 change를 적용시켜준다.
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
 
-		for (int i = 0; i < 6; ++i) {
-			glBindTexture(GL_TEXTURE_2D, Texture[7]);
-			glDrawArrays(GL_TRIANGLES, i * 6, 6);
-		}
+		glBindTexture(GL_TEXTURE_2D, Texture[5]);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		glBindTexture(GL_TEXTURE_2D, Texture[5]);
+		glDrawArrays(GL_TRIANGLES, 6, 6);
+
+		glBindTexture(GL_TEXTURE_2D, Texture[5]);
+		glDrawArrays(GL_TRIANGLES, 18, 6);
+
+		glBindTexture(GL_TEXTURE_2D, Texture[5]); 
+		glDrawArrays(GL_TRIANGLES, 30, 6);
+
 
 	}
 	else if (animalForm == Form::item && animalType == 양털아이템) {			// 양털아이템그리기
@@ -151,7 +168,7 @@ void CSheep::Render()
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
 
 		for (int i = 0; i < 6; ++i) {
-			glBindTexture(GL_TEXTURE_2D, Texture[7]);
+			glBindTexture(GL_TEXTURE_2D, Texture[3]);
 			glDrawArrays(GL_TRIANGLES, i * 6, 6);
 		}
 

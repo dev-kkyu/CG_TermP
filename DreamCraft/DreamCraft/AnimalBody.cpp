@@ -44,6 +44,14 @@ void AnimalBody::Render()
 		}
 
 		break;
+	case ¹«³Ê¾ç:
+
+		for (int i = 0; i < 6; ++i) {
+			glBindTexture(GL_TEXTURE_2D, Texture[4]);
+			glDrawArrays(GL_TRIANGLES, i * 6, 6);
+		}
+
+		break;
 	}
 }
 

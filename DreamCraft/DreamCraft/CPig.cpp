@@ -74,10 +74,17 @@ void CPig:: Render() {
 		// animal 의 생성자에서 change를 적용시켜준다.
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
 
-		for (int i = 0; i < 6; ++i) {
-			glBindTexture(GL_TEXTURE_2D, Texture[13]);		// 돼지머리귀엽당
-			glDrawArrays(GL_TRIANGLES, i * 6, 6);
-		}
+		glBindTexture(GL_TEXTURE_2D, Texture[13]);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		glBindTexture(GL_TEXTURE_2D, Texture[13]);
+		glDrawArrays(GL_TRIANGLES, 6, 6);
+
+		glBindTexture(GL_TEXTURE_2D, Texture[13]);
+		glDrawArrays(GL_TRIANGLES, 18, 6);
+
+		glBindTexture(GL_TEXTURE_2D, Texture[13]);
+		glDrawArrays(GL_TRIANGLES, 30, 6);
 
 	}
 }
