@@ -13,15 +13,29 @@ void CChickenHead::Render()
 	glBindVertexArray(BlockVAO);
 
 	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용
-	glUniform1i(selectColorLocation, 0);
-
-	GLuint objectColor = glGetUniformLocation(shaderID, "objectColor");
-	glUniform4f(objectColor, 1, 1, 1, 1);
+	glUniform1i(selectColorLocation, 1);
 
 	GLuint model = glGetUniformLocation(shaderID, "modelTransform");
 	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(Change));
 
-	glDrawArrays(GL_TRIANGLES, 0, 36);
+	glBindTexture(GL_TEXTURE_2D, Texture[16]);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
+
+	glBindTexture(GL_TEXTURE_2D, Texture[16]);
+	glDrawArrays(GL_TRIANGLES, 6, 6);
+
+	glBindTexture(GL_TEXTURE_2D, Texture[16]);	// 위
+	glDrawArrays(GL_TRIANGLES, 12, 6);
+
+	glBindTexture(GL_TEXTURE_2D, Texture[16]);
+	glDrawArrays(GL_TRIANGLES, 18, 6);
+
+	glBindTexture(GL_TEXTURE_2D, Texture[16]);	// 바닥
+	glDrawArrays(GL_TRIANGLES, 24, 6);
+
+	glBindTexture(GL_TEXTURE_2D, Texture[20]);  // 머리
+	glDrawArrays(GL_TRIANGLES, 30, 6);
+
 }
 
 void CChickenHead::Update()
