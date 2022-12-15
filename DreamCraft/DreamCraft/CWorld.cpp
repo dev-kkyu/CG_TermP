@@ -639,6 +639,13 @@ void CWorld::insertObject(const int& ObjectType, const glm::vec3& ObjectPos)
 		Objects.insert(new CLeaves(ObjectPos));
 		break;
 
+	case 나무2:
+		MakeTree2(ObjectPos);
+		break;
+	case 나무줄기2:
+		Objects.insert(new CBirchTrunk(ObjectPos));
+		break;
+
 
 	case 돼지:
 		Objects.insert(new CPig(ObjectPos, Form::creature));
