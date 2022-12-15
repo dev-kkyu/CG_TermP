@@ -27,6 +27,7 @@ extern GLuint shaderID; //--- 세이더 프로그램 이름
 extern pair<float, float> MouseAngle;
 extern GLuint Texture[50];
 extern GLuint ItemTexture[6][6];
+extern GLuint GameEndTexture[2];
 
 
 #define 맨손		100

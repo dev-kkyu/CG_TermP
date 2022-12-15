@@ -42,6 +42,7 @@ pair<float, float> MouseAngle;
 
 GLuint Texture[50];
 GLuint ItemTexture[6][6];
+GLuint GameEndTexture[2];
 
 float InvenWindow[4][8]{
 	{-1, 1, 0,		0, 0, 1,	0, 1},
@@ -765,6 +766,35 @@ void InitTexture()
 				}
 				break;
 			}
+		}
+	}
+
+	{
+		glGenTextures(2, GameEndTexture);
+
+		for (int i = 0; i < 2; ++i) {
+			glBindTexture(GL_TEXTURE_2D, GameEndTexture[i]);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+			int ImageWidth, ImageHeight, numberOfChannel;
+			stbi_set_flip_vertically_on_load(true); //--- 이미지가 거꾸로 읽힌다면 추가
+
+			GLubyte* data;
+			string filename;
+			switch (i) {
+			case 0:
+				filename = "텍스처/Complete.png";
+				break;
+			case 1:
+				filename = "텍스처/toDreamCraft.png";
+				break;
+			}
+			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
+			//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			stbi_image_free(data);
 		}
 	}
 }

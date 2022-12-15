@@ -1,6 +1,6 @@
 ﻿#include "CWorld.h"
 
-CWorld::CWorld() : Player{ CPlayer{glm::vec3(0.f, 10.f, 0.f)} }, PlayerPos{ glm::vec3(0.f, 10.f, 0.f) }, gameStart{ false },
+CWorld::CWorld() : Player{ CPlayer{glm::vec3(0.f, 10.f, 0.f)} }, PlayerPos{ glm::vec3(0.f, 10.f, 0.f) }, gameStart{ false }, gameEnd{ false },
 isUp{ false }, isDown{ false }, isLeft{ false }, isRight{ false }, isJump{ 0 }, personView{ 1 },
 planToCreateObj{ 기본흙 },
 VELOCITY{ 0 }, first_VEL{ 25 }, MASS{ 10 }
@@ -87,6 +87,12 @@ void CWorld::Keyboard(unsigned char key, int state)
 			break;
 		case 't':
 			personView = 3;
+			break;
+
+		case 'r':
+		case 'R':
+			PlayerPos = glm::vec3(0, 10, 0);
+			VELOCITY = 0;
 			break;
 
 			// 이동
@@ -683,6 +689,9 @@ void CWorld::Initialize()
 
 void CWorld::Update()
 {
+	if (itemCount.isComplete())
+		gameEnd = true;
+
 	if (gameStart) {
 		for (auto Object : Objects) {
 			Object->Update();
@@ -832,8 +841,20 @@ void CWorld::Render()
 	Player.Render();
 
 
-	// 인벤토리 표시
-	viewInventory();
+	static int time = 0;
+	// 도전과제 달성시 애니메이션
+	if (gameEnd) {
+		if (time < 800) {
+			GameClearAnimation(time);
+			++time;
+		}
+	}
+	else {
+		// 인벤토리 표시
+		viewInventory();
+	}
+
+
 }
 
 void CWorld::Release()
@@ -916,6 +937,59 @@ void CWorld::viewInventory()
 	glBindTexture(GL_TEXTURE_2D, ItemTexture[5][num]);
 	glDrawArrays(GL_QUADS, 0, 4);
 
+}
+
+void CWorld::GameClearAnimation(int time)
+{
+	// 투영변환 - 원근투영
+	GLuint projectionLocation = glGetUniformLocation(shaderID, "projectionTransform"); //--- 투영 변환 값 설정
+	glUniformMatrix4fv(projectionLocation, 1, GL_FALSE, glm::value_ptr(glm::mat4(1.f)));
+
+	GLuint viewLocation = glGetUniformLocation(shaderID, "viewTransform"); //--- 뷰잉 변환 설정
+	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, glm::value_ptr(glm::mat4(1.f)));
+
+	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
+
+	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용
+	glUniform1i(selectColorLocation, 1);
+
+	glm::mat4 Change;
+	glm::mat4 Trans;
+	glm::mat4 Scale;
+
+	static int num = 0;
+	switch (num) {
+	case 0:
+		Scale = glm::scale(glm::mat4(1.f), glm::vec3(0.75, 0.1, 0.1));
+		break;
+	case 1:
+		Scale = glm::scale(glm::mat4(1.f), glm::vec3(0.95, 0.1, 0.1));
+		break;
+	}
+
+	if (time < 100)
+		Trans = glm::translate(glm::mat4(1.f), glm::vec3(0, 1.5 - (time / 100.f), 0));
+	else if (time < 300)
+		Trans = glm::translate(glm::mat4(1.f), glm::vec3(0, 0.5, 0));
+	else if (time < 400)
+		Trans = glm::translate(glm::mat4(1.f), glm::vec3(0, 0.5f + (time - 300) / 100.f, 0));
+
+	else if (time < 500) {
+		Trans = glm::translate(glm::mat4(1.f), glm::vec3(0, 1.5 - ((time - 400) / 100.f), 0));
+		num = 1;
+	}
+	else if (time < 700)
+		Trans = glm::translate(glm::mat4(1.f), glm::vec3(0, 0.5, 0));
+	else if (time < 800)
+		Trans = glm::translate(glm::mat4(1.f), glm::vec3(0, 0.5f + (time - 700) / 100.f, 0));
+
+
+	Change = Trans * Scale;
+
+	glBindVertexArray(InvenVAO);
+	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
+	glBindTexture(GL_TEXTURE_2D, GameEndTexture[num]);
+	glDrawArrays(GL_QUADS, 0, 4);
 }
 
 int CWorld::getpersonView()

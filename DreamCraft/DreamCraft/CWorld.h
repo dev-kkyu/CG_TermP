@@ -9,7 +9,6 @@
 #include "CSheep.h"
 #include "CLeaves.h"
 #include "CTreeTrunk.h"
-//#include "CSheepNOTUL.h"
 #include "CRice.h"
 #include "CWool.h"
 #include "CBirchTrunk.h"
@@ -34,12 +33,24 @@ struct Item {
 		cout << "벼 : " << Rice << endl;
 		cout << endl;
 	}
+
+	bool isComplete() {
+		if (Chicken >= 5 &&
+			Cow >= 5 &&
+			Pig >= 5 &&
+			Rice >= 5 &&
+			Sheep >= 5 &&
+			SheepTer >= 5
+			) return true;
+		return false;
+	}
 };
 
 class CWorld
 {
 private:
 	bool gameStart;
+	bool gameEnd;
 
 	GLUquadricObj* qobj;			// 실린더 생성하자
 
@@ -96,6 +107,7 @@ public:
 	void Release();			//소멸될 때 할 일
 
 	void viewInventory();
+	void GameClearAnimation(int time);
 
 	int getpersonView();
 
