@@ -15,6 +15,9 @@
 #include <gl/glm/ext.hpp>
 //#include <gl/glm/gtc/matrix_transform.hpp>
 
+#pragma comment (lib, "winmm.lib")    //À½¾Ç
+#include <mmsystem.h>                //À½¾Ç
+
 using namespace std;
 
 extern GLint winWidth, winHeight;

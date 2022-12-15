@@ -15,6 +15,8 @@
 #include "CBirchTrunk.h"
 #include "CCloud.h"
 
+#include "CSound.h"
+
 #include <set>
 
 struct Item {
@@ -40,6 +42,8 @@ private:
 	bool gameStart;
 
 	GLUquadricObj* qobj;			// 실린더 생성하자
+
+	CSound Sound;
 
 private:
 	CPlayer Player;
