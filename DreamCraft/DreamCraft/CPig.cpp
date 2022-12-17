@@ -39,19 +39,6 @@ void CPig::Update()
 	Leg2.Update();
 	Leg3.Update();
 	Leg4.Update();
-
-	//static int time = 0;
-	//if (Attacked /* && playerWeapon != °¡À§*/) {
-	//	Color = glm::vec3(1, 0, 0);
-	//	if (time > 20) {
-	//		time = 0;
-	//		Attacked = false;
-	//	}
-	//	else
-	//		++time;
-	//}
-	//else
-	//	Color = origin_Color;
 }
 
 void CPig:: Render() {

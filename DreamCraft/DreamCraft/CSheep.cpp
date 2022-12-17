@@ -40,19 +40,6 @@ void CSheep::Update()
 	Leg2.Update();
 	Leg3.Update();
 	Leg4.Update();
-
-	//static int time = 0;
-	//if (Attacked /* && playerWeapon != 가위*/) {
-	//	Color = glm::vec3(1, 0, 0);
-	//	if (time > 20) {
-	//		time = 0;
-	//		Attacked = false;
-	//	}
-	//	else
-	//		++time;
-	//}
-	//else
-	//	Color = origin_Color;
 }
 
 void CSheep::Render()
@@ -71,10 +58,6 @@ void CSheep::Render()
 
 			// 양털아이템 블럭 생성
 			World.died_Objects.insert(new CSheep{ Position, Form::item, 양털아이템 });
-
-			this->Color = glm::vec3(1, 1, 1);
-			origin_Color = this->Color;
-
 		}
 
 		Head.Render();

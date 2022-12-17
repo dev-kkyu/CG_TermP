@@ -269,7 +269,7 @@ void CWorld::Camera()
 
 void CWorld::Gravity()
 {
-	double F;
+	float F;
 	static int time{ 0 };
 
 	if (1 == isJump) {
@@ -287,10 +287,10 @@ void CWorld::Gravity()
 		++time;
 
 	if (VELOCITY > 0) {
-		F = MASS * VELOCITY * VELOCITY;
+		F = (float)(MASS * VELOCITY * VELOCITY);
 	}
 	else
-		F = -MASS * VELOCITY * VELOCITY;
+		F = (float)(-MASS * VELOCITY * VELOCITY);
 
 	if (time >= 39 || 0 == time) {
 		float PlayerBottomPos = Player.getBottom() + F / 50000.f;
@@ -746,7 +746,7 @@ void CWorld::Render()
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(glm::mat4(1.f)));
 
 		GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용
-		glUniform1i(selectColorLocation, 2);
+		glUniform1i(selectColorLocation, 2);			// 조명없는 텍스처 사용
 
 		glBindVertexArray(InvenVAO);
 
@@ -801,27 +801,27 @@ void CWorld::Render()
 
 		change = glm::translate(glm::mat4(1.f), glm::vec3(0, -50, 0)) * Rotate;
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(change));
-		glUniform4f(objectColorLocation, 1, 1, 1, 0.2);
+		glUniform4f(objectColorLocation, 1, 1, 1, 0.2f);
 		gluCylinder(qobj, 165.0, 165.0, 100.0, 100, 10);
 
 		change = glm::translate(glm::mat4(1.f), glm::vec3(0, -40, 0)) * Rotate;
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(change));
-		glUniform4f(objectColorLocation, 1, 1, 1, 0.2);
+		glUniform4f(objectColorLocation, 1, 1, 1, 0.2f);
 		gluCylinder(qobj, 160.0, 160.0, 80.0, 100, 8);
 
 		change = glm::translate(glm::mat4(1.f), glm::vec3(0, -30, 0)) * Rotate;
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(change));
-		glUniform4f(objectColorLocation, 1, 1, 1, 0.2);
+		glUniform4f(objectColorLocation, 1, 1, 1, 0.2f);
 		gluCylinder(qobj, 155.0, 155.0, 60.0, 100, 6);
 
 		change = glm::translate(glm::mat4(1.f), glm::vec3(0, -20, 0)) * Rotate;
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(change));
-		glUniform4f(objectColorLocation, 1, 1, 1, 0.2);
+		glUniform4f(objectColorLocation, 1, 1, 1, 0.2f);
 		gluCylinder(qobj, 150.0, 150.0, 40.0, 100, 4);
 
 		change = glm::translate(glm::mat4(1.f), glm::vec3(0, -10, 0)) * Rotate;
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(change));
-		glUniform4f(objectColorLocation, 1, 1, 1, 0.2);
+		glUniform4f(objectColorLocation, 1, 1, 1, 0.2f);
 		gluCylinder(qobj, 145.0, 145.0, 20.0, 100, 2);
 
 		glUniform1i(normalOption, 0);
@@ -951,7 +951,7 @@ void CWorld::GameClearAnimation(int time)
 	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
 
 	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용
-	glUniform1i(selectColorLocation, 1);
+	glUniform1i(selectColorLocation, 2);			// 조명 없는 텍스처 사용
 
 	glm::mat4 Change;
 	glm::mat4 Trans;

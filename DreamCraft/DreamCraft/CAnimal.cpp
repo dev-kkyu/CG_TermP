@@ -3,13 +3,8 @@
 
 extern CWorld World;
 
-random_device rd;
-default_random_engine dre(rd());
-uniform_int_distribution<int> dict_urd{ 1, 8 };
-uniform_real_distribution<float> travel_urd{ 5.f, 15.f };
-
 CAnimal::CAnimal(glm::vec3 Position, Form animalForm, int animalType)
-	: CGameObject{ Position }, animalForm{ animalForm }, animalType{ animalType }
+	: CGameObject{ Position }, animalForm{ animalForm }, animalType{ animalType }, dre{ rd() }
 {
 	Initialize();
 }
@@ -56,6 +51,9 @@ void CAnimal::Initialize()
 {
 	Hp = 10;
 
+	uniform_int_distribution<int> dict_urd{ 1, 8 };
+	uniform_real_distribution<float> travel_urd{ 5.f, 15.f };
+
 	animal_Direction = dict_urd(dre) * 45.f;			// 이동 방향 1-8까지 n*45도 만큼 회전
 	Travel = travel_urd(dre);
 
@@ -64,57 +62,30 @@ void CAnimal::Initialize()
 
 	float_Position = Position;
 
-	uniform_real_distribution<float> urd{ 0.f, 1.f };
+	if (animalForm == Form::item) {					// 아이템 생성시 모델변환 적용시킴
+		glm::mat4 Rotate;
+		glm::mat4 Trans;
+		glm::mat4 Scale;
 
-	while (true) {
-		Color = glm::vec3{ urd(dre),urd(dre), urd(dre) };
+		Trans = glm::translate(Unit, glm::vec3(0.f, -0.5f, 0.f));
 
-		if (Color != glm::vec3(1, 1, 1))
-			break;
+		if (animalForm == Form::creature)
+			Scale = glm::scale(Unit, glm::vec3(1.f, 1.f, 2.f));
+		else if (animalForm == Form::item)
+			Scale = glm::scale(Unit, glm::vec3(0.5, 0.5, 0.5));
+
+		Rotate = glm::rotate(glm::mat4(1.0f), glm::radians(animal_Direction), glm::vec3(0.f, 1.f, 0.f));
+
+		Change = glm::translate(Unit, float_Position) * Rotate * Scale * Trans;
 	}
-
-	origin_Color = Color;
-
-	Update();
-}
-
-void CAnimal::Update()
-{
-	FixedUpdate();
-
-	//----- 변환
-	glm::mat4 Rotate;
-	glm::mat4 Trans;
-	glm::mat4 Scale;
-
-	Trans = glm::translate(Unit, glm::vec3(0.f, -0.5f, 0.f));
-
-	if (animalForm == Form::creature)
-		Scale = glm::scale(Unit, glm::vec3(1.f, 1.f, 2.f));
-	else if (animalForm == Form::item)
-		Scale = glm::scale(Unit, glm::vec3(0.5, 0.5, 0.5));
-
-	Rotate = glm::rotate(glm::mat4(1.0f), glm::radians(animal_Direction), glm::vec3(0.f, 1.f, 0.f));
-
-	Change = glm::translate(Unit, float_Position) * Rotate * Scale * Trans;
-
-	static int time = 0;
-	if (Attacked /* && playerWeapon != 가위*/) {
-		Color = glm::vec3(1, 0, 0);
-		if (time > 20) {
-			time = 0;
-			Attacked = false;
-		}
-		else
-			++time;
-	}
-	else
-		Color = origin_Color;
 }
 
 void CAnimal::FixedUpdate()
 {
-	float speed = 0.005;
+	uniform_int_distribution<int> dict_urd{ 1, 8 };
+	uniform_real_distribution<float> travel_urd{ 5.f, 15.f };
+
+	float speed = 0.005f;
 
 	if (pow(before_Position.x - Position.x, 2)
 		+ pow(before_Position.z - Position.z, 2) >= pow(Travel, 2)) {  // 한 방향으로 travel만큼 이동했으면
@@ -190,43 +161,6 @@ void CAnimal::FixedUpdate()
 			World.Objects.insert(this);
 		}
 	}
-}
-
-void CAnimal::Render()
-{
-	//if (Hp > 5) {
-
-	//	glBindVertexArray(BlockVAO);
-
-	//	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용
-	//	glUniform1i(selectColorLocation, 0);
-
-	//	GLuint Color = glGetUniformLocation(shaderID, "objectColor");
-	//	glUniform3f(Color, this->Color.r, this->Color.g, this->Color.b);
-
-	//	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
-	//	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
-
-	//	glDrawArrays(GL_TRIANGLES, 0, 36);
-	//}
-	//else {		// 동물 죽음
-
-	//	glBindVertexArray(BlockVAO);
-
-	//	GLuint selectColorLocation = glGetUniformLocation(shaderID, "selectColor");	//--- 텍스처 사용
-	//	glUniform1i(selectColorLocation, 0);
-
-	//	GLuint Color = glGetUniformLocation(shaderID, "objectColor");
-	//	//glUniform3f(Color, this->Color.r, this->Color.g, this->Color.b);
-	//	glUniform3f(Color, 0,0,0);
-
-	//	GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
-	//	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
-
-	//	glDrawArrays(GL_TRIANGLES, 0, 36);
-	//}
-
-
 }
 
 float CAnimal::getLeft()

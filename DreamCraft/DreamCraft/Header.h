@@ -1,4 +1,12 @@
 #pragma once
+
+#pragma comment(lib, "glew32.lib")
+#pragma comment(lib, "freeglut.lib")
+
+#include <Windows.h>
+#include <mmsystem.h>					//À½¾Ç
+#pragma comment (lib, "winmm.lib")		//À½¾Ç
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -10,13 +18,7 @@
 #include <utility>		// pair¶«¿¡
 #include <gl/glew.h>											//--- ÇÊ¿äÇÑ Çì´õÆÄÀÏ include
 #include <gl/freeglut.h>
-//#include <gl/freeglut_ext.h>
-//#include <gl/glm/glm.hpp>
 #include <gl/glm/ext.hpp>
-//#include <gl/glm/gtc/matrix_transform.hpp>
-
-#pragma comment (lib, "winmm.lib")    //À½¾Ç
-#include <mmsystem.h>                //À½¾Ç
 
 using namespace std;
 

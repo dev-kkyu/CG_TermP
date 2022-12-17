@@ -2,13 +2,10 @@
 
 #include "CWorld.h"
 
-#pragma comment(lib, "glew32.lib")
-#pragma comment(lib, "freeglut.lib")
-
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-CWorld World;
+CWorld World;			// 월드를 생성한다.
 
 GLuint make_vertexShaders();
 GLuint make_fragmentShaders();
@@ -117,7 +114,7 @@ GLuint make_vertexShaders()
 {
 	//--- 버텍스 세이더 읽어 저장하고 컴파일 하기
 	//--- filetobuf: 사용자정의 함수로 텍스트를 읽어서 문자열에 저장하는 함수
-	GLchar* vertexSource = filetobuf("vertex.glsl");
+	GLchar* vertexSource = filetobuf("Resource/Shader/vertex.glsl");
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);		//--- 버텍스 세이더 객체
 	glShaderSource(vertexShader, 1, &vertexSource, NULL);
 	glCompileShader(vertexShader);
@@ -138,7 +135,7 @@ GLuint make_vertexShaders()
 GLuint make_fragmentShaders()
 {
 	//--- 프래그먼트 세이더 읽어 저장하고 컴파일하기
-	GLchar* fragmentSource = filetobuf("fragment.glsl"); // 프래그세이더 읽어오기
+	GLchar* fragmentSource = filetobuf("Resource/Shader/fragment.glsl"); // 프래그세이더 읽어오기
 	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);		//--- 프래그먼트 세이더 객체
 	glShaderSource(fragmentShader, 1, &fragmentSource, NULL);
 	glCompileShader(fragmentShader);
@@ -190,7 +187,7 @@ void InitBuffer()					// 도형 버퍼 생성
 {
 	vector<glm::vec3> vertex;
 
-	ReadObj("Block.obj", vertex);
+	ReadObj("Resource/Obj/Block.obj", vertex);
 
 	//--- VAO 객체 생성 및 바인딩
 	glGenVertexArrays(1, &BlockVAO);
@@ -206,12 +203,12 @@ void InitBuffer()					// 도형 버퍼 생성
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
 	glEnableVertexAttribArray(1);		// 버텍스 속성 배열을 사용하도록 한다.(1번 배열 활성화)
 
-		//--텍스처
+		//--Texture
 	GLuint textureVBO;
 	glGenBuffers(1, &textureVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, textureVBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(textureVertex), textureVertex, GL_STATIC_DRAW);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0); //--- 텍스처 좌표 속성
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0); //--- Texture 좌표 속성
 	glEnableVertexAttribArray(2);
 
 
@@ -224,7 +221,7 @@ void InitBuffer()					// 도형 버퍼 생성
 	glEnableVertexAttribArray(0);		// 버텍스 속성 배열을 사용하도록 한다.(0번 배열 활성화)
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(sizeof(float) * 3));
 	glEnableVertexAttribArray(1);		// 버텍스 속성 배열을 사용하도록 한다.(1번 배열 활성화)
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(sizeof(float) * 6)); //--- 텍스처 좌표 속성
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(sizeof(float) * 6)); //--- Texture 좌표 속성
 	glEnableVertexAttribArray(2);
 }
 
@@ -245,21 +242,21 @@ void InitTexture()
 		GLubyte* data;
 		switch (i) {
 		case 0:
-			filename = "텍스처/바닥/노풀.png";		// 흙
+			filename = "Resource/Texture/바닥/노풀.png";		// 흙
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		case 1:
-			filename = "텍스처/바닥/옆풀.png";		// 잔디
+			filename = "Resource/Texture/바닥/옆풀.png";		// 잔디
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		case 2:
-			filename = "텍스처/바닥/윗풀2.png";		// 잔디 윗면
+			filename = "Resource/Texture/바닥/윗풀2.png";		// 잔디 윗면
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -268,35 +265,35 @@ void InitTexture()
 
 			// 양
 		case 3:
-			filename = "텍스처/동물/양털.png";		// 양털
+			filename = "Resource/Texture/동물/양털.png";		// 양털
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		case 4:
-			filename = "텍스처/동물/노털.png";		// 노털
+			filename = "Resource/Texture/동물/노털.png";		// 노털
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		case 5:
-			filename = "텍스처/동물/양고기.png";		// 양고기
+			filename = "Resource/Texture/동물/양고기.png";		// 양고기
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		case 6:
-			filename = "텍스처/동물/양다리.png";		// 양다리
+			filename = "Resource/Texture/동물/양다리.png";		// 양다리
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		case 7:
-			filename = "텍스처/동물/양머리.png";		// 양머리
+			filename = "Resource/Texture/동물/양머리.png";		// 양머리
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -305,28 +302,28 @@ void InitTexture()
 
 			// 소
 		case 8:
-			filename = "텍스처/동물/소털.png";		// 소털
+			filename = "Resource/Texture/동물/소털.png";		// 소털
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		case 9:
-			filename = "텍스처/동물/소고기.png";		// 소고기
+			filename = "Resource/Texture/동물/소고기.png";		// 소고기
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		case 10:
-			filename = "텍스처/동물/소다리.png";		// 소다리
+			filename = "Resource/Texture/동물/소다리.png";		// 소다리
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		case 11:
-			filename = "텍스처/동물/소머리.png";		// 소머리
+			filename = "Resource/Texture/동물/소머리.png";		// 소머리
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -335,28 +332,28 @@ void InitTexture()
 
 			// 돼지
 		case 12:
-			filename = "텍스처/동물/돼지털.png";		// 돼지털
+			filename = "Resource/Texture/동물/돼지털.png";		// 돼지털
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		case 13:
-			filename = "텍스처/동물/돼지고기.png";		// 돼지고기
+			filename = "Resource/Texture/동물/돼지고기.png";		// 돼지고기
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		case 14:
-			filename = "텍스처/동물/돼지다리.png";		// 돼지다리
+			filename = "Resource/Texture/동물/돼지다리.png";		// 돼지다리
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		case 15:
-			filename = "텍스처/동물/돼지머리.png";		// 돼지머리
+			filename = "Resource/Texture/동물/돼지머리.png";		// 돼지머리
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -365,35 +362,35 @@ void InitTexture()
 
 			// 닭
 		case 16:
-			filename = "텍스처/동물/닭털.png";		// 닭털
+			filename = "Resource/Texture/동물/닭털.png";		// 닭털
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		case 17:
-			filename = "텍스처/동물/닭고기.png";		// 닭고기
+			filename = "Resource/Texture/동물/닭고기.png";		// 닭고기
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		case 18:
-			filename = "텍스처/동물/닭날개.png";		// 닭날개
+			filename = "Resource/Texture/동물/닭날개.png";		// 닭날개
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		case 19:
-			filename = "텍스처/동물/닭다리.png";		// 닭다리
+			filename = "Resource/Texture/동물/닭다리.png";		// 닭다리
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		case 20:
-			filename = "텍스처/동물/닭머리2.png";		// 닭머리
+			filename = "Resource/Texture/동물/닭머리2.png";		// 닭머리
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -402,21 +399,21 @@ void InitTexture()
 
 			// 나무
 		case 25:
-			filename = "텍스처/나무/나무옆통.png";		// 나무옆통
+			filename = "Resource/Texture/나무/나무옆통.png";		// 나무옆통
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		case 26:
-			filename = "텍스처/나무/나무윗통.png";		// 나무윗통
+			filename = "Resource/Texture/나무/나무윗통.png";		// 나무윗통
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		case 27:
-			filename = "텍스처/나무/나무ㅅ잎.png";	// 나무잎파리
+			filename = "Resource/Texture/나무/나무ㅅ잎.png";	// 나무잎파리
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -425,21 +422,21 @@ void InitTexture()
 
 
 		case 28:
-			filename = "텍스처/나무/나무옆통2.png";		// 나무옆통
+			filename = "Resource/Texture/나무/나무옆통2.png";		// 나무옆통
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 		case 29:
-			filename = "텍스처/나무/나무윗통2.png";		// 나무윗통
+			filename = "Resource/Texture/나무/나무윗통2.png";		// 나무윗통
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			stbi_image_free(data);
 			break;
 			//case 30:
-			//	filename = "텍스처/나무/나무ㅅ잎2.png";	// 나무잎파리
+			//	filename = "Resource/Texture/나무/나무ㅅ잎2.png";	// 나무잎파리
 			//	data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			//	//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			//	glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -448,7 +445,7 @@ void InitTexture()
 
 			// 벼
 		case 31:
-			filename = "텍스처/벼.png";	// 벼
+			filename = "Resource/Texture/벼.png";	// 벼
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -456,7 +453,7 @@ void InitTexture()
 			break;
 
 		case 49:
-			filename = "텍스처/시작화면.png";
+			filename = "Resource/Texture/시작화면.png";
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 			glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 			//glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -492,42 +489,42 @@ void InitTexture()
 			case 0:
 				switch (j) {
 				case 0:
-					filename = "텍스처/인벤/닭0.png";
+					filename = "Resource/Texture/인벤/닭0.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 1:
-					filename = "텍스처/인벤/닭1.png";
+					filename = "Resource/Texture/인벤/닭1.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 2:
-					filename = "텍스처/인벤/닭2.png";
+					filename = "Resource/Texture/인벤/닭2.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 3:
-					filename = "텍스처/인벤/닭3.png";
+					filename = "Resource/Texture/인벤/닭3.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 4:
-					filename = "텍스처/인벤/닭4.png";
+					filename = "Resource/Texture/인벤/닭4.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 5:
-					filename = "텍스처/인벤/닭5.png";
+					filename = "Resource/Texture/인벤/닭5.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -538,42 +535,42 @@ void InitTexture()
 			case 1:
 				switch (j) {
 				case 0:
-					filename = "텍스처/인벤/돼지0.png";
+					filename = "Resource/Texture/인벤/돼지0.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 1:
-					filename = "텍스처/인벤/돼지1.png";
+					filename = "Resource/Texture/인벤/돼지1.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 2:
-					filename = "텍스처/인벤/돼지2.png";
+					filename = "Resource/Texture/인벤/돼지2.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 3:
-					filename = "텍스처/인벤/돼지3.png";
+					filename = "Resource/Texture/인벤/돼지3.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 4:
-					filename = "텍스처/인벤/돼지4.png";
+					filename = "Resource/Texture/인벤/돼지4.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 5:
-					filename = "텍스처/인벤/돼지5.png";
+					filename = "Resource/Texture/인벤/돼지5.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -584,42 +581,42 @@ void InitTexture()
 			case 2:
 				switch (j) {
 				case 0:
-					filename = "텍스처/인벤/벼0.png";
+					filename = "Resource/Texture/인벤/벼0.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 1:
-					filename = "텍스처/인벤/벼1.png";
+					filename = "Resource/Texture/인벤/벼1.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 2:
-					filename = "텍스처/인벤/벼2.png";
+					filename = "Resource/Texture/인벤/벼2.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 3:
-					filename = "텍스처/인벤/벼3.png";
+					filename = "Resource/Texture/인벤/벼3.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 4:
-					filename = "텍스처/인벤/벼4.png";
+					filename = "Resource/Texture/인벤/벼4.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 5:
-					filename = "텍스처/인벤/벼5.png";
+					filename = "Resource/Texture/인벤/벼5.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -630,42 +627,42 @@ void InitTexture()
 			case 3:
 				switch (j) {
 				case 0:
-					filename = "텍스처/인벤/소0.png";
+					filename = "Resource/Texture/인벤/소0.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 1:
-					filename = "텍스처/인벤/소1.png";
+					filename = "Resource/Texture/인벤/소1.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 2:
-					filename = "텍스처/인벤/소2.png";
+					filename = "Resource/Texture/인벤/소2.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 3:
-					filename = "텍스처/인벤/소3.png";
+					filename = "Resource/Texture/인벤/소3.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 4:
-					filename = "텍스처/인벤/소4.png";
+					filename = "Resource/Texture/인벤/소4.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 5:
-					filename = "텍스처/인벤/소5.png";
+					filename = "Resource/Texture/인벤/소5.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -676,42 +673,42 @@ void InitTexture()
 			case 4:
 				switch (j) {
 				case 0:
-					filename = "텍스처/인벤/양0.png";
+					filename = "Resource/Texture/인벤/양0.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 1:
-					filename = "텍스처/인벤/양1.png";
+					filename = "Resource/Texture/인벤/양1.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 2:
-					filename = "텍스처/인벤/양2.png";
+					filename = "Resource/Texture/인벤/양2.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 3:
-					filename = "텍스처/인벤/양3.png";
+					filename = "Resource/Texture/인벤/양3.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 4:
-					filename = "텍스처/인벤/양4.png";
+					filename = "Resource/Texture/인벤/양4.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 5:
-					filename = "텍스처/인벤/양5.png";
+					filename = "Resource/Texture/인벤/양5.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -722,42 +719,42 @@ void InitTexture()
 			case 5:
 				switch (j) {
 				case 0:
-					filename = "텍스처/인벤/양털0.png";
+					filename = "Resource/Texture/인벤/양털0.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 1:
-					filename = "텍스처/인벤/양털1.png";
+					filename = "Resource/Texture/인벤/양털1.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 2:
-					filename = "텍스처/인벤/양털2.png";
+					filename = "Resource/Texture/인벤/양털2.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 3:
-					filename = "텍스처/인벤/양털3.png";
+					filename = "Resource/Texture/인벤/양털3.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 4:
-					filename = "텍스처/인벤/양털4.png";
+					filename = "Resource/Texture/인벤/양털4.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 					stbi_image_free(data);
 					break;
 				case 5:
-					filename = "텍스처/인벤/양털5.png";
+					filename = "Resource/Texture/인벤/양털5.png";
 					data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);
 					//glTexImage2D(GL_TEXTURE_2D, 0, 3, ImageWidth, ImageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 					glTexImage2D(GL_TEXTURE_2D, 0, 4, ImageWidth, ImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
@@ -785,10 +782,10 @@ void InitTexture()
 			string filename;
 			switch (i) {
 			case 0:
-				filename = "텍스처/Complete.png";
+				filename = "Resource/Texture/Complete.png";
 				break;
 			case 1:
-				filename = "텍스처/toDreamCraft.png";
+				filename = "Resource/Texture/toDreamCraft.png";
 				break;
 			}
 			data = stbi_load(filename.c_str(), &ImageWidth, &ImageHeight, &numberOfChannel, 0);

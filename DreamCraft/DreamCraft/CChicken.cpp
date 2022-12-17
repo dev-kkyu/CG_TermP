@@ -36,8 +36,6 @@ void CChicken::Update()
 
 void CChicken::Render()
 {
-
-
 	if (animalForm == Form::creature) {
 		Head.Render();
 		Body.Render();
@@ -54,11 +52,6 @@ void CChicken::Render()
 		GLuint modelLocation = glGetUniformLocation(shaderID, "modelTransform");
 		glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(Change)); //--- modelTransform 변수에 변환 값 적용하기
 
-		//for (int i = 0; i < 6; ++i) {
-		//	glBindTexture(GL_TEXTURE_2D, Texture[20]);		// 닭머리귀엽당
-		//	glDrawArrays(GL_TRIANGLES, i * 6, 6);
-		//}
-
 		glBindTexture(GL_TEXTURE_2D, Texture[17]);		
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 
@@ -70,7 +63,5 @@ void CChicken::Render()
 
 		glBindTexture(GL_TEXTURE_2D, Texture[17]);		
 		glDrawArrays(GL_TRIANGLES, 30, 6);
-
-
 	}
 }
