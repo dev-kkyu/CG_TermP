@@ -1,4 +1,4 @@
-﻿#version 330 core
+#version 330 core
 
 in vec3 FragPos;			//--- 위치값
 in vec3 Normal;				//--- 버텍스 세이더에서 받은 노멀값
