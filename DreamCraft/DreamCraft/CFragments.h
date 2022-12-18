@@ -7,7 +7,6 @@ private:
 	glm::vec3 pos;
 	glm::vec3 scale;
 	glm::vec3 color;
-	glm::mat4 transMatrix;
 
 	int object;
 

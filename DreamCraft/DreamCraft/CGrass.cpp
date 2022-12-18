@@ -14,13 +14,6 @@ void CGrass::Initialize()
 {
 	Hp = 10;
 
-	random_device rd;
-	default_random_engine dre{ rd() };
-	uniform_real_distribution<float> urd{ 0.f, 1.f };
-
-	Color = glm::vec3{ urd(dre),urd(dre), urd(dre) };
-
-
 	glm::mat4 Trans;
 
 	Trans = glm::translate(Unit, glm::vec3(0.f, -0.5f, 0.f));
@@ -33,13 +26,15 @@ void CGrass::Initialize()
 
 	for (int i = 0; i < 100; ++i)
 		myFragments.push_back(new CFragments{ Position ,ÀÜµðÈë });
+
+	for (CFragments*& fragments : myFragments)
+		fragments->Update();
 }
 
 void CGrass::Update()
 {
 	static int time = 0;
 	if (isfragments) {
-		Color = glm::vec3(1, 0, 0);
 		if (time > 50) {
 			time = 0;
 			isfragments = false;
@@ -47,11 +42,6 @@ void CGrass::Update()
 		else
 			++time;
 	}
-
-	if (isfragments)
-		for (CFragments*& fragments : myFragments)
-			fragments->Update();
-
 }
 
 void CGrass::FixedUpdate()

@@ -4,7 +4,6 @@
 class CBlock : public CGameObject
 {
 protected:
-	glm::vec3 Color;
 	bool isfragments;
 public:
 	CBlock(glm::vec3 Position);

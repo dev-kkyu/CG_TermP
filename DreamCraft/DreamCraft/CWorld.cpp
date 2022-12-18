@@ -113,11 +113,14 @@ void CWorld::Keyboard(unsigned char key, int state)
 			isRight = true;
 			break;
 		case ' ':
-			gameStart = true;
-			if (isJump == 0)
-				isJump = 1;
-			else if (isJump == 3)
-				isJump = 2;
+			if (not gameStart)
+				gameStart = true;
+			else {
+				if (isJump == 0)
+					isJump = 1;
+				else if (isJump == 3)
+					isJump = 2;
+			}
 			break;
 		case 27:		//Esc버튼
 			glutLeaveMainLoop();

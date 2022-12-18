@@ -4,6 +4,7 @@
 class CCloud : public CBlock
 {
 private:
+	glm::vec3 Color;
 
 public:
 	CCloud(glm::vec3 Position);

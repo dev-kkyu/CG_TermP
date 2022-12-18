@@ -12,8 +12,8 @@ CFragments::~CFragments()
 
 void CFragments::Initialize()
 {
-	random_device r;
-	default_random_engine ge(r());
+	random_device rd;
+	default_random_engine dre(rd());
 	std::uniform_real_distribution<float> x(Position.x-0.7, Position.x+0.7);
 	std::uniform_real_distribution<float> y(Position.y-1.2, Position.y+0.2);
 	std::uniform_real_distribution<float> z(Position.z-0.7, Position.z+0.7);
@@ -21,7 +21,7 @@ void CFragments::Initialize()
 
 	std::uniform_int_distribution<int> ren(0, 2);
 
-	int num = ren(ge);
+	int num = ren(dre);
 
 	
 
@@ -61,7 +61,7 @@ void CFragments::Initialize()
 	}
 
 	scale = glm::vec3(0.07, 0.07, 0.07);
-	pos = glm::vec3(x(ge), y(ge), z(ge));
+	pos = glm::vec3(x(dre), y(dre), z(dre));
 
 	Update();
 
@@ -74,10 +74,10 @@ void CFragments::Update()
 	glm::mat4 scaleMat;
 	glm::mat4 posMat;
 
-	scaleMat = glm::scale(glm::mat4(1.0f), glm::vec3(scale.x, scale.y, scale.z));    //--- 신축 행렬
-	posMat = glm::translate(glm::mat4(1.0f), glm::vec3(pos.x, pos.y, pos.z));   //--- 이동 행렬
+	scaleMat = glm::scale(glm::mat4(1.0f), scale);    //--- 신축 행렬
+	posMat = glm::translate(glm::mat4(1.0f), pos);   //--- 이동 행렬
 
-	transMatrix = posMat * scaleMat;
+	Change = posMat * scaleMat;
 
 }
 
@@ -94,14 +94,14 @@ void CFragments::Render()
 	glUniform1i(selectColorLocation, 0);
 
 	GLuint model = glGetUniformLocation(shaderID, "modelTransform");
-	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(transMatrix));
+	glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(Change));
 
 	//glBindTexture(GL_TEXTURE_2D, Texture[0]);
 	GLuint Color = glGetUniformLocation(shaderID, "objectColor");
 
 	
 	
-	glUniform4f(Color, color.r, color.g, color.b,1);
+	glUniform4f(Color, color.r, color.g, color.b, 1);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 
 }

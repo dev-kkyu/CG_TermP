@@ -15,13 +15,6 @@ void CTree::Initialize()
 {
 	Hp = 10;
 
-	random_device rd;
-	default_random_engine dre{ rd() };
-	uniform_real_distribution<float> urd{ 0.f, 1.f };
-
-	Color = glm::vec3{ urd(dre),urd(dre), urd(dre) };
-
-
 	glm::mat4 Trans;
 
 	Trans = glm::translate(Unit, glm::vec3(0.f, -0.5f, 0.f));

@@ -11,10 +11,7 @@ CCloud::~CCloud()
 
 void CCloud::Initialize()
 {
-
-	
 	Color = glm::vec3{ 1,1,1 };
-
 
 	glm::mat4 Trans;
 

@@ -5,7 +5,7 @@ extern CWorld World;
 
 CBlock::CBlock(glm::vec3 Position) : CGameObject{Position}
 {
-	//Initialize();
+	Initialize();
 }
 
 CBlock::~CBlock()
@@ -31,22 +31,13 @@ void CBlock::be_Attacked(int Weapon)
 		Hp -= 100;
 		break;
 	}
-	Color = Color * (Hp / 10.f);
 	isfragments = true;
 
 }
 
 void CBlock::Initialize()
 {
-	//glm::mat4 Trans;
-	//
-	//Trans = glm::translate(Unit, glm::vec3(0.f, -0.5f, 0.f));
 
-	//Change = Trans;
-
-	//Trans = glm::translate(Unit, Position);
-
-	//Change = Trans * Change;
 }
 
 void CBlock::Render()
