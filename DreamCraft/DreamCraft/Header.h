@@ -3,10 +3,6 @@
 #pragma comment(lib, "glew32.lib")
 #pragma comment(lib, "freeglut.lib")
 
-#include <Windows.h>
-#include <mmsystem.h>					//À½¾Ç
-#pragma comment (lib, "winmm.lib")		//À½¾Ç
-
 #include <iostream>
 #include <fstream>
 #include <sstream>

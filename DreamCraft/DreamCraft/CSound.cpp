@@ -1,5 +1,9 @@
 #include "CSound.h"
 
+#include <Windows.h>
+#include <mmsystem.h>					//À½¾Ç
+#pragma comment (lib, "winmm.lib")		//À½¾Ç
+
 CSound::CSound()
 {
 }

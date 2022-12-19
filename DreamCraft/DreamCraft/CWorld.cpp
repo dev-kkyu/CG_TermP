@@ -1,5 +1,19 @@
 ﻿#include "CWorld.h"
 
+#include "CBase.h"
+#include "CGrass.h"
+#include "CLeaves.h"
+#include "CTreeTrunk.h"
+#include "CRice.h"
+#include "CWool.h"
+#include "CBirchTrunk.h"
+#include "CCloud.h"
+
+#include "CCow.h"
+#include "CChicken.h"
+#include "CPig.h"
+#include "CSheep.h"
+
 CWorld::CWorld() : Player{ CPlayer{glm::vec3(0.f, 10.f, 0.f)} }, PlayerPos{ glm::vec3(0.f, 10.f, 0.f) }, gameStart{ false }, gameEnd{ false },
 isUp{ false }, isDown{ false }, isLeft{ false }, isRight{ false }, isJump{ 0 }, personView{ 1 },
 planToCreateObj{ 기본흙 },

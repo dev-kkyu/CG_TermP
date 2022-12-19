@@ -1,19 +1,6 @@
 ﻿#pragma once
 #include "Header.h"
-#include "CBase.h"
-#include "CGrass.h"
 #include "CPlayer.h"
-#include "CCow.h"
-#include "CChicken.h"
-#include "CPig.h"
-#include "CSheep.h"
-#include "CLeaves.h"
-#include "CTreeTrunk.h"
-#include "CRice.h"
-#include "CWool.h"
-#include "CBirchTrunk.h"
-#include "CCloud.h"
-
 #include "CSound.h"
 
 #include <set>

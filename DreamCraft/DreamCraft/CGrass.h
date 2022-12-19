@@ -1,6 +1,5 @@
 #pragma once
 #include "CBlock.h"
-//#include "CFragments.h"
 
 class CFragments;
 class CGrass : public CBlock

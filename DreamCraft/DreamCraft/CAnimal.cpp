@@ -1,5 +1,6 @@
 #include "CAnimal.h"
 #include "CWorld.h"
+#include "CBase.h"
 
 extern CWorld World;
 

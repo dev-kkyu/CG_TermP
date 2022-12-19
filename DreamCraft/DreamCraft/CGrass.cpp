@@ -8,6 +8,7 @@ CGrass::CGrass(glm::vec3 Position) : CBlock{ Position }
 
 CGrass::~CGrass()
 {
+	Release();
 }
 
 void CGrass::Initialize()
@@ -85,5 +86,7 @@ void CGrass::Render()
 
 void CGrass::Release()
 {
-	
+	for (auto tmp : myFragments) {
+		delete tmp;
+	}
 }

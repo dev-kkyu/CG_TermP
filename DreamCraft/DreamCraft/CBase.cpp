@@ -8,6 +8,7 @@ CBase::CBase(glm::vec3 Position) : CBlock{ Position }
 
 CBase::~CBase()
 {
+	Release();
 }
 
 void CBase::Initialize()
@@ -70,4 +71,7 @@ void CBase::Render()
 
 void CBase::Release()
 {
+	for (auto tmp : myFragments) {
+		delete tmp;
+	}
 }
