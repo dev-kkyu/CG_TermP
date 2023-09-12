@@ -1,38 +1,8 @@
-# # Prerequisites
-# *.d
+# Made By @dev-kkyu
 
-# # Compiled Object files
-# *.slo
-# *.lo
-# *.o
-# *.obj
+*/.vs/
+**/Debug/*
+**/Release/*
 
-# # Precompiled Headers
-# *.gch
-# *.pch
-
-# # Compiled Dynamic libraries
-# *.so
-# *.dylib
-# *.dll
-
-# # Fortran module files
-# *.mod
-# *.smod
-
-# # Compiled Static libraries
-# *.lai
-# *.la
-# *.a
-# *.lib
-
-# # Executables
-# *.exe
-# *.out
-# *.app
-
-# 비쥬얼에서 필요없는거
-**/.vs/
-**/Debug/
-**/Release/
-**/x64/
+!**/Debug/*.dll
+!**/Release/*.dll
