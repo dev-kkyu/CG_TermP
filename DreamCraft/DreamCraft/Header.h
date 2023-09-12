@@ -1,8 +1,5 @@
 #pragma once
 
-#pragma comment(lib, "glew32.lib")
-#pragma comment(lib, "freeglut.lib")
-
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -12,9 +9,13 @@
 #include <vector>
 #include <random>
 #include <utility>		// pair땜에
-#include <gl/glew.h>											//--- 필요한 헤더파일 include
-#include <gl/freeglut.h>
-#include <gl/glm/ext.hpp>
+
+#include "OpenGL/glew.h"
+#include "OpenGL/freeglut.h"
+#include "OpenGL/glm/ext.hpp"
+
+#pragma comment(lib, "glew32.lib")
+#pragma comment(lib, "freeglut.lib")
 
 using namespace std;
 

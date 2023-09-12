@@ -85,13 +85,20 @@ void main(int argc, char** argv) //--- 윈도우 출력하고 콜백함수 설정
 	InitBuffer();	// VAO, VBO 생성
 	InitTexture();
 
-	glEnable(GL_DEPTH_TEST);	//은면제거
-	glEnable(GL_DITHER);        // 표면을 매끄럽게
-	glEnable(GL_CULL_FACE);     // 컬링
-	glEnable(GL_LINE_SMOOTH);   // 안티 앨리어싱
-	glEnable(GL_POLYGON_SMOOTH);// 안티 앨리어싱
-	glShadeModel(GL_SMOOTH);    // 부드러운 음영을 수행합니다.
+	glEnable(GL_DEPTH_TEST);	//	깊이검사 활성화 (은면제거 - 가려지는 면)
+	glEnable(GL_CULL_FACE);     //	컬링 활성화 (은면제거 - 뒷면)
 
+	// 아래는 이미 기본값
+	//glFrontFace(GL_CCW);		// 컬링의 앞면 설정 (GL_CW - 시계, GL_CCW - 반시계)
+	//glCullFace(GL_BACK);		// 어떤 면을 제거할지 설정
+
+	// 아래꺼 활성화하면 원하지 않는 품질이 나온다. 따라서 비활성화
+	//glEnable(GL_DITHER);        // 표면을 매끄럽게
+	//glEnable(GL_LINE_SMOOTH);   // 안티 앨리어싱
+	//glEnable(GL_POLYGON_SMOOTH);// 안티 앨리어싱
+	//glShadeModel(GL_SMOOTH);    // 부드러운 음영을 수행합니다.
+
+	// 블렌딩 활성화시, alpha 채널 사용 가능
 	glEnable(GL_BLEND);			// 블렌딩 기능을 활성화한다.
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	//지수를 원본 컬러 벡터 Csource의 알파값으로 설정
 
@@ -950,7 +957,7 @@ void ReadObj(string file, vector<glm::vec3>& vertexInfo)
 		}
 	}
 
-	for (int i = 0; i < vFace.size(); ++i) {
+	for (size_t i = 0; i < vFace.size(); ++i) {
 		vertexInfo.push_back(vertex[vFace[i].x]);
 		vertexInfo.push_back(vNormal[vnFace[i].x]);
 
